@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://beauaqxcm41yt"]
+
+[ext_resource type="Script" path="res://scripts/GUI_HUD.gd" id="1_b4ysd"]
+[ext_resource type="Script" path="res://Game_Session.gd" id="2_nx4wc"]
+[ext_resource type="Script" path="res://Factions.gd" id="3_l3rp5"]
+
+[node name="root" type="Node2D"]
+
+[node name="GUI_DETAIL" type="CanvasLayer" parent="."]
+layer = -1
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="GUI_DETAIL"]
+offset_right = 416.0
+offset_bottom = 445.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.32549)
+
+[node name="GUI_LOG" type="CanvasLayer" parent="."]
+layer = -1
+script = ExtResource("1_b4ysd")
+
+[node name="ColorRect" type="ColorRect" parent="GUI_LOG"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -416.0
+offset_bottom = 1081.0
+grow_horizontal = 0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.32549)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI_LOG/ColorRect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 11.0
+offset_right = 403.0
+offset_bottom = 1073.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "Willkommen zur heutigen Schlacht!
+Erste Runde!"
+scroll_following = true
+
+[node name="Game_Session" type="Node2D" parent="."]
+script = ExtResource("2_nx4wc")
+
+[node name="Factions" type="Node2D" parent="Game_Session"]
+script = ExtResource("3_l3rp5")
+
+[node name="Gameboard" type="Node2D" parent="Game_Session"]

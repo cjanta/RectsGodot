@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7n0upvyc4sh5"]
+
+[ext_resource type="Script" path="res://scripts/battlefield.gd" id="2_l4ur0"]
+[ext_resource type="Script" path="res://scripts/GUI_HUD.gd" id="2_tho2e"]
+[ext_resource type="Texture2D" uid="uid://bbjncrlhcyj4t" path="res://grfx/sheets/#1 - Transparent Icons.png" id="3_40xy8"]
+
+[node name="World2d" type="Node2D"]
+
+[node name="battlefield" type="Node2D" parent="."]
+script = ExtResource("2_l4ur0")
+
+[node name="GUI_HUD" type="CanvasLayer" parent="."]
+layer = -1
+script = ExtResource("2_tho2e")
+
+[node name="ColorRect" type="ColorRect" parent="GUI_HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -416.0
+offset_bottom = 1081.0
+grow_horizontal = 0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.32549)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI_HUD/ColorRect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 11.0
+offset_right = 403.0
+offset_bottom = 1073.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "Willkommen zur heutigen Schlacht!
+Erste Runde!"
+scroll_following = true
+
+[node name="#1-TransparentIcons" type="Sprite2D" parent="."]
+position = Vector2(150, 150)
+texture = ExtResource("3_40xy8")
+region_enabled = true
+region_rect = Rect2(416, 672, 32, 32)
