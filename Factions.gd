@@ -3,8 +3,9 @@ extends Node2D
 
 @export var all_factions : Array[Faction] = []
 @onready var faction_preload = preload("res://faction.tscn")
+@onready var gui : GUI_Log = %GUI_LOG as GUI_Log
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	create_faction("Nord Fraktion", Vector2.DOWN)
 	create_faction("Süd Fraktion", Vector2.UP)
@@ -21,6 +22,5 @@ func get_all_factions_log():
 		info += faction.faction_name + "\t"
 	return info
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

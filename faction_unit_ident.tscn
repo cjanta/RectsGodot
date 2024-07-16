@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c77qpiscnsrsl"]
+
+[ext_resource type="Script" path="res://Faction_Unit_Ident.gd" id="1_uq2m0"]
+[ext_resource type="Texture2D" uid="uid://bbjncrlhcyj4t" path="res://grfx/sheets/#1 - Transparent Icons.png" id="2_btnn1"]
+
+[node name="Faction_Unit_Ident" type="Node2D"]
+script = ExtResource("1_uq2m0")
+unit_name = "Soldat"
+icon_vector = Vector2(1, 7)
+
+[node name="icon_sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_btnn1")
+region_enabled = true
+region_rect = Rect2(32, 192, 32, 32)

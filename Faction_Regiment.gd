@@ -22,15 +22,24 @@ var unit_pixel_size = 32.0
 var isIni = true
 
 var faction_unit_preload = preload("res://faction_unit.tscn")
+var session : Game_Session
 
 func _ready():
+	session = find_parent("Game_Session")
 	selected_Mouse_Position = get_global_mouse_position()
 	regiment_unit_size.z = ceil(regiment_unit_size.x / regiment_unit_size.y)
-	hitbox_regiment_bounds.shape.extents = Vector2(regiment_unit_size.y * unit_pixel_size /2  ,regiment_unit_size.z * unit_pixel_size /2  )
+	hitbox_regiment_bounds.shape.extents = get_current_bounds_extends()
 	hitbox_rotation.shape.radius = unit_pixel_size
-	hitbox_polygone.polygon = get_front_arc_polygon()
+	#hitbox_polygone.polygon = get_front_arc_polygon()
 	update_relatives()
 	update_attached_gui()
+
+func get_unit_Pixel_size():
+	return unit_pixel_size
+
+func get_current_bounds_extends():
+	return Vector2(regiment_unit_size.y * unit_pixel_size /2  ,regiment_unit_size.z * unit_pixel_size /2  )
+
 
 func get_front_arc_polygon():
 	#shrott, noch missverstanden
@@ -68,22 +77,21 @@ func setup(setup_facing : Vector2, setup_position : Vector2):
 
 func setup_regiment(pos : Vector2):
 	position +=pos
-	hitbox_polygone.polygon = get_front_arc_polygon()
+	#TODO
+	#hitbox_polygone.polygon = get_front_arc_polygon()
 	setup_units()
 
 func setup_units():
 	var offset = Vector2(unit_pixel_size/2,unit_pixel_size/2)
 	for n in regiment_unit_size.x:		
 		var unit = faction_unit_preload.instantiate()
-		unit.setup(Vector2(1,7))
-		unit.unit_name = "Soldat " + str(n)
 		var collum =  floor(n / regiment_unit_size.y)
 		unit.position = relative_position + Vector2(n * unit_pixel_size - collum * regiment_unit_size.y * unit_pixel_size , collum * unit_pixel_size ) + offset
 		add_child(unit)
 		faction_units.append(unit)
 
 func update_attached_gui():
-	var y_offset =  -(regiment_unit_size.z * 24)
+	var y_offset =  -(regiment_unit_size.z * unit_pixel_size)
 	for node in node_to_update:
 		node.position += Vector2(0,y_offset)
 		
@@ -110,9 +118,9 @@ func check_if_runtime_ini():
 		setup_regiment(setup_pos)
 
 func _draw():
-	draw_rect(regiment_bounds,Color.WHEAT,true, -1.0)
+	#draw_rect(regiment_bounds,Color.WHEAT,true, -1.0)
 	draw_circle(hitbox_rotation.position,hitbox_rotation.shape.radius,Color(0.5, 0.5, 0.5, 0.5 ))
-	draw_colored_polygon(hitbox_polygone.polygon,Color(0.7, 0.5, 0.5, 0.5 ))
+	#draw_colored_polygon(hitbox_polygone.polygon,Color(0.7, 0.5, 0.5, 0.5 ))
 
 func rotateTo(aGlobalPosition):
 	var direction = aGlobalPosition - global_position
@@ -148,3 +156,6 @@ func _on_hitbox_regiment_bounds_input_event(viewport, event, shape_idx):
 		selected = true
 		has_selected_rotation = false
 		selected_Mouse_Position = get_global_mouse_position()
+
+func guilog(test : String):
+	session.gui.log(test)

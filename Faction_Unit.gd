@@ -1,19 +1,19 @@
 class_name Faction_Unit
 extends Node2D
 
-@onready var sprite = %regiment_icon
-@onready var spritesheet = preload("res://grfx/sheets/#1 - Transparent Icons.png")
-@onready var rastersize : float = 32.0
-@export var sprite_row_col : Vector2 = Vector2(1,7)
-@export var unit_name : String = ""
+@export var unit_ident : Faction_Unit_Ident = null
+@onready var faction_unit_ident_preload = preload("res://faction_unit_ident.tscn")
+var session : Game_Session
 
 func _ready():
-	setupSprites(sprite_row_col)
-
-func setup(row_col : Vector2):
-	self.sprite_row_col = row_col
+	session = find_parent("Game_Session")
+	unit_ident = faction_unit_ident_preload.instantiate()
+	add_child(unit_ident)
+	randomize()
+	var int3 = randi_range(0,3)
+	unit_ident.setup("Soldat", Vector2(int3,7 ) )
 	
-func setupSprites(sprite_row_col : Vector2):
-	sprite.region_rect = Rect2(sprite_row_col.x * rastersize, sprite_row_col.y * rastersize, rastersize, rastersize)
-
+	
+func guilog(test : String):
+	session.gui.log(test)
 	

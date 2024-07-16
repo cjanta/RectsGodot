@@ -6,8 +6,10 @@ extends Node2D
 @export var start_direction : Vector2 = Vector2.ZERO
 @export var faction_regiments : Array[Faction_Regiment] = []
 @onready var regiments_preload = preload("res://faction_regiment.tscn")
+var session : Game_Session
 
 func _ready():
+	session = find_parent("Game_Session")
 	if start_direction == Vector2.DOWN:
 		create_test_regiments(Vector2(800,200))
 	elif start_direction == Vector2.UP:
@@ -25,3 +27,6 @@ func create_test_regiments(start_position : Vector2):
 	add_child(regiment)
 	regiment.setup(start_direction, start_position)
 	faction_regiments.append(regiment)
+
+func guilog(test : String):
+	session.gui.log(test)

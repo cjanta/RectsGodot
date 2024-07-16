@@ -6,11 +6,16 @@
 
 [node name="root" type="Node2D"]
 
-[node name="Game_Session" type="Node2D" parent="." node_paths=PackedStringArray("gui")]
+[node name="Game_Session" type="Node2D" parent="."]
 script = ExtResource("2_nx4wc")
-gui = NodePath("GUI_LOG")
+
+[node name="Factions" type="Node2D" parent="Game_Session"]
+script = ExtResource("3_l3rp5")
+
+[node name="Gameboard" type="Node2D" parent="Game_Session"]
 
 [node name="GUI_LOG" type="CanvasLayer" parent="Game_Session"]
+unique_name_in_owner = true
 layer = -1
 script = ExtResource("1_b4ysd")
 
@@ -45,8 +50,3 @@ offset_right = 416.0
 offset_bottom = 445.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0.32549)
-
-[node name="Factions" type="Node2D" parent="Game_Session"]
-script = ExtResource("3_l3rp5")
-
-[node name="Gameboard" type="Node2D" parent="Game_Session"]

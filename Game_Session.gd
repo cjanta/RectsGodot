@@ -1,11 +1,14 @@
+class_name Game_Session
 extends Node2D
-
 
 var is_runtime_ini = true;
 @onready var factions : Factions = $Factions as Factions
-@onready var gui : GUI_Log = $"../GUI_LOG" as GUI_Log
+@export var gui : GUI_Log
 
 var session_counter = 1
+
+func _ready():
+	pass
 
 func _process(delta):
 	check_runtime_ini()
