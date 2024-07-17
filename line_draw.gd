@@ -2,18 +2,17 @@ extends Node2D
 
 var regiment : Faction_Regiment
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	regiment = get_parent()
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	queue_redraw()
 
-
 func _draw():
+	#draw_front_arc()
+	pass
+
+func draw_front_arc():
 	var size = regiment.get_current_bounds_extends() as Vector2
 	var rotation_off = 0.5 as float
 	var tl = position + Vector2(-size.x ,-size.y)
@@ -25,9 +24,9 @@ func _draw():
 	var colors = PackedColorArray([Color.WHEAT])
 	var uvs = PackedVector2Array()
 	draw_polygon(points, colors,uvs,null)
-	pass
 	
-func draw_regiment_45_arcs():
+func draw_regiment_45_line_arcs():
+	# Testlinien zeichnen
 	var size = regiment.get_current_bounds_extends() as Vector2
 	draw_dashed_line(position,Vector2.UP.rotated(rotation) * 250 ,Color.WEB_GREEN, 8.0, 2.0, true )
 	var rotation_off = 0.5 as float
