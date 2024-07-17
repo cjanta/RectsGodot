@@ -28,7 +28,6 @@ var session : Game_Session
 func _ready():
 	session = find_parent("Game_Session")
 	selected_Mouse_Position = get_global_mouse_position()
-	regiment_unit_size.z = ceil(regiment_unit_size.x / regiment_unit_size.y)
 	hitbox_regiment_bounds.shape.extents = get_current_bounds_extends()
 	hitbox_rotation.shape.radius = unit_pixel_size
 	#hitbox_polygone.polygon = get_front_arc_polygon()
@@ -39,6 +38,7 @@ func get_unit_Pixel_size():
 	return unit_pixel_size
 
 func get_current_bounds_extends():
+	regiment_unit_size.z = ceil(regiment_unit_size.x / regiment_unit_size.y)
 	return Vector2(regiment_unit_size.y * unit_pixel_size /2  ,regiment_unit_size.z * unit_pixel_size /2  )
 
 

@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Faction_Regiment.gd" id="1_dxhcw"]
 [ext_resource type="Texture2D" uid="uid://cftc6r08dnci6" path="res://grfx/iconDarkGrey32.png" id="2_3tm8i"]
 [ext_resource type="Texture2D" uid="uid://fhbwoyshdwh7" path="res://grfx/icon_Rotate32.png" id="3_kc30x"]
-[ext_resource type="Script" path="res://hitbox_arcs.gd" id="3_ovpul"]
 [ext_resource type="Script" path="res://faction_icon.gd" id="3_vmfe0"]
+[ext_resource type="Script" path="res://hitbox_arcs.gd" id="3_y0cay"]
 [ext_resource type="Script" path="res://line_draw.gd" id="5_pensw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6hcr"]
@@ -30,8 +30,7 @@ shape = SubResource("RectangleShape2D_hptpt")
 
 [node name="hitbox_arcs" type="Area2D" parent="."]
 z_index = -1
-position = Vector2(0, -8)
-script = ExtResource("3_ovpul")
+script = ExtResource("3_y0cay")
 
 [node name="front_arc" type="CollisionPolygon2D" parent="hitbox_arcs"]
 polygon = PackedVector2Array(14, -16, 41, -49, -50, -49, -15, -15)
@@ -42,7 +41,6 @@ texture = ExtResource("2_3tm8i")
 script = ExtResource("3_vmfe0")
 
 [node name="line_draw" type="Node2D" parent="."]
-z_index = -2
 script = ExtResource("5_pensw")
 
 [connection signal="input_event" from="hitbox_rotation" to="." method="_on_hitbox_rotation_input_event"]

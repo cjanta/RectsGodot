@@ -12,7 +12,7 @@ func _ready():
 	var bounds = regiment.get_current_bounds_extends()
 	var x_ratio = (bounds.x * 2.0)  / initial_size.x 
 	var y_ratio = (bounds.y * 2.0) / initial_size.y 	
-	new_scale = Vector2(x_ratio,y_ratio * 1.5)
+	new_scale = Vector2(x_ratio,y_ratio)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
