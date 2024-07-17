@@ -28,10 +28,6 @@ var session : Game_Session
 func _ready():
 	session = find_parent("Game_Session")
 	selected_Mouse_Position = get_global_mouse_position()
-<<<<<<< Updated upstream
-=======
-	
->>>>>>> Stashed changes
 	hitbox_regiment_bounds.shape.extents = get_current_bounds_extends()
 	hitbox_rotation.shape.radius = unit_pixel_size
 	#hitbox_polygone.polygon = get_front_arc_polygon()
