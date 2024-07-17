@@ -18,7 +18,7 @@ var selected_Mouse_Position
 var shape_extends_total = Vector2.ZERO
 var	relative_position = Vector2.ZERO
 var	regiment_bounds =  null
-var regiment_unit_size = Vector3(25,10,2)
+var regiment_unit_size = Vector3(3,1,3)
 var unit_pixel_size = 32.0
 
 var is_runntime_ini = true
@@ -29,8 +29,6 @@ var session : Game_Session
 func _ready():
 	session = find_parent("Game_Session")
 	selected_Mouse_Position = get_global_mouse_position()
-	hitbox_rotation.shape.radius = 16.0
-	update_attached_gui()
 
 func get_unit_Pixel_size():
 	return unit_pixel_size
@@ -41,16 +39,6 @@ func set_regiment_unit_size(new_size : Vector3):
 func get_current_bounds_extends():
 	regiment_unit_size.z = ceil(regiment_unit_size.x / regiment_unit_size.y)
 	return Vector2(regiment_unit_size.y * unit_pixel_size /2  ,regiment_unit_size.z * unit_pixel_size /2  )
-
-
-func get_front_arc_polygon():
-	#shrott, noch missverstanden
-	var bounds = hitbox_regiment_bounds.shape.extents
-	var left_bot = Vector2(-bounds.x, - bounds.y) + position
-	var right_bot = Vector2(bounds.x, - bounds.y) + position
-	var left_top =  left_bot + Vector2.UP.rotated(deg_to_rad(-45) * 100)
-	var right_top = right_bot + Vector2.UP.rotated(deg_to_rad(45))
-	return PackedVector2Array([left_bot,left_top,right_top, right_bot])
 
 func _input(event):
 	#selection reset
@@ -73,9 +61,9 @@ func _physics_process(delta):
 
 func setup(setup_facing : Vector2, setup_position : Vector2, new_size : Vector3):
 	self.setup_facing_dir = setup_facing
-	self.setup_pos = setup_position
 	if setup_facing == Vector2.DOWN:
 		rotation_degrees += 180
+	self.setup_pos = setup_position
 	set_regiment_unit_size(new_size)
 	hitbox_regiment_bounds.shape = hitbox_regiment_bounds.shape.duplicate()
 	hitbox_regiment_bounds.shape.extents = get_current_bounds_extends()
@@ -97,9 +85,9 @@ func runntime_ini():
 	update_attached_gui()
 
 func update_attached_gui():
-	var y_offset = get_current_bounds_extends().y / 2.0
+	var y_offset = hitbox_regiment_bounds.shape.extents.y + unit_pixel_size / 2.0
 	for node in node_to_update:
-		node.position += Vector2(0,-y_offset - unit_pixel_size)
+		node.position += Vector2(0,-y_offset )
 		
 func update_relatives():
 	shape_extends_total = Vector2(hitbox_regiment_bounds.shape.extents.x *2, hitbox_regiment_bounds.shape.extents.y *2)

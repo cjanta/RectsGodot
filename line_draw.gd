@@ -23,6 +23,7 @@ func draw_front_arc():
 	points.append(tl)
 	var tl_arc = Vector2(-size.x ,-size.y) + Vector2.LEFT.rotated(rotation + rotation_off) * arc_length
 	points.append(tl_arc)
+	
 	var tr_arc = Vector2(size.x ,-size.y) + Vector2.RIGHT.rotated(rotation - rotation_off) * arc_length	
 	points.append(tr_arc)
 	var tr = position + Vector2(size.x ,-size.y)

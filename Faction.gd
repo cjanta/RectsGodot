@@ -11,13 +11,13 @@ var session : Game_Session
 func _ready():
 	session = find_parent("Game_Session")
 	var x_off = 200
-	var num_per_faction = 2
+	var num_per_faction = 3
 	if start_direction == Vector2.DOWN:
 		for n in num_per_faction:
 			create_test_regiments(Vector2(x_off+ n*400,100))
 	elif start_direction == Vector2.UP:
 		for n in num_per_faction:
-			create_test_regiments(Vector2(x_off+ n*400,700))
+			create_test_regiments(Vector2(x_off+ n*400,900))
 
 func _process(delta):
 	pass
