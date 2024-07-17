@@ -3,11 +3,10 @@ extends Area2D
 
 
 var regiment : Faction_Regiment
-var coll_shape :CollisionPolygon2D
+@onready var coll_shape :CollisionPolygon2D = $front_arc
 
 func _ready():
 	regiment = get_parent()
-	coll_shape = get_child(0) as CollisionPolygon2D
 	coll_shape.polygon = get_regiment_front_polygon()
 	
 	pass
