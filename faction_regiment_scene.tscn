@@ -20,6 +20,7 @@ texture = ExtResource("2_2qplr")
 script = ExtResource("2_nebew")
 
 [node name="hitbox_arcs" type="Area2D" parent="."]
+z_index = -1
 script = ExtResource("6_npda7")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hitbox_arcs"]

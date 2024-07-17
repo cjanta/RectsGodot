@@ -31,7 +31,8 @@ func create_test_regiments(start_position : Vector2):
 	add_child(regiment)
 	randomize()
 	randi()
-	regiment.setup(start_direction, start_position, Vector3(randi_range(50,100), 10.0, 1.0 ))
+	var number_units = randi_range(10,101)
+	regiment.setup(start_direction, start_position, Vector3(number_units, 10.0, 1.0 ))
 	faction_regiments.append(regiment)
 
 func guilog(test : String):

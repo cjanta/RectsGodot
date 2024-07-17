@@ -13,43 +13,61 @@ func _ready():
 
 func _process(delta):
 	chick_runtime_ini()
+	queue_redraw()
 	
 func chick_runtime_ini():
 	if is_runtime_ini:
 		is_runtime_ini = false;
-		coll_shape.polygon = get_regiment_front_polygon()
+		#coll_shape.polygon = get_regiment_front_polygon()
+		coll_shape.polygon =get_front_arc()
 		
-func get_regiment_front_polygon():
-	var size = regiment.hitbox_regiment_bounds.shape.extents as Vector2
-	var y_offset = regiment.hitbox_regiment_bounds.shape.extents.y + regiment.unit_pixel_size / 2.0
-	var rotation_off = deg_to_rad(60)
-	var arc_length = 180
-	#[tl, tl_arc, tr_arc, tr]
-	var points = PackedVector2Array()
+
+const DETECT_RADIUS = 200
+const FOV = 80
+
+var angle = 0
+var direction = Vector2()
+# Drawing the FOV
+const RED = Color(1.0, 0, 0, 0.4)
+const GREEN = Color(0, 1.0, 0, 0.4)
+
+var draw_color = GREEN
+
+func _draw():
+	#draw_circle_arc_poly(Vector2(), DETECT_RADIUS,  angle - FOV/2, angle + FOV/2, draw_color)
+	pass
+
+func get_front_arc():
+	var size = regiment.get_current_bounds_extends() as Vector2
+	var angle = -90
+	var center = Vector2.ZERO
 	var tl = position + Vector2(-size.x ,-size.y)
-	points.append(tl)
-	var tl_arc = Vector2(-size.x ,-size.y) + Vector2.LEFT.rotated(rotation + rotation_off) * arc_length
-	points.append(tl_arc)
 	var tr = position + Vector2(size.x ,-size.y)
-	#get_fan_points(tl,tr, tl_arc, points)
-	var tr_arc = Vector2(size.x ,-size.y) + Vector2.RIGHT.rotated(rotation - rotation_off) * arc_length	
-	points.append(tr_arc)
-	points.append(tr)
-	return points
+	var fow = rad_to_deg(tl.angle_to(tr))
+	var radius = regiment.shape_extends_total.length()
+	var angle_from = angle - fow/2
+	var angle_to = angle + fow/2
+	var nb_points = 16
+	var points_arc = PackedVector2Array()
+	points_arc.push_back(center)
+	#var colors = PackedColorArray([color])
 
-func get_fan_points(start : Vector2, end : Vector2, top_left : Vector2, packed_arry : PackedVector2Array):
-	var dir = end - start
-	var dir_length = dir.length()
-	dir = dir.normalized()
-	var detail = 1
-	var length_ratio = dir_length / detail
-	var current = Vector2(start.x,start.y)
-	var height = top_left - start
-	for n in detail:
-		current = current  * length_ratio
-		packed_arry.append(Vector2(current.x, current.y).rotated(deg_to_rad(90)))
+	for i in range(nb_points+1):
+		var angle_point = angle_from + i*(angle_to-angle_from)/nb_points
+		points_arc.push_back(center + Vector2( cos( deg_to_rad(angle_point) ), sin( deg_to_rad(angle_point) ) ) * radius)
+	#draw_polygon(points_arc, colors)
+	return points_arc
 
+func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
+	var nb_points = 32
+	var points_arc = PackedVector2Array()
+	points_arc.push_back(center)
+	var colors = PackedColorArray([color])
 
+	for i in range(nb_points+1):
+		var angle_point = angle_from + i*(angle_to-angle_from)/nb_points
+		points_arc.push_back(center + Vector2( cos( deg_to_rad(angle_point) ), sin( deg_to_rad(angle_point) ) ) * radius)
+	draw_polygon(points_arc, colors)
 
 func draw_front_arc_flat():
 	var size = regiment.get_current_bounds_extends() as Vector2
