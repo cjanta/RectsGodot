@@ -5,7 +5,7 @@ extends Node2D
 @export var owner_ident : String = "LOCAL_PLAYER"
 @export var start_direction : Vector2 = Vector2.ZERO
 @export var faction_regiments : Array[Faction_Regiment] = []
-@onready var regiments_preload = preload("res://faction_regiment.tscn")
+@onready var regiments_preload = preload("res://faction_regiment_scene.tscn")
 var session : Game_Session
 
 func _ready():

@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwv3s62w20ivm"]
+
+[ext_resource type="Script" path="res://Faction_Regiment.gd" id="1_nqapm"]
+[ext_resource type="Texture2D" uid="uid://cftc6r08dnci6" path="res://grfx/iconDarkGrey32.png" id="2_2qplr"]
+[ext_resource type="Script" path="res://faction_icon.gd" id="2_nebew"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jkixb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3p1nj"]
+
+[node name="Faction_Regiment_Scene" type="Node2D"]
+script = ExtResource("1_nqapm")
+
+[node name="hitbox_regiment_bounds" type="Area2D" parent="."]
+
+[node name="regiment_bounds" type="CollisionShape2D" parent="hitbox_regiment_bounds"]
+shape = SubResource("RectangleShape2D_jkixb")
+
+[node name="hitbox_rotation" type="Area2D" parent="."]
+
+[node name="rotation_circle" type="CollisionShape2D" parent="hitbox_rotation"]
+shape = SubResource("CircleShape2D_3p1nj")
+
+[node name="bounds_sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_2qplr")
+script = ExtResource("2_nebew")
+
+[connection signal="input_event" from="hitbox_regiment_bounds" to="." method="_on_hitbox_regiment_bounds_input_event"]
+[connection signal="input_event" from="hitbox_rotation" to="." method="_on_hitbox_rotation_input_event"]

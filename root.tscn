@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://beauaqxcm41yt"]
+[gd_scene load_steps=5 format=3 uid="uid://beauaqxcm41yt"]
 
 [ext_resource type="Script" path="res://scripts/GUI_HUD.gd" id="1_b4ysd"]
 [ext_resource type="Script" path="res://Game_Session.gd" id="2_nx4wc"]
 [ext_resource type="Script" path="res://Factions.gd" id="3_l3rp5"]
+[ext_resource type="PackedScene" uid="uid://bwv3s62w20ivm" path="res://faction_regiment_scene.tscn" id="4_txo2a"]
 
 [node name="root" type="Node2D"]
 
@@ -50,3 +51,5 @@ color = Color(0, 0, 0, 0.32549)
 script = ExtResource("3_l3rp5")
 
 [node name="Gameboard" type="Node2D" parent="Game_Session"]
+
+[node name="Faction_Regiment_Scene" parent="." instance=ExtResource("4_txo2a")]
