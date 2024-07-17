@@ -4,3 +4,40 @@
 
 [node name="faction_regiment" type="Node2D"]
 script = ExtResource("1_dxhcw")
+<<<<<<< Updated upstream
+=======
+
+[node name="hitbox_rotation" type="Area2D" parent="."]
+
+[node name="rotation_hitbox" type="CollisionShape2D" parent="hitbox_rotation"]
+shape = SubResource("CircleShape2D_b6hcr")
+
+[node name="IconRotate32" type="Sprite2D" parent="hitbox_rotation/rotation_hitbox"]
+texture = ExtResource("3_kc30x")
+
+[node name="hitbox_regiment_bounds" type="Area2D" parent="."]
+
+[node name="regiment_bounds" type="CollisionShape2D" parent="hitbox_regiment_bounds"]
+shape = SubResource("RectangleShape2D_hptpt")
+
+[node name="Area2D" type="Area2D" parent="."]
+z_index = -1
+monitoring = false
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+visible = false
+polygon = PackedVector2Array(14, -16, 41, -49, -50, -49, -15, -15)
+
+[node name="faction_icon" type="Sprite2D" parent="."]
+z_index = -2
+texture = ExtResource("2_3tm8i")
+script = ExtResource("3_vmfe0")
+
+[node name="line_draw" type="Node2D" parent="."]
+z_index = -1
+script = ExtResource("5_pensw")
+
+[connection signal="input_event" from="hitbox_rotation" to="." method="_on_hitbox_rotation_input_event"]
+[connection signal="input_event" from="hitbox_regiment_bounds" to="." method="_on_hitbox_regiment_bounds_input_event"]
+>>>>>>> Stashed changes
