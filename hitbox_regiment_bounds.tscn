@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://sf58apyyihsn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jkixb"]
+
+[node name="hitbox_regiment_bounds" type="Area2D"]
+
+[node name="regiment_bounds" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jkixb")

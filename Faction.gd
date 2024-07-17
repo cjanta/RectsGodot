@@ -10,9 +10,8 @@ var session : Game_Session
 
 func _ready():
 	session = find_parent("Game_Session")
-	randomize()
 	var x_off = 200
-	var num_per_faction = randi_range(2,5)
+	var num_per_faction = 2
 	if start_direction == Vector2.DOWN:
 		for n in num_per_faction:
 			create_test_regiments(Vector2(x_off+ n*400,100))
@@ -32,7 +31,7 @@ func create_test_regiments(start_position : Vector2):
 	add_child(regiment)
 	randomize()
 	randi()
-	regiment.setup(start_direction, start_position, Vector3(randi_range(10,51), 10.0, 1.0 ))
+	regiment.setup(start_direction, start_position, Vector3(randi_range(50,100), 10.0, 1.0 ))
 	faction_regiments.append(regiment)
 
 func guilog(test : String):

@@ -21,7 +21,7 @@ var	regiment_bounds =  null
 var regiment_unit_size = Vector3(25,10,2)
 var unit_pixel_size = 32.0
 
-var isIni = true
+var is_runntime_ini = true
 
 var faction_unit_preload = preload("res://faction_unit.tscn")
 var session : Game_Session
@@ -36,7 +36,6 @@ func get_unit_Pixel_size():
 	return unit_pixel_size
 
 func set_regiment_unit_size(new_size : Vector3):
-	hitbox_regiment_bounds.shape.extents = get_current_bounds_extends()
 	regiment_unit_size = new_size
 
 func get_current_bounds_extends():
@@ -78,27 +77,29 @@ func setup(setup_facing : Vector2, setup_position : Vector2, new_size : Vector3)
 	if setup_facing == Vector2.DOWN:
 		rotation_degrees += 180
 	set_regiment_unit_size(new_size)
+	hitbox_regiment_bounds.shape = hitbox_regiment_bounds.shape.duplicate()
 	hitbox_regiment_bounds.shape.extents = get_current_bounds_extends()
 	update_relatives()
 	
 
-func setup_regiment(pos : Vector2):
-	position +=pos
-	setup_units()
-
-func setup_units():
-	var offset = Vector2(unit_pixel_size/2,unit_pixel_size/2)
+func runntime_ini():
+	set_regiment_unit_size(regiment_unit_size)
+	hitbox_regiment_bounds.shape.extents = get_current_bounds_extends()
+	update_relatives()
+	position += setup_pos
+	var offset = Vector2(unit_pixel_size/2, unit_pixel_size/2)
 	for n in regiment_unit_size.x:		
 		var unit = faction_unit_preload.instantiate()
 		var collum =  floor(n / regiment_unit_size.y)
-		unit.position = relative_position + Vector2(n * unit_pixel_size - collum * regiment_unit_size.y * unit_pixel_size , collum * unit_pixel_size ) + offset
+		unit.position = relative_position  + Vector2(n * unit_pixel_size - collum * regiment_unit_size.y * unit_pixel_size , collum * unit_pixel_size ) + offset
 		add_child(unit)
 		faction_units.append(unit)
+	update_attached_gui()
 
 func update_attached_gui():
-	var y_offset =  -(regiment_unit_size.z * unit_pixel_size)
+	var y_offset = get_current_bounds_extends().y / 2.0
 	for node in node_to_update:
-		node.position += Vector2(0,y_offset)
+		node.position += Vector2(0,-y_offset - unit_pixel_size)
 		
 func update_relatives():
 	shape_extends_total = Vector2(hitbox_regiment_bounds.shape.extents.x *2, hitbox_regiment_bounds.shape.extents.y *2)
@@ -119,14 +120,15 @@ func rotate_dragged_object(delta):
 	return alpha
 
 func check_if_runtime_ini():
-	if isIni && setup_pos != Vector2.ZERO:
-		isIni = false
-		setup_regiment(setup_pos)
+	if is_runntime_ini:
+		is_runntime_ini = false
+		runntime_ini()
 
 func _draw():
 	#draw_rect(regiment_bounds,Color.WHEAT,true, -1.0)
-	draw_circle(hitbox_rotation.position,hitbox_rotation.shape.radius,Color(0.5, 0.5, 0.5, 0.5 ))
+	#draw_circle(hitbox_rotation.position,hitbox_rotation.shape.radius,Color(0.5, 0.5, 0.5, 0.5 ))
 	#draw_colored_polygon(hitbox_polygone.polygon,Color(0.7, 0.5, 0.5, 0.5 ))
+	pass
 
 func rotateTo(aGlobalPosition):
 	var direction = aGlobalPosition - global_position

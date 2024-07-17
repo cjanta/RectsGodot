@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://Faction_Unit.gd" id="1_vwj34"]
 
 [node name="Faction_Unit" type="Node2D"]
+z_index = 5
 script = ExtResource("1_vwj34")
