@@ -13,15 +13,23 @@ func _draw():
 	pass
 
 func draw_front_arc():
+	#nur zur entwicklung um hitboxen anzupassen
 	var size = regiment.get_current_bounds_extends() as Vector2
-	var rotation_off = 0.5 as float
+	var rotation_off = deg_to_rad(60)
+	var arc_length = 180
+	#[tl, tl_arc, tr_arc, tr]
+	var points = PackedVector2Array()
 	var tl = position + Vector2(-size.x ,-size.y)
-	var tl_arc = Vector2(-size.x ,-size.y) + Vector2.LEFT.rotated(rotation + rotation_off) * 250
-	var tr_arc = Vector2(size.x ,-size.y) + Vector2.RIGHT.rotated(rotation - rotation_off) * 250
+	points.append(tl)
+	var tl_arc = Vector2(-size.x ,-size.y) + Vector2.LEFT.rotated(rotation + rotation_off) * arc_length
+	points.append(tl_arc)
+	var tr_arc = Vector2(size.x ,-size.y) + Vector2.RIGHT.rotated(rotation - rotation_off) * arc_length	
+	points.append(tr_arc)
 	var tr = position + Vector2(size.x ,-size.y)
+	points.append(tr)
 
-	var points = PackedVector2Array([tl, tl_arc, tr_arc, tr])
-	var colors = PackedColorArray([Color.WHEAT])
+	var color = Color(25,25,25,64)
+	var colors = PackedColorArray([color])
 	var uvs = PackedVector2Array()
 	draw_polygon(points, colors,uvs,null)
 	
