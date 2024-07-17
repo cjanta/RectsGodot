@@ -13,6 +13,7 @@ var selected_Mouse_Position
 @onready var hitbox_regiment_bounds = $hitbox_regiment_bounds/regiment_bounds
 @onready var hitbox_rotation = $hitbox_rotation/rotation_circle
 @onready var node_to_update = [$hitbox_rotation/rotation_circle]
+@onready var bounds_sprite = $bounds_sprite
 
 var shape_extends_total = Vector2.ZERO
 var	relative_position = Vector2.ZERO
@@ -28,14 +29,15 @@ var session : Game_Session
 func _ready():
 	session = find_parent("Game_Session")
 	selected_Mouse_Position = get_global_mouse_position()
-	hitbox_regiment_bounds.shape.extents = get_current_bounds_extends()
-	hitbox_rotation.shape.radius = unit_pixel_size
-	#hitbox_polygone.polygon = get_front_arc_polygon()
-	update_relatives()
+	hitbox_rotation.shape.radius = 16.0
 	update_attached_gui()
 
 func get_unit_Pixel_size():
 	return unit_pixel_size
+
+func set_regiment_unit_size(new_size : Vector3):
+	hitbox_regiment_bounds.shape.extents = get_current_bounds_extends()
+	regiment_unit_size = new_size
 
 func get_current_bounds_extends():
 	regiment_unit_size.z = ceil(regiment_unit_size.x / regiment_unit_size.y)
@@ -70,16 +72,18 @@ func _physics_process(delta):
 	elif has_selected_rotation:
 		handleDragnDropRotation(delta)
 
-func setup(setup_facing : Vector2, setup_position : Vector2):
+func setup(setup_facing : Vector2, setup_position : Vector2, new_size : Vector3):
 	self.setup_facing_dir = setup_facing
 	self.setup_pos = setup_position
 	if setup_facing == Vector2.DOWN:
 		rotation_degrees += 180
+	set_regiment_unit_size(new_size)
+	hitbox_regiment_bounds.shape.extents = get_current_bounds_extends()
+	update_relatives()
+	
 
 func setup_regiment(pos : Vector2):
 	position +=pos
-	#TODO
-	#hitbox_polygone.polygon = get_front_arc_polygon()
 	setup_units()
 
 func setup_units():
@@ -100,6 +104,7 @@ func update_relatives():
 	shape_extends_total = Vector2(hitbox_regiment_bounds.shape.extents.x *2, hitbox_regiment_bounds.shape.extents.y *2)
 	relative_position = Vector2(position.x - shape_extends_total.x / 2.0, position.y - shape_extends_total.y / 2.0)
 	regiment_bounds =  Rect2(relative_position,shape_extends_total)	
+	bounds_sprite.update_scale()
 
 func handleDragnDropMovement(delta):
 	var action_points = move()
