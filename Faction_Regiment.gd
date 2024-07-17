@@ -11,8 +11,8 @@ var selected_Mouse_Position
 
 @onready var hitbox_polygone = $Area2D/CollisionPolygon2D
 @onready var hitbox_regiment_bounds = $hitbox_regiment_bounds/regiment_bounds
-@onready var hitbox_rotation = $hitbox_rotation/rotation_hitbox
-@onready var node_to_update = [$hitbox_rotation/rotation_hitbox]
+@onready var hitbox_rotation = $hitbox_rotation/CollisionShape2D
+@onready var node_to_update = [$hitbox_rotation/CollisionShape2D]
 
 var shape_extends_total = Vector2.ZERO
 var	relative_position = Vector2.ZERO
