@@ -7,6 +7,7 @@ extends Node2D
 @export var faction_regiments : Array[Faction_Regiment] = []
 @onready var regiments_preload = preload("res://faction_regiment_scene.tscn")
 var session : Game_Session
+var sum_regiments = 0
 
 func _ready():
 	session = find_parent("Game_Session")
@@ -14,9 +15,11 @@ func _ready():
 	var num_per_faction = 3
 	if start_direction == Vector2.DOWN:
 		for n in num_per_faction:
+			sum_regiments += 1
 			create_test_regiments(Vector2(x_off+ n*400,100))
 	elif start_direction == Vector2.UP:
 		for n in num_per_faction:
+			sum_regiments += 1
 			create_test_regiments(Vector2(x_off+ n*400,700))
 
 func _process(delta):
@@ -32,7 +35,7 @@ func create_test_regiments(start_position : Vector2):
 	randomize()
 	randi()
 	var number_units = randi_range(10,101)
-	regiment.setup(start_direction, start_position, Vector3(number_units, 10.0, 1.0 ))
+	regiment.setup("Regiment: " + str(sum_regiments),start_direction, start_position, Vector3(number_units, 10.0, 1.0 ))
 	faction_regiments.append(regiment)
 
 func guilog(test : String):

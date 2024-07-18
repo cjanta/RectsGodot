@@ -24,4 +24,3 @@ script = ExtResource("2_nebew")
 collision_layer = 4
 
 [connection signal="input_event" from="hitbox_regiment_bounds" to="." method="_on_hitbox_regiment_bounds_input_event"]
-[connection signal="input_event" from="hitbox_rotation" to="." method="_on_hitbox_rotation_input_event"]
