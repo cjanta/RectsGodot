@@ -14,6 +14,6 @@ func _ready():
 	unit_ident.setup("Soldat", Vector2(int3,7 ) )
 	
 	
-func guilog(test : String):
-	session.gui.log(test)
+func guilog(text : String):
+	session.gui.log(text)
 	
