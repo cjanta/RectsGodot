@@ -9,7 +9,7 @@ var regiment : Faction_Regiment
 func _ready():
 	regiment = get_parent()
 	selected_Mouse_Position = get_global_mouse_position()
-	coll_shape = coll_shape.duplicate()
+	coll_shape.shape = coll_shape.shape.duplicate()
 
 func _input(event):
 	if event is InputEventMouseButton:
