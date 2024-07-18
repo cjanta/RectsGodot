@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://3mie7hp7sxd"]
+[gd_scene load_steps=3 format=3 uid="uid://3mie7hp7sxd"]
+
+[ext_resource type="Texture2D" uid="uid://4845qd0tii57" path="res://grfx/icon_PointNorth32.png" id="1_gq3mc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3p1nj"]
 radius = 16.0
@@ -7,3 +9,6 @@ radius = 16.0
 
 [node name="rotation_circle" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3p1nj")
+
+[node name="icon" type="Sprite2D" parent="rotation_circle"]
+texture = ExtResource("1_gq3mc")

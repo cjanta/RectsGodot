@@ -17,7 +17,7 @@ func _ready():
 			create_test_regiments(Vector2(x_off+ n*400,100))
 	elif start_direction == Vector2.UP:
 		for n in num_per_faction:
-			create_test_regiments(Vector2(x_off+ n*400,900))
+			create_test_regiments(Vector2(x_off+ n*400,700))
 
 func _process(delta):
 	pass

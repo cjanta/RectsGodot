@@ -9,7 +9,6 @@ var selected_Mouse_Position
 @export var setup_facing_dir : Vector2 = Vector2.ZERO
 @export var setup_pos : Vector2 = Vector2.ZERO
 
-#@onready var hitbox_polygone = $Area2D/CollisionPolygon2D
 @onready var hitbox_regiment_bounds = $hitbox_regiment_bounds/regiment_bounds
 @onready var hitbox_rotation = $hitbox_rotation/rotation_circle
 @onready var node_to_update = [$hitbox_rotation/rotation_circle]
@@ -69,7 +68,6 @@ func setup(setup_facing : Vector2, setup_position : Vector2, new_size : Vector3)
 	hitbox_regiment_bounds.shape.extents = get_current_bounds_extends()
 	update_relatives()
 	
-
 func runntime_ini():
 	set_regiment_unit_size(regiment_unit_size)
 	hitbox_regiment_bounds.shape.extents = get_current_bounds_extends()
@@ -138,7 +136,6 @@ func move():
 			selected_Mouse_Position = get_global_mouse_position()
 			return abs(dot)
 			
-		
 		return 0
 	
 func _on_hitbox_rotation_input_event(viewport, event, shape_idx):
