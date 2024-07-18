@@ -2,7 +2,7 @@ class_name Factions
 extends Node2D
 
 @export var all_factions : Array[Faction] = []
-@onready var faction_preload = preload("res://faction.tscn")
+@onready var faction_preload = preload("res://faction_scene.tscn")
 @onready var gui : GUI_Log = $"../GUI_LOG" as GUI_Log
 
 
