@@ -2,7 +2,7 @@ class_name Faction_Unit
 extends Node2D
 
 @export var unit_ident : Faction_Unit_Ident = null
-@onready var faction_unit_ident_preload = preload("res://faction_unit_ident.tscn")
+@onready var faction_unit_ident_preload = load("res://faction_unit_ident.tscn")
 var session : Game_Session
 
 func _ready():
