@@ -9,6 +9,7 @@ extends Node2D
 var session : Game_Session
 var sum_regiments = 0
 
+
 func _ready():
 	session = find_parent("Game_Session")
 	var x_off = 200

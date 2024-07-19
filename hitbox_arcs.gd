@@ -1,10 +1,12 @@
 extends Area2D
 
+@onready var coll_shape :CollisionPolygon2D = $CollisionPolygon2D
 var is_runtime_ini = true
 var regiment : Faction_Regiment
-
-@onready var coll_shape :CollisionPolygon2D = $CollisionPolygon2D
-
+const RED = Color(1.0, 0, 0, 0.4)
+const GREEN = Color(0, 1.0, 0, 0.4)
+var draw_color = GREEN
+var packed_front_arc :PackedVector2Array
 
 func _ready():
 	regiment = get_parent()
@@ -17,21 +19,18 @@ func _process(delta):
 func check_runtime_ini():
 	if is_runtime_ini:
 		is_runtime_ini = false;
-		coll_shape.polygon = get_front_arc()
+		packed_front_arc = get_front_arc_points()
+		coll_shape.polygon = packed_front_arc
 		
-
-const RED = Color(1.0, 0, 0, 0.4)
-const GREEN = Color(0, 1.0, 0, 0.4)
-var draw_color = GREEN
 
 func _draw():
 	draw_front_arc()
 
 func draw_front_arc():
-	var front_arc = get_front_arc()
-	draw_polygon(front_arc, PackedColorArray([draw_color]))
+	if not is_runtime_ini:
+		draw_polygon(packed_front_arc, PackedColorArray([draw_color]))
 
-func get_front_arc():	
+func get_front_arc_points():	
 	var size = regiment.get_current_bounds_extends() as Vector2
 	var angle = -90
 	var center = Vector2.ZERO
@@ -50,12 +49,14 @@ func get_front_arc():
 		points_arc.push_back(center + Vector2( cos( deg_to_rad(angle_point) ), sin( deg_to_rad(angle_point) ) ) * radius)
 	return points_arc
 
-
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if area.get_parent() != regiment:
 		draw_color = RED
-	
 
 func _on_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
 	if area.get_parent() != regiment:
 		draw_color = GREEN
+
+func _on_faction_regiment_scene_update_visuals(current_bounds_extends):
+	packed_front_arc = get_front_arc_points()
+	coll_shape.polygon = packed_front_arc

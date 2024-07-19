@@ -1,10 +1,9 @@
 class_name Game_Session
 extends Node2D
 
-var is_runtime_ini = true;
-@onready var factions : Factions = $Factions as Factions
 @export var gui : GUI_Log
-
+@onready var factions : Factions = $Factions as Factions
+var is_runtime_ini = true;
 var session_counter = 1
 
 func _ready():

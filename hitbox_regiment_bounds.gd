@@ -50,3 +50,7 @@ func _on_input_event(viewport, event, shape_idx):
 	if Input.is_action_just_pressed("left_click"):
 		has_selected_movement = true
 		selected_Mouse_Position = get_global_mouse_position()
+
+
+func _on_faction_regiment_scene_update_visuals(current_bounds_extends):
+	update_extends(current_bounds_extends)

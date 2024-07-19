@@ -13,7 +13,6 @@ func _ready():
 	var int3 = randi_range(0,3)
 	unit_ident.setup("Soldat", Vector2(int3,7 ) )
 	
-	
 func guilog(text : String):
 	session.gui.log(text)
 	

@@ -1,20 +1,18 @@
 class_name Faction_Regiment
 extends Node2D
 
-var session : Game_Session
-var faction : Faction
-var regiment_name : String = ""
-
-var faction_unit_preload = preload("res://faction_unit.tscn")
-var is_runntime_ini = true
-
 @export var faction_units : Array[Faction_Unit] = []
 @export var setup_facing_dir : Vector2 = Vector2.ZERO
 @export var setup_pos : Vector2 = Vector2.ZERO
 
-@onready var hitbox_regiment_bounds = $hitbox_regiment_bounds
-@onready var bounds_sprite = $bounds_sprite
-@onready var hitbox_rotation : Regiment_rotation = $hitbox_rotation
+var session : Game_Session
+var faction : Faction
+var faction_unit_preload
+var is_runntime_ini = true
+
+var regiment_name : String = ""
+
+signal update_visuals(current_bounds_extends)
 
 var shape_extends_total = Vector2.ZERO # full width and height
 var current_bounds_extends = Vector2.ZERO #ready to shape, halfed
@@ -25,6 +23,7 @@ var unit_pixel_size = 32.0
 
 
 func _ready():
+	faction_unit_preload = load("res://faction_unit.tscn")
 	session = find_parent("Game_Session")
 	faction = get_parent()
 
@@ -55,9 +54,7 @@ func setup(new_name : String, setup_facing : Vector2, setup_position : Vector2, 
 	
 func runntime_ini():
 	update_relatives()
-	hitbox_regiment_bounds.update_extends(current_bounds_extends)
-	bounds_sprite.update_scale(current_bounds_extends)
-	hitbox_rotation.update_position(current_bounds_extends)
+	update_visuals.emit(current_bounds_extends)
 	position += setup_pos
 	var offset = Vector2(unit_pixel_size/2, unit_pixel_size/2)
 	for n in regiment_unit_size.x:		
