@@ -1,55 +1,55 @@
-[gd_scene load_steps=4 format=3 uid="uid://beauaqxcm41yt"]
+[gd_scene load_steps=6 format=3 uid="uid://beauaqxcm41yt"]
 
-[ext_resource type="Script" path="res://scripts/GUI_HUD.gd" id="1_b4ysd"]
-[ext_resource type="Script" path="res://Game_Session.gd" id="2_nx4wc"]
-[ext_resource type="Script" path="res://Factions.gd" id="3_l3rp5"]
+[ext_resource type="Script" path="res://scripts/game/Game_Session.gd" id="2_nx4wc"]
+[ext_resource type="PackedScene" uid="uid://bt142o4g34u0y" path="res://scns/ui/common_log.tscn" id="3_48iyu"]
+[ext_resource type="Script" path="res://scripts/game/Factions.gd" id="3_l3rp5"]
+[ext_resource type="PackedScene" uid="uid://deqc5r53rtb20" path="res://scns/ui/faction_display_left.tscn" id="4_6lmdl"]
+[ext_resource type="PackedScene" uid="uid://dkyarb68ybori" path="res://selection_display.tscn" id="5_eta7b"]
 
 [node name="root" type="Node2D"]
 
-[node name="Game_Session" type="Node2D" parent="." node_paths=PackedStringArray("gui")]
+[node name="Game_Session" type="Node2D" parent="." node_paths=PackedStringArray("gui", "selection_display")]
 script = ExtResource("2_nx4wc")
-gui = NodePath("GUI_LOG")
+gui = NodePath("GUI/main/Common_Log")
+selection_display = NodePath("GUI/main/selection_display")
 
-[node name="GUI_LOG" type="CanvasLayer" parent="Game_Session"]
-layer = 10
-script = ExtResource("1_b4ysd")
+[node name="Factions" type="Node2D" parent="Game_Session"]
+script = ExtResource("3_l3rp5")
 
-[node name="ColorRect" type="ColorRect" parent="Game_Session/GUI_LOG"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -500.0
-offset_bottom = 400.0
-grow_horizontal = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-color = Color(0, 0, 0, 0.32549)
+[node name="Gameboard" type="Node2D" parent="Game_Session"]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Game_Session/GUI_LOG/ColorRect"]
-layout_mode = 1
+[node name="GUI" type="CanvasLayer" parent="Game_Session"]
+
+[node name="main" type="Control" parent="Game_Session/GUI"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-bbcode_enabled = true
-text = "Willkommen zur heutigen Schlacht!
-Erste Runde!"
-scroll_following = true
 
-[node name="GUI_DETAIL" type="CanvasLayer" parent="Game_Session"]
-layer = -1
-visible = false
+[node name="Faction_Display_Right" parent="Game_Session/GUI/main" instance=ExtResource("4_6lmdl")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = -281.0
+offset_right = 284.0
+offset_bottom = -31.0
+grow_vertical = 0
+pivot_offset = Vector2(0, 250)
 
-[node name="ColorRect" type="ColorRect" parent="Game_Session/GUI_DETAIL"]
-offset_right = 416.0
-offset_bottom = 445.0
-mouse_filter = 2
-color = Color(0, 0, 0, 0.32549)
+[node name="Common_Log" parent="Game_Session/GUI/main" instance=ExtResource("3_48iyu")]
+layout_mode = 1
+size_flags_vertical = 4
 
-[node name="Factions" type="Node2D" parent="Game_Session"]
-script = ExtResource("3_l3rp5")
+[node name="Faction_Display_Left" parent="Game_Session/GUI/main" instance=ExtResource("4_6lmdl")]
+offset_left = 33.0
+offset_top = 22.0
+offset_right = 283.0
+offset_bottom = 272.0
 
-[node name="Gameboard" type="Node2D" parent="Game_Session"]
+[node name="selection_display" parent="Game_Session/GUI/main" instance=ExtResource("5_eta7b")]
+layout_mode = 1

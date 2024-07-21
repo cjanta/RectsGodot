@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=3 uid="uid://beauaqxcm41yt"]
+
+[ext_resource type="Script" path="res://scripts/game/Game_Session.gd" id="2_nx4wc"]
+[ext_resource type="Script" path="res://scripts/game/Factions.gd" id="3_l3rp5"]
+[ext_resource type="Script" path="res://scripts/ui/Common_Log.gd" id="3_tu3ya"]
+
+[sub_resource type="SystemFont" id="SystemFont_e7ki2"]
+subpixel_positioning = 0
+
+[sub_resource type="Theme" id="Theme_wlalc"]
+default_font = SubResource("SystemFont_e7ki2")
+default_font_size = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41w8g"]
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mj5q"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="root" type="Node2D"]
+
+[node name="Game_Session" type="Node2D" parent="." node_paths=PackedStringArray("gui")]
+script = ExtResource("2_nx4wc")
+gui = NodePath("GUI/Common_Log")
+
+[node name="Factions" type="Node2D" parent="Game_Session"]
+script = ExtResource("3_l3rp5")
+
+[node name="Gameboard" type="Node2D" parent="Game_Session"]
+
+[node name="GUI" type="CanvasLayer" parent="Game_Session"]
+
+[node name="Common_Log" type="Control" parent="Game_Session/GUI"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -310.0
+offset_right = 310.0
+offset_bottom = 84.0
+grow_horizontal = 2
+mouse_filter = 1
+theme = SubResource("Theme_wlalc")
+script = ExtResource("3_tu3ya")
+
+[node name="outter_panel" type="Panel" parent="Game_Session/GUI/Common_Log"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_41w8g")
+
+[node name="inner_panel" type="Panel" parent="Game_Session/GUI/Common_Log/outter_panel"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5mj5q")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Game_Session/GUI/Common_Log/outter_panel/inner_panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 5.0
+offset_right = -6.0
+offset_bottom = 81.0
+grow_horizontal = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Willkommen zur heutigen Schlacht!
+Erste Runde!"
+scroll_following = true

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://d4nnj0la4o3if"]
+
+[ext_resource type="Shader" path="res://shader/regiment_sprite_shader.gdshader" id="1_o7e0e"]
+[ext_resource type="Texture2D" uid="uid://cftc6r08dnci6" path="res://grfx/iconDarkGrey32.png" id="2_m3f2t"]
+
+[resource]
+shader = ExtResource("1_o7e0e")
+shader_parameter/size = 3.0
+shader_parameter/iChannel0 = ExtResource("2_m3f2t")
