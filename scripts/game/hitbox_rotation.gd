@@ -1,7 +1,12 @@
 class_name Regiment_rotation
 extends Area2D
 
-var has_selected_rotation = false
+signal selection_changed(has_selected_rotation :bool)
+var has_selected_rotation = false:
+	set(value):
+		has_selected_rotation = value
+		selection_changed.emit(has_selected_rotation)
+
 var selected_Mouse_Position
 var regiment : Faction_Regiment
 var icon_sprite : Sprite2D

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="faction_type" load_steps=3 format=3 uid="uid://cfl18t63y2oxu"]
 
 [ext_resource type="Texture2D" uid="uid://nyyxfa1ag0lp" path="res://grfx/flags/AuraRunic.png" id="1_6hcti"]
-[ext_resource type="Script" path="res://game_res/faction_type.gd" id="1_v6qn5"]
+[ext_resource type="Script" path="res://game_res/faction_type/faction_type.gd" id="1_v6qn5"]
 
 [resource]
 script = ExtResource("1_v6qn5")

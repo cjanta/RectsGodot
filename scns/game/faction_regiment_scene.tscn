@@ -9,6 +9,8 @@
 
 [node name="Faction_Regiment_Scene" type="Node2D"]
 script = ExtResource("1_nqapm")
+setup_facing_dir = null
+setup_pos = null
 
 [node name="hitbox_regiment_bounds" parent="." instance=ExtResource("2_daj36")]
 
@@ -29,3 +31,4 @@ collision_layer = 4
 [connection signal="update_visuals" from="." to="hitbox_arcs" method="_on_faction_regiment_scene_update_visuals"]
 [connection signal="input_event" from="hitbox_regiment_bounds" to="." method="_on_hitbox_regiment_bounds_input_event"]
 [connection signal="selection_changed" from="hitbox_regiment_bounds" to="." method="_on_hitbox_regiment_bounds_selection_changed"]
+[connection signal="selection_changed" from="hitbox_rotation" to="." method="_on_hitbox_rotation_selection_changed"]

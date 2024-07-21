@@ -7,8 +7,8 @@ extends Node2D
 @onready var gui_faction_display_left =$"../GUI/main/Faction_Display_Left"  as Faction_Display
 @onready var gui_faction_display_right =$"../GUI/main/Faction_Display_Right"  as Faction_Display
 
-@export var faction_type = load("res://game_res/taction_type_north.tres")
-var faction_paths : Array[String] = ["res://game_res/taction_type_north.tres","res://game_res/taction_type_sued.tres" ]
+@export var faction_type = load("res://game_res/faction_type/taction_type_north.tres")
+var faction_paths : Array[String] = ["res://game_res/faction_type/taction_type_north.tres","res://game_res/faction_type/taction_type_sued.tres" ]
 
 func _ready():
 	faction_preload = load("res://scns/game/faction_scene.tscn")	
@@ -26,7 +26,7 @@ func create_faction(index :int):
 func get_all_factions_log():
 	var info = ""
 	for faction in all_factions:
-		info += faction.faction_name + "\t"
+		info += faction.get_rich_logPrefix() + "\t"
 	return info
 
 func display_faction_left(faction : Faction):

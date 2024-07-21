@@ -65,6 +65,5 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 bbcode_enabled = true
-text = "Willkommen zur heutigen Schlacht!
-Erste Runde!"
+text = "Willkommen zur heutigen Schlacht!"
 scroll_following = true

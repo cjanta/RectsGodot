@@ -15,6 +15,8 @@ func _ready():
 	regiment = get_parent()
 	selected_Mouse_Position = get_global_mouse_position()
 	coll_shape.shape = coll_shape.shape.duplicate()
+func _process(delta):
+	queue_redraw()
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -56,6 +58,40 @@ func _on_input_event(viewport, event, shape_idx):
 		has_selected_movement = true
 		selected_Mouse_Position = get_global_mouse_position()
 
-
 func _on_faction_regiment_scene_update_visuals(current_bounds_extends):
 	update_extends(current_bounds_extends)
+
+func _draw():
+	draw_bounds()
+
+func draw_bounds():
+	var width = 4.0	
+	draw_edge_line(Vector2(1,1),Vector2(-1,1), width)
+	draw_edge_line(Vector2(-1,1),Vector2(-1,-1), width)
+	draw_edge_line(Vector2(-1,-1),Vector2(1,-1), width)
+	draw_edge_line(Vector2(1,-1),Vector2(1,1), width)
+
+func draw_edge_line(from_dir : Vector2, to_dir : Vector2, width):
+	var color = Color.WHITE
+	var offset = Vector2(width / 2.0, width / 2.0)
+	var from = regiment.get_current_bounds_extends()
+	from = Vector2(from.x * from_dir.x, from.y * from_dir.y)
+	from += Vector2(offset.y * from_dir.x, offset.y * from_dir.y)
+	
+	var to = regiment.get_current_bounds_extends()
+	to = Vector2(to.x * to_dir.x, to.y * to_dir.y)
+	to += Vector2(offset.y * to_dir.x, offset.y * to_dir.y)
+	draw_line(from, to, color, width, true)
+
+	
+	
+
+
+
+
+
+
+
+
+
+

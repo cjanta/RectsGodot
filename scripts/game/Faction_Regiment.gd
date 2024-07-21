@@ -63,7 +63,7 @@ func runntime_ini():
 		unit.position = relative_position  + Vector2(n * unit_pixel_size - collum * regiment_unit_size.y * unit_pixel_size , collum * unit_pixel_size ) + offset
 		add_child(unit)
 		faction_units.append(unit)
-	guilog(get_rich_logPrefix() + " mit " + str(faction_units.size()) + " Einheiten bereit.")
+	guilog(get_rich_common_prefix() + " mit " + str(faction_units.size()) + " Einheiten bereit.")
 
 func update_relatives():
 	shape_extends_total = Vector2(current_bounds_extends.x * 2, current_bounds_extends.y *2)
@@ -75,16 +75,46 @@ func check_if_runtime_ini():
 		is_runntime_ini = false
 		runntime_ini()
 
-func get_rich_logPrefix():
+func get_rich_display_prefix():
 	var faction_prefix = faction.get_rich_logPrefix()
-	var html_color = Color.CADET_BLUE.to_html(true)
+	var message = faction_prefix + "\n"
+	message += "\t" + regiment_name + "\n"
+	message += "\t" + "Lebende " + str(faction_units.size())
+	return get_colored_string(message, Color.WHEAT)
 
-	return faction_prefix + ": [color=" + html_color + "]" + regiment_name + "[/color]" 
-	
+func get_rich_common_prefix():
+	var faction_prefix = faction.get_rich_logPrefix()
+	return faction_prefix + " " + get_colored_string(regiment_name, Color.WHEAT)
+
+func get_colored_string(message : String, color : Color):
+	var html_color = color.to_html(true)
+	var prefix = "[color=" + html_color + "]"
+	var suffix = "[/color]"
+	return prefix + message + suffix
+
 func guilog(text : String):
 	session.gui.log(text)
 
-
 func _on_hitbox_regiment_bounds_selection_changed(has_selected_movement):
 	if has_selected_movement:
-		session.set_selected_regiment(self as Faction_Regiment)
+		session_set_selected_regiment()
+	
+func _on_hitbox_rotation_selection_changed(has_selected_rotation):
+	if has_selected_rotation:
+		session_set_selected_regiment()
+	
+func session_set_selected_regiment():
+	session.set_selected_regiment(self as Faction_Regiment)
+	
+func session_clear_selected_regiment():
+	session.remove_selected_regiment(self as Faction_Regiment)
+	
+func is_session_selected_regiment():
+	return session.is_selected_regiment(self as Faction_Regiment)
+	
+	
+	
+	
+	
+	
+	

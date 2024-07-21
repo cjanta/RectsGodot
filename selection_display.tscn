@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dkyarb68ybori"]
+[gd_scene load_steps=9 format=3 uid="uid://dkyarb68ybori"]
 
 [ext_resource type="Script" path="res://selection_display.gd" id="1_avro6"]
 [ext_resource type="Script" path="res://name_label.gd" id="2_385hc"]
-[ext_resource type="Texture2D" uid="uid://bbh6v6eq3tn0t" path="res://grfx/iconBattleIcon32.png" id="2_vbusf"]
+[ext_resource type="Script" path="res://selection_display_panel.gd" id="2_sgsv5"]
+[ext_resource type="Texture2D" uid="uid://4qeegurau2oi" path="res://grfx/flags/AuraRays.png" id="3_ga2fw"]
+[ext_resource type="Script" path="res://background_texture.gd" id="4_5gf80"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_546b2"]
 bg_color = Color(0, 0, 0, 1)
@@ -21,7 +23,7 @@ subpixel_positioning = 0
 
 [sub_resource type="Theme" id="Theme_7sgg7"]
 default_font = SubResource("SystemFont_0fspv")
-default_font_size = 30
+default_font_size = 36
 
 [node name="selection_display" type="Control"]
 layout_mode = 3
@@ -37,7 +39,7 @@ grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("1_avro6")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="selection_display_panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,20 +47,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_546b2")
+script = ExtResource("2_sgsv5")
 
-[node name="TextureRect" type="TextureRect" parent="Panel"]
+[node name="background_texture" type="TextureRect" parent="selection_display_panel"]
+self_modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -77.0
-offset_top = 63.0
-offset_right = 54.0
-offset_bottom = 183.0
+anchor_bottom = 0.5
+offset_left = -239.0
+offset_top = -117.0
+offset_right = 242.0
+offset_bottom = 118.0
 grow_horizontal = 2
-texture = ExtResource("2_vbusf")
+grow_vertical = 2
+texture = ExtResource("3_ga2fw")
+expand_mode = 1
+script = ExtResource("4_5gf80")
 
-[node name="name_label" type="RichTextLabel" parent="Panel"]
+[node name="name_label" type="RichTextLabel" parent="selection_display_panel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -72,6 +81,8 @@ theme = SubResource("Theme_7sgg7")
 bbcode_enabled = true
 text = "Die Drachenreiter von Ulm"
 fit_content = true
+text_direction = 1
 script = ExtResource("2_385hc")
 
-[connection signal="update_selection_display" from="." to="Panel/name_label" method="_on_selection_display_update_selection_display"]
+[connection signal="update_selection_display" from="." to="selection_display_panel/background_texture" method="_on_selection_display_update_selection_display"]
+[connection signal="update_selection_display" from="." to="selection_display_panel/name_label" method="_on_selection_display_update_selection_display"]

@@ -10,14 +10,17 @@ extends Node2D
 var session : Game_Session
 var sum_regiments = 0
 var faction_type : faction_type
-
+var faction_color : Color
+var faction_color_html
 
 func setup(type):
 	faction_type = type
 	faction_name = type.faction_name
 	start_direction = type.start_facing
 	faction_texture = type.faction_texture
-	
+	faction_color = type.faction_color
+	faction_color_html = faction_color.to_html()
+
 func _ready():
 	session = find_parent("Game_Session")
 	#faction_texture = load("res://grfx/flags_svg/al.svg")
@@ -42,7 +45,7 @@ func create_test_regiments(start_position : Vector2):
 	add_child(regiment)
 	randomize()
 	var number_units = randi_range(10,101)
-	regiment.setup("Regiment: " + str(sum_regiments),start_direction, start_position, Vector3(number_units, 10.0, 1.0 ))
+	regiment.setup("Regiment " + str(sum_regiments),start_direction, start_position, Vector3(number_units, 10.0, 1.0 ))
 	faction_regiments.append(regiment)
 
 func get_rich_logPrefix():
