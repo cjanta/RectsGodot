@@ -80,6 +80,7 @@ func select_faction():
 	faction_has_turn = factions.all_factions[faction_turn_index]
 	update_selectable_regiments(factions.all_factions[faction_turn_index], true)
 	selected_regiment = null
+	selection_display.clear()
 	
 func update_selectable_regiments(faction : Faction, isSelectable : bool):
 	for regiment in faction.faction_regiments:

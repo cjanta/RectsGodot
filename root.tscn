@@ -1,30 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://beauaqxcm41yt"]
+[gd_scene load_steps=7 format=3 uid="uid://beauaqxcm41yt"]
 
 [ext_resource type="Script" path="res://scripts/game/Game_Session.gd" id="2_nx4wc"]
 [ext_resource type="PackedScene" uid="uid://bt142o4g34u0y" path="res://scns/ui/common_log.tscn" id="3_48iyu"]
 [ext_resource type="Script" path="res://scripts/game/Factions.gd" id="3_l3rp5"]
 [ext_resource type="PackedScene" uid="uid://deqc5r53rtb20" path="res://scns/ui/faction_display_left.tscn" id="4_6lmdl"]
 [ext_resource type="PackedScene" uid="uid://dkyarb68ybori" path="res://selection_display.tscn" id="5_eta7b"]
-[ext_resource type="Script" path="res://session_round_display.gd" id="6_odefa"]
-[ext_resource type="Script" path="res://session_round_display_label.gd" id="7_hgm8m"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kd5si"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.501961, 0.501961, 0.501961, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="SystemFont" id="SystemFont_bnbvd"]
-
-[sub_resource type="Theme" id="Theme_h3yek"]
-default_font = SubResource("SystemFont_bnbvd")
-default_font_size = 35
+[ext_resource type="PackedScene" uid="uid://c2be5ggfs43tl" path="res://session_round_display.tscn" id="6_bsjtm"]
 
 [node name="root" type="Node2D"]
 
@@ -83,45 +64,5 @@ offset_top = -109.0
 offset_right = -28.0
 offset_bottom = 141.0
 
-[node name="session_round_display" type="Control" parent="Game_Session/GUI/main"]
+[node name="session_round_display" parent="Game_Session/GUI/main" instance=ExtResource("6_bsjtm")]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 75.0
-offset_right = 75.0
-grow_horizontal = 0
-script = ExtResource("6_odefa")
-
-[node name="Panel" type="Panel" parent="Game_Session/GUI/main/session_round_display"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -594.0
-offset_top = 23.0
-offset_right = -94.0
-offset_bottom = 173.0
-grow_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_kd5si")
-
-[node name="session_round_display_label" type="RichTextLabel" parent="Game_Session/GUI/main/session_round_display/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -239.0
-offset_top = -60.0
-offset_right = 244.0
-offset_bottom = 61.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_h3yek")
-bbcode_enabled = true
-text = "Runde 1
-	Die Drachenriter von Ulm"
-script = ExtResource("7_hgm8m")
-
-[connection signal="update_session_round_display" from="Game_Session/GUI/main/session_round_display" to="Game_Session/GUI/main/session_round_display/Panel/session_round_display_label" method="_on_session_round_display_update_session_round_display"]
