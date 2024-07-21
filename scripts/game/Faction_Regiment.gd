@@ -9,6 +9,11 @@ var session : Game_Session
 var faction : Faction
 var faction_unit_preload
 var is_runntime_ini = true
+var is_Selectable = false:
+	set(value):
+		is_Selectable = value
+	get:
+		return is_Selectable
 
 var regiment_name : String = ""
 

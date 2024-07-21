@@ -11,7 +11,7 @@ var session : Game_Session
 var sum_regiments = 0
 var faction_type : faction_type
 var faction_color : Color
-var faction_color_html
+var faction_color_html = Color.WHITE.to_html()
 
 func setup(type):
 	faction_type = type

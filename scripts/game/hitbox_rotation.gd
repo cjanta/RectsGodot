@@ -53,7 +53,7 @@ func update_position(current_Bounds_extend : Vector2):
 	position += Vector2(0,-y_offset )
 
 func _on_input_event(viewport, event, shape_idx):
-	if Input.is_action_just_pressed("left_click"):
+	if regiment.is_Selectable && Input.is_action_just_pressed("left_click"):
 		has_selected_rotation = true
 		selected_Mouse_Position = get_global_mouse_position()
 
@@ -61,8 +61,9 @@ func _on_faction_regiment_scene_update_visuals(current_bounds_extends):
 	update_position(current_bounds_extends)
 
 func _on_mouse_entered():
-	icon_sprite.texture = icon_tex_rotate
+	if regiment.is_Selectable:
+		icon_sprite.texture = icon_tex_rotate
 
 func _on_mouse_exited():
-	if not has_selected_rotation:
+	if not has_selected_rotation || not regiment.is_Selectable:
 		icon_sprite.texture = icon_tex_north

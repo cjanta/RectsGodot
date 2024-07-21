@@ -56,7 +56,9 @@ func get_rich_round_log():
 	return "Runde [color=" + logging_color_html + "]" + str(session_round_counter) + "[/color]" 
 
 func get_rich_faction_turn_log(selected_faction : Faction):
-	return "[color=" + selected_faction.faction_color_html + "]" + selected_faction.faction_name + "[/color]" 	
+	if selected_faction != null:
+		return "[color=" + selected_faction.faction_color_html + "]" + selected_faction.faction_name + "[/color]" 
+	return "error"	
 
 func get_session_round_display_log():
 	return get_rich_round_log() + "\n\t" + get_rich_faction_turn_log(faction_has_turn)
@@ -65,15 +67,23 @@ func get_session_round_display_log():
 func iterate_session_round():
 	session_round_counter += 1
 	gui.log(get_rich_round_log())
+	select_faction()
+	gui.log(get_rich_faction_turn_log(faction_has_turn))
+	session_round_display.update(self)
+
+func select_faction():
+	update_selectable_regiments(factions.all_factions[faction_turn_index], false)
 	if faction_turn_index == 0:
 		faction_turn_index = 1
 	else:
 		faction_turn_index = 0
 	faction_has_turn = factions.all_factions[faction_turn_index]
-	gui.log(get_rich_faction_turn_log(faction_has_turn))
-	session_round_display.update(self)
+	update_selectable_regiments(factions.all_factions[faction_turn_index], true)
+	selected_regiment = null
 	
-	
+func update_selectable_regiments(faction : Faction, isSelectable : bool):
+	for regiment in faction.faction_regiments:
+		regiment.is_Selectable = isSelectable	
 	
 	
 	
