@@ -1,7 +1,7 @@
 extends RichTextLabel
 
 
-@onready var selection_display_panel = $".."
+@onready var selection_display_panel = $"../.."
 
 
 

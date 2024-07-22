@@ -85,22 +85,6 @@ func select_faction():
 func update_selectable_regiments(faction : Faction, isSelectable : bool):
 	for regiment in faction.faction_regiments:
 		regiment.is_Selectable = isSelectable	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+func _on_session_round_display_clicked_session_round_display():
+	iterate_session_round()

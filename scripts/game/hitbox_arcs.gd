@@ -3,11 +3,11 @@ extends Area2D
 @onready var coll_shape :CollisionPolygon2D = $CollisionPolygon2D
 var is_runtime_ini = true
 var regiment : Faction_Regiment
-const RED = Color(1.0, 0, 0, 0.4)
-const GREEN = Color(0, 1.0, 0, 0.4)
+const RED = Color(1.0, 0, 0, 0.05)
+const GREEN = Color(0, 1.0, 0, 0.05)
 var draw_color = GREEN
 var packed_front_arc :PackedVector2Array
-var is_draw_front_arc = false
+var is_draw_front_arc = true
 
 func _ready():
 	regiment = get_parent()
@@ -38,7 +38,7 @@ func get_front_arc_points():
 	var tl = position + Vector2(-size.x ,-size.y)
 	var tr = position + Vector2(size.x ,-size.y)
 	var fow = rad_to_deg(tl.angle_to(tr))
-	var radius = regiment.shape_extends_total.length()
+	var radius = size.length() * 2
 	var angle_from = angle - fow/2
 	var angle_to = angle + fow/2
 	var nb_points = 16
@@ -51,11 +51,14 @@ func get_front_arc_points():
 	return points_arc
 
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	if area.get_parent() != regiment:
+	var other_regiment = area.get_parent() as Faction_Regiment
+	if  other_regiment != null and other_regiment != regiment:
 		draw_color = RED
+		pass
 
 func _on_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
-	if area.get_parent() != regiment:
+	var other_regiment = area.get_parent() as Faction_Regiment
+	if  other_regiment != null and other_regiment != regiment:
 		draw_color = GREEN
 
 func _on_faction_regiment_scene_update_visuals(current_bounds_extends):

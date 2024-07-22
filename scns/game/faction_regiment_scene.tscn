@@ -13,8 +13,6 @@ script = ExtResource("1_nqapm")
 [node name="hitbox_regiment_bounds" parent="." instance=ExtResource("2_daj36")]
 
 [node name="hitbox_rotation" parent="." instance=ExtResource("3_3dvq2")]
-collision_layer = 128
-collision_mask = 0
 
 [node name="bounds_sprite" type="Sprite2D" parent="."]
 texture = ExtResource("4_2trtb")

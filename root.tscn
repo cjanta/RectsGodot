@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://beauaqxcm41yt"]
+[gd_scene load_steps=9 format=3 uid="uid://beauaqxcm41yt"]
 
 [ext_resource type="Script" path="res://scripts/game/Game_Session.gd" id="2_nx4wc"]
 [ext_resource type="PackedScene" uid="uid://bt142o4g34u0y" path="res://scns/ui/common_log.tscn" id="3_48iyu"]
@@ -6,6 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://deqc5r53rtb20" path="res://scns/ui/faction_display_left.tscn" id="4_6lmdl"]
 [ext_resource type="PackedScene" uid="uid://dkyarb68ybori" path="res://selection_display.tscn" id="5_eta7b"]
 [ext_resource type="PackedScene" uid="uid://c2be5ggfs43tl" path="res://session_round_display.tscn" id="6_bsjtm"]
+
+[sub_resource type="SystemFont" id="SystemFont_18rl2"]
+
+[sub_resource type="Theme" id="Theme_v6ffy"]
+default_font = SubResource("SystemFont_18rl2")
+default_font_size = 22
 
 [node name="root" type="Node2D"]
 
@@ -27,42 +33,51 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Faction_Display_Right" parent="Game_Session/GUI/main" instance=ExtResource("4_6lmdl")]
+[node name="Common_Log" parent="Game_Session/GUI/main" instance=ExtResource("3_48iyu")]
+layout_mode = 1
+offset_left = -347.0
+offset_top = 10.0
+offset_right = 388.0
+offset_bottom = 80.0
+size_flags_vertical = 4
+
+[node name="Faction_Display_North" parent="Game_Session/GUI/main" instance=ExtResource("4_6lmdl")]
+layout_mode = 1
+offset_left = 18.0
+offset_top = 11.0
+offset_right = 328.0
+offset_bottom = 161.0
+theme = SubResource("Theme_v6ffy")
+
+[node name="Faction_Display_South" parent="Game_Session/GUI/main" instance=ExtResource("4_6lmdl")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 34.0
-offset_top = -281.0
-offset_right = 284.0
-offset_bottom = -31.0
+offset_left = 12.0
+offset_top = -162.0
+offset_right = 322.0
+offset_bottom = -12.0
 grow_vertical = 0
-pivot_offset = Vector2(0, 250)
-
-[node name="Common_Log" parent="Game_Session/GUI/main" instance=ExtResource("3_48iyu")]
-layout_mode = 1
-offset_left = -351.0
-offset_top = 23.0
-offset_right = 349.0
-offset_bottom = 173.0
-size_flags_vertical = 4
-
-[node name="Faction_Display_Left" parent="Game_Session/GUI/main" instance=ExtResource("4_6lmdl")]
-offset_left = 33.0
-offset_top = 22.0
-offset_right = 283.0
-offset_bottom = 272.0
+theme = SubResource("Theme_v6ffy")
 
 [node name="selection_display" parent="Game_Session/GUI/main" instance=ExtResource("5_eta7b")]
 layout_mode = 1
-offset_left = -528.0
-offset_top = -109.0
-offset_right = -28.0
-offset_bottom = 141.0
+offset_left = -329.0
+offset_top = 15.0
+offset_right = -13.0
+offset_bottom = 124.0
 
 [node name="session_round_display" parent="Game_Session/GUI/main" instance=ExtResource("6_bsjtm")]
 layout_mode = 1
+offset_left = -352.0
+offset_top = 8.0
+offset_bottom = 79.0
+
+[connection signal="clicked_session_round_display" from="Game_Session/GUI/main/session_round_display" to="Game_Session" method="_on_session_round_display_clicked_session_round_display"]

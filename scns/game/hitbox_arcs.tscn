@@ -3,10 +3,12 @@
 [ext_resource type="Script" path="res://scripts/game/hitbox_arcs.gd" id="1_ll1u7"]
 
 [node name="hitbox_arcs" type="Area2D"]
+light_mask = 4
 z_index = -1
 script = ExtResource("1_ll1u7")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+light_mask = 4
 polygon = PackedVector2Array(15, 16, 41, 82, 2, 55, -18, 88, -19, 41, -52, 38)
 
 [connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
