@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2be5ggfs43tl"]
+
+[ext_resource type="Script" path="res://scripts/ui/session_round_display.gd" id="1_34h0q"]
+[ext_resource type="Script" path="res://scripts/ui/session_round_display_label.gd" id="2_mg1yd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kd5si"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.501961, 0.501961, 0.501961, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="SystemFont" id="SystemFont_bnbvd"]
+subpixel_positioning = 0
+
+[sub_resource type="Theme" id="Theme_h3yek"]
+default_font = SubResource("SystemFont_bnbvd")
+default_font_size = 22
+
+[node name="session_round_display" type="Control"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -351.0
+offset_top = 7.0
+offset_right = -8.0
+offset_bottom = 76.0
+grow_horizontal = 0
+mouse_force_pass_scroll_events = false
+script = ExtResource("1_34h0q")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kd5si")
+
+[node name="session_round_display_label" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 4.0
+offset_right = -8.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_h3yek")
+bbcode_enabled = true
+text = "Runde 1
+	Die Drachenriter von Ulm"
+script = ExtResource("2_mg1yd")
+
+[connection signal="update_session_round_display" from="." to="Panel/session_round_display_label" method="_on_session_round_display_update_session_round_display"]
+[connection signal="gui_input" from="Panel/session_round_display_label" to="." method="_on_session_round_display_label_gui_input"]

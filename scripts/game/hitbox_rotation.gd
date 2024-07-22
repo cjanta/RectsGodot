@@ -7,7 +7,7 @@ var has_selected_rotation = false:
 		has_selected_rotation = value
 		selection_changed.emit(has_selected_rotation)
 
-var selected_Mouse_Position
+var original_drag_vector_up
 var regiment : Faction_Regiment
 var icon_sprite : Sprite2D
 var icon_tex_north
@@ -19,7 +19,7 @@ func _ready():
 	icon_tex_rotate = load("res://grfx/icon_Rotate32.png")
 	icon_sprite.texture = icon_tex_north
 	regiment = get_parent()
-	selected_Mouse_Position = get_global_mouse_position()
+	original_drag_vector_up = Vector2.UP.rotated(regiment.global_rotation)
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -30,21 +30,26 @@ func check_endof_drag():
 	if has_selected_rotation:
 		has_selected_rotation = false
 		icon_sprite.texture = icon_tex_north
+		var result = Vector2.UP.rotated(regiment.global_rotation).angle_to(original_drag_vector_up)
+		regiment.type.action_points -= abs(rad_to_deg(result))
+		regiment.session_update_selection_display()	
 
 func _physics_process(delta):
 	if has_selected_rotation:
-		handleDragnDropRotation(delta)
+		if regiment.type.action_points > 0:
+			handleDragnDropRotation(delta)
+		else:
+			regiment.session_update_selection_display()	
 
 func handleDragnDropRotation(delta):
-	var action_points =	rotate_dragged_object(delta)
+	rotate_dragged_object(delta)
+	regiment.session_update_selection_display()
 
 func rotate_dragged_object(delta):
 	var direction = get_global_mouse_position() - regiment.global_position
-	var alpha = Vector2.UP.rotated(regiment.rotation).angle_to(direction)
+	var alpha = Vector2.UP.rotated(regiment.global_rotation).angle_to(direction)
 	regiment.global_rotation += alpha
-	return alpha
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
@@ -54,8 +59,9 @@ func update_position(current_Bounds_extend : Vector2):
 
 func _on_input_event(viewport, event, shape_idx):
 	if regiment.is_Selectable && Input.is_action_just_pressed("left_click"):
-		has_selected_rotation = true
-		selected_Mouse_Position = get_global_mouse_position()
+		if regiment.type.action_points > -1:
+			has_selected_rotation = true
+			original_drag_vector_up = Vector2.UP.rotated(regiment.global_rotation)
 
 func _on_faction_regiment_scene_update_visuals(current_bounds_extends):
 	update_position(current_bounds_extends)

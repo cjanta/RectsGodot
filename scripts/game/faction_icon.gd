@@ -20,4 +20,5 @@ func _process(delta):
 
 func _on_faction_regiment_scene_update_visuals(current_bounds_extends):
 	update_scale(current_bounds_extends)
-	self_modulate = regiment.faction.faction_type.faction_color
+	texture = regiment.type.regiment_texture
+	self_modulate =  regiment.type.regiment_color

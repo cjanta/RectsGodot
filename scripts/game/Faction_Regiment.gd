@@ -15,7 +15,7 @@ var is_Selectable = false:
 	get:
 		return is_Selectable
 
-var regiment_name : String = ""
+var type : Regiment_Type
 
 signal update_visuals(current_bounds_extends)
 
@@ -49,13 +49,15 @@ func update_current_bounds_extends():
 func _process(delta):
 	check_if_runtime_ini()
 
-func setup(new_name : String, setup_facing : Vector2, setup_position : Vector2, new_size : Vector3):
-	self.setup_facing_dir = setup_facing
-	regiment_name = new_name
-	if setup_facing == Vector2.DOWN:
+func set_type(regiment_type : Regiment_Type):
+	type = regiment_type
+	setup_facing_dir = type.setup_facing_dir
+	if setup_facing_dir == Vector2.DOWN:
 		rotation_degrees += 180
-	self.setup_pos = setup_position
-	set_regiment_unit_size(new_size)
+	setup_pos = type.setup_position
+	set_regiment_unit_size(type.regiment_unit_size)
+	
+	pass
 	
 func runntime_ini():
 	update_relatives()
@@ -83,13 +85,14 @@ func check_if_runtime_ini():
 func get_rich_display_prefix():
 	var faction_prefix = faction.get_rich_logPrefix()
 	var message = faction_prefix + "\n"
-	message += "\t" + regiment_name + "\n"
-	message += "\t" + "Lebende " + str(faction_units.size())
+	message += "\t" + type.regiment_name + "\n"
+	message += "\t" + "Lebende " + str(faction_units.size()) + "\n"
+	message += "\t" + "AP " + str(type.action_points)
 	return get_colored_string(message, Color.WHEAT)
 
 func get_rich_common_prefix():
 	var faction_prefix = faction.get_rich_logPrefix()
-	return faction_prefix + " " + get_colored_string(regiment_name, Color.WHEAT)
+	return faction_prefix + " " + get_colored_string(type.regiment_name, Color.WHEAT)
 
 func get_colored_string(message : String, color : Color):
 	var html_color = color.to_html(true)
@@ -107,6 +110,9 @@ func _on_hitbox_regiment_bounds_selection_changed(has_selected_movement):
 func _on_hitbox_rotation_selection_changed(has_selected_rotation):
 	if has_selected_rotation:
 		session_set_selected_regiment()
+		
+func session_update_selection_display():
+	session.update_selection_display(self as Faction_Regiment)
 	
 func session_set_selected_regiment():
 	session.set_selected_regiment(self as Faction_Regiment)

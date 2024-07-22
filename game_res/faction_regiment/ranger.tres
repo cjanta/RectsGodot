@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Regiment_Type" load_steps=3 format=3 uid="uid://ge42sv2l88mk"]
+
+[ext_resource type="Texture2D" uid="uid://ep4d0xyynwdk" path="res://grfx/iconWhite_full.png" id="1_7unes"]
+[ext_resource type="Script" path="res://game_res/faction_regiment/regiment_type.gd" id="1_sqo0m"]
+
+[resource]
+script = ExtResource("1_sqo0m")
+regiment_name = "Rangers"
+regiment_texture = ExtResource("1_7unes")
+regiment_unit_size = Vector3(20, 10, 0)
+regiment_color = Color(0.254902, 0.541176, 0.290196, 1)
+regiment_unit_coords = Vector2(0, 7)

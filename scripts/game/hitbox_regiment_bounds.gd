@@ -29,10 +29,14 @@ func check_endof_drag():
 
 func _physics_process(delta):
 	if has_selected_movement:
-		handleDragnDropMovement(delta)
+		if regiment.type.action_points > 0:
+			handleDragnDropMovement(delta)
+		else:
+			regiment.session_update_selection_display()	
 
 func handleDragnDropMovement(delta):
-	var action_points = move()
+	regiment.type.action_points -= move()
+	regiment.session_update_selection_display()
 
 func update_extends(current_bounds_extends :Vector2):
 	coll_shape.shape.extents = current_bounds_extends
@@ -55,8 +59,9 @@ func move():
 	
 func _on_input_event(viewport, event, shape_idx):
 	if regiment.is_Selectable && Input.is_action_just_pressed("left_click"):
-		has_selected_movement = true
-		selected_Mouse_Position = get_global_mouse_position()
+		if regiment.type.action_points > -1:
+			has_selected_movement = true
+			selected_Mouse_Position = get_global_mouse_position()
 
 func _on_faction_regiment_scene_update_visuals(current_bounds_extends):
 	update_extends(current_bounds_extends)

@@ -23,7 +23,6 @@ func setup(type):
 
 func _ready():
 	session = find_parent("Game_Session")
-	#faction_texture = load("res://grfx/flags_svg/al.svg")
 	regiments_preload = load("res://scns/game/faction_regiment_scene.tscn")
 	var x_offset = Vector2(500,200)
 	var num_per_faction = 2
@@ -41,11 +40,15 @@ func _process(delta):
 	pass
 	
 func create_test_regiments(start_position : Vector2):
-	var regiment = regiments_preload.instantiate()
+	var regiment : Faction_Regiment = regiments_preload.instantiate()
 	add_child(regiment)
 	randomize()
 	var number_units = randi_range(10,101)
-	regiment.setup("Regiment " + str(sum_regiments),start_direction, start_position, Vector3(number_units, 10.0, 1.0 ))
+	var new_type : Regiment_Type = session.data.get_random_regiment_type()
+	new_type.setup_facing_dir = start_direction
+	new_type.setup_position = start_position
+	regiment.set_type(new_type)
+	#regiment.setup("Regiment " + str(sum_regiments),start_direction, start_position, Vector3(number_units, 10.0, 1.0 ))
 	faction_regiments.append(regiment)
 
 func get_rich_logPrefix():

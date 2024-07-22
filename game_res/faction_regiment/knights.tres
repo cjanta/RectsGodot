@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Regiment_Type" load_steps=3 format=3 uid="uid://dhshjxjo5brft"]
+
+[ext_resource type="Texture2D" uid="uid://ep4d0xyynwdk" path="res://grfx/iconWhite_full.png" id="1_gflen"]
+[ext_resource type="Script" path="res://game_res/faction_regiment/regiment_type.gd" id="2_vq15k"]
+
+[resource]
+script = ExtResource("2_vq15k")
+regiment_name = "Knights"
+regiment_texture = ExtResource("1_gflen")
+regiment_unit_size = Vector3(40, 10, 0)
+regiment_color = Color(0.4, 0.4, 0.654902, 1)
+regiment_unit_coords = Vector2(3, 7)
