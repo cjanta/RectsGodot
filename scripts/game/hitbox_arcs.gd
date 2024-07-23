@@ -1,5 +1,6 @@
-extends Area2D
+class_name Hitbox_Arcs
 
+extends Area2D
 @onready var coll_shape :CollisionPolygon2D = $CollisionPolygon2D
 var is_runtime_ini = true
 var regiment : Faction_Regiment
@@ -17,7 +18,7 @@ var packed_back_arc : PackedVector2Array
 var packed_left_arc :PackedVector2Array
 var is_draw_arc = true
 
-var chargeable_regiments : Array[Faction_Regiment]
+@export var chargeable_regiments : Array[Faction_Regiment]
 
 func _ready():
 	regiment = get_parent()
@@ -34,10 +35,15 @@ func check_runtime_ini():
 		
 
 func _draw():
-	#Todo: Bug, positionen von oben ziehen line in falsche Richtung
-	for regiment in chargeable_regiments:
-		var target_pos = position + (regiment.global_position - global_position) 
-		draw_line(position, target_pos, Color.AQUA, 8.0 , true)
+	for chargeable_regiment : Faction_Regiment in chargeable_regiments:
+		if regiment.is_session_selected_regiment():		
+			draw_line(position ,to_local(chargeable_regiment.global_position) , Color.REBECCA_PURPLE, 8.0 , true)
+			var other_chargeables : Array[Faction_Regiment] = chargeable_regiment.hitbox_arcs_node.chargeable_regiments
+			for reg in other_chargeables:
+				if reg == regiment:
+					var off = Vector2(8,0)
+					draw_line(position +off,to_local(chargeable_regiment.global_position)+off , Color.INDIAN_RED, 8.0 , true)
+			
 	#var test_draw_color_front = Color.WHITE_SMOKE
 	#var test_draw_color_back = Color.BLACK
 	#var test_draw_color_right = Color.YELLOW

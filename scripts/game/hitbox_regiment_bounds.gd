@@ -71,7 +71,7 @@ func _draw():
 		draw_bounds()
 
 func draw_bounds():
-	var width = 4.0	
+	var width = 3.0	
 	draw_edge_line(Vector2(1,1),Vector2(-1,1), width)
 	draw_edge_line(Vector2(-1,1),Vector2(-1,-1), width)
 	draw_edge_line(Vector2(-1,-1),Vector2(1,-1), width)

@@ -4,6 +4,7 @@ extends Node2D
 @export var faction_units : Array[Faction_Unit] = []
 @export var setup_facing_dir : Vector2 = Vector2.ZERO
 @export var setup_pos : Vector2 = Vector2.ZERO
+@onready var hitbox_arcs_node = $hitbox_arcs
 
 var session : Game_Session
 var faction : Faction
@@ -25,7 +26,6 @@ var	relative_position = Vector2.ZERO
 var	regiment_bounds =  null
 var regiment_unit_size = Vector3(3,1,3)
 var unit_pixel_size = 32.0
-
 
 func _ready():
 	faction_unit_preload = load("res://scns/game/faction_unit.tscn")
