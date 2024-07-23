@@ -11,9 +11,12 @@ class_name Regiment_Type
 var setup_position : Vector2 = Vector2.ZERO
 var setup_facing_dir : Vector2 = Vector2.DOWN
 
-var action_points_max : int = 300
-var action_points : int = 300:
+const action_points_max : int = 400
+var action_points : int = 400:
 	set(value):
 		action_points = value
 		if action_points < 0:
 			action_points = 0
+
+func reset_action_points():
+	action_points = action_points_max

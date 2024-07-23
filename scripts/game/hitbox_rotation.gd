@@ -31,7 +31,7 @@ func check_endof_drag():
 		has_selected_rotation = false
 		icon_sprite.texture = icon_tex_north
 		var result = Vector2.UP.rotated(regiment.global_rotation).angle_to(original_drag_vector_up)
-		regiment.type.action_points -= abs(rad_to_deg(result))
+		regiment.type.action_points -= abs(rad_to_deg(result) / 10.0)
 		regiment.session_update_selection_display()	
 
 func _physics_process(delta):

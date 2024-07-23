@@ -72,6 +72,10 @@ func get_session_round_display_log():
 func iterate_session_round():
 	session_round_counter += 1
 	gui.log(get_rich_round_log())
+	for faction in factions.all_factions:
+		for regiment in faction.faction_regiments:
+			regiment.type.reset_action_points()
+	
 	select_faction()
 	gui.log(get_rich_faction_turn_log(faction_has_turn))
 	session_round_display.update(self)
