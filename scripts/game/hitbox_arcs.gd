@@ -42,16 +42,17 @@ func _draw():
 
 	if not is_runtime_ini && is_draw_arc:
 		draw_polygon(packed_front_arc, PackedColorArray([draw_color]))
-		draw_polygon(packed_right_arc, PackedColorArray([draw_color]))
-		draw_polygon(packed_left_arc, PackedColorArray([draw_color]))
-		draw_polygon(packed_back_arc, PackedColorArray([draw_color]))
+		#draw_polygon(packed_right_arc, PackedColorArray([draw_color]))
+		#draw_polygon(packed_left_arc, PackedColorArray([draw_color]))
+		#draw_polygon(packed_back_arc, PackedColorArray([draw_color]))
 
 func get_arc_point(angle_degrees):
 	var size = regiment.get_current_bounds_extends() as Vector2
 	var angle = angle_degrees
 	var center = Vector2.ZERO
 	var fow =get_fov_of_degrees(angle_degrees)
-	var radius = size.length() + 4.0
+	#var fow = 180
+	var radius = size.length() * regiment.type.charge_range
 	var angle_from = angle - fow/2
 	var angle_to = angle + fow/2
 	var nb_points = 16

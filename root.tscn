@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://beauaqxcm41yt"]
+[gd_scene load_steps=17 format=3 uid="uid://beauaqxcm41yt"]
 
 [ext_resource type="Script" path="res://scripts/game/Game_Session.gd" id="2_nx4wc"]
 [ext_resource type="Script" path="res://scripts/game/data.gd" id="2_vo6wv"]
@@ -12,11 +12,29 @@
 [ext_resource type="PackedScene" uid="uid://dkyarb68ybori" path="res://scns/ui/selection_display.tscn" id="5_eta7b"]
 [ext_resource type="PackedScene" uid="uid://c2be5ggfs43tl" path="res://scns/ui/session_round_display.tscn" id="6_bsjtm"]
 
+[sub_resource type="SystemFont" id="SystemFont_hlcwx"]
+
+[sub_resource type="Theme" id="Theme_lfqe7"]
+default_font = SubResource("SystemFont_hlcwx")
+default_font_size = 22
+
 [sub_resource type="SystemFont" id="SystemFont_18rl2"]
 
 [sub_resource type="Theme" id="Theme_v6ffy"]
 default_font = SubResource("SystemFont_18rl2")
 default_font_size = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jr7dn"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.501961, 0.501961, 0.501961, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="root" type="Node2D"]
 
@@ -50,6 +68,7 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = SubResource("Theme_lfqe7")
 
 [node name="Common_Log" parent="Game_Session/GUI/main" instance=ExtResource("3_48iyu")]
 layout_mode = 1
@@ -91,5 +110,83 @@ layout_mode = 1
 offset_left = -352.0
 offset_top = 8.0
 offset_bottom = 79.0
+
+[node name="action_bar" type="Control" parent="Game_Session/GUI/main"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -150.0
+offset_right = 400.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="Game_Session/GUI/main/action_bar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jr7dn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Game_Session/GUI/main/action_bar/Panel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 10.0
+offset_right = -11.0
+offset_bottom = -10.0
+grow_vertical = 2
+
+[node name="spacing5" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(16, 128)
+layout_mode = 2
+
+[node name="action_bar_element" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="spacing" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(16, 128)
+layout_mode = 2
+
+[node name="action_bar_element2" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="spacing2" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(16, 128)
+layout_mode = 2
+
+[node name="action_bar_element3" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="spacing3" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(16, 128)
+layout_mode = 2
+
+[node name="action_bar_element4" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="spacing4" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(16, 128)
+layout_mode = 2
+
+[node name="action_bar_element5" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="spacing6" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(16, 128)
+layout_mode = 2
 
 [connection signal="clicked_session_round_display" from="Game_Session/GUI/main/session_round_display" to="Game_Session" method="_on_session_round_display_clicked_session_round_display"]
