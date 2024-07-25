@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://beauaqxcm41yt"]
 
 [ext_resource type="Script" path="res://scripts/game/Game_Session.gd" id="2_nx4wc"]
-[ext_resource type="Script" path="res://data.gd" id="2_vo6wv"]
+[ext_resource type="Script" path="res://scripts/game/data.gd" id="2_vo6wv"]
 [ext_resource type="PackedScene" uid="uid://bt142o4g34u0y" path="res://scns/ui/common_log.tscn" id="3_48iyu"]
 [ext_resource type="Resource" uid="uid://dhshjxjo5brft" path="res://game_res/faction_regiment/knights.tres" id="3_aq20d"]
 [ext_resource type="Resource" uid="uid://ck43168nase3u" path="res://game_res/faction_type/taction_type_north.tres" id="3_btu6t"]

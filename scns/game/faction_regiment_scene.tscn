@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwv3s62w20ivm"]
+[gd_scene load_steps=8 format=3 uid="uid://bwv3s62w20ivm"]
 
 [ext_resource type="Script" path="res://scripts/game/Faction_Regiment.gd" id="1_nqapm"]
 [ext_resource type="PackedScene" uid="uid://sf58apyyihsn" path="res://scns/game/hitbox_regiment_bounds.tscn" id="2_daj36"]
 [ext_resource type="Script" path="res://scripts/game/faction_icon.gd" id="2_nebew"]
 [ext_resource type="PackedScene" uid="uid://3mie7hp7sxd" path="res://scns/game/hitbox_rotation.tscn" id="3_3dvq2"]
-[ext_resource type="Texture2D" uid="uid://ep4d0xyynwdk" path="res://grfx/iconWhite_full.png" id="4_2trtb"]
+[ext_resource type="Texture2D" uid="uid://ciub6jojdfds2" path="res://grfx/flags/bd.svg" id="4_06a2m"]
+[ext_resource type="Material" uid="uid://d4nnj0la4o3if" path="res://shader/regiment_shader/regiment_sprite_shader.tres" id="4_bcwqg"]
 [ext_resource type="PackedScene" uid="uid://cgrwbimmaa7cd" path="res://scns/game/hitbox_arcs.tscn" id="6_eui2j"]
 
 [node name="Faction_Regiment_Scene" type="Node2D"]
@@ -15,7 +16,8 @@ script = ExtResource("1_nqapm")
 [node name="hitbox_rotation" parent="." instance=ExtResource("3_3dvq2")]
 
 [node name="bounds_sprite" type="Sprite2D" parent="."]
-texture = ExtResource("4_2trtb")
+material = ExtResource("4_bcwqg")
+texture = ExtResource("4_06a2m")
 script = ExtResource("2_nebew")
 
 [node name="hitbox_arcs" parent="." instance=ExtResource("6_eui2j")]

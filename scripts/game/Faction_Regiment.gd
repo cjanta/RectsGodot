@@ -66,6 +66,7 @@ func runntime_ini():
 		var unit = faction_unit_preload.instantiate()
 		var collum =  floor(n / regiment_unit_size.y)
 		unit.position = relative_position  + Vector2(n * unit_pixel_size - collum * regiment_unit_size.y * unit_pixel_size , collum * unit_pixel_size ) + offset
+		unit.visible = false
 		add_child(unit)
 		faction_units.append(unit)
 	guilog(get_rich_common_prefix() + " mit " + str(faction_units.size()) + " Einheiten bereit.")
