@@ -89,8 +89,6 @@ func draw_edge_line(from_dir : Vector2, to_dir : Vector2, width):
 	to += Vector2(offset.y * to_dir.x, offset.y * to_dir.y)
 	draw_line(from, to, color, width, true)
 
-	
-	
 
 
 

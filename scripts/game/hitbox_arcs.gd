@@ -7,10 +7,6 @@ var regiment : Faction_Regiment
 const RED = Color(1.0, 0, 0, 0.05)
 const GREEN = Color(0, 1.0, 0, 0.05)
 var draw_color = GREEN
-var test_draw_color_front = Color.WHITE_SMOKE
-var test_draw_color_back = Color.BLACK
-var test_draw_color_right = Color.YELLOW
-var test_draw_color_left = Color.ORANGE
 
 var packed_front_arc :PackedVector2Array
 var packed_right_arc :PackedVector2Array
@@ -32,7 +28,6 @@ func check_runtime_ini():
 	if is_runtime_ini:
 		is_runtime_ini = false;
 		update_arcs()
-		
 
 func _draw():
 	for chargeable_regiment : Faction_Regiment in chargeable_regiments:
@@ -44,15 +39,12 @@ func _draw():
 					var off = Vector2(8,0)
 					draw_line(position +off,to_local(chargeable_regiment.global_position)+off , Color.INDIAN_RED, 8.0 , true)
 			
-	#var test_draw_color_front = Color.WHITE_SMOKE
-	#var test_draw_color_back = Color.BLACK
-	#var test_draw_color_right = Color.YELLOW
-	#var test_draw_color_left = Color.ORANGE
+
 	if not is_runtime_ini && is_draw_arc:
 		draw_polygon(packed_front_arc, PackedColorArray([draw_color]))
-		#draw_polygon(packed_right_arc, PackedColorArray([draw_color]))
-		#draw_polygon(packed_left_arc, PackedColorArray([draw_color]))
-		#draw_polygon(packed_back_arc, PackedColorArray([draw_color]))
+		draw_polygon(packed_right_arc, PackedColorArray([draw_color]))
+		draw_polygon(packed_left_arc, PackedColorArray([draw_color]))
+		draw_polygon(packed_back_arc, PackedColorArray([draw_color]))
 
 func get_arc_point(angle_degrees):
 	var size = regiment.get_current_bounds_extends() as Vector2

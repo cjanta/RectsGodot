@@ -1,8 +1,6 @@
 class_name SelectionDisplay
 extends Control
 
-
-
 signal update_selection_display(faction_regiment : Faction_Regiment)
 
 func _ready():

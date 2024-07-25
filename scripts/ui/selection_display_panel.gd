@@ -1,7 +1,5 @@
 extends Panel
 
-
-
 var styleBox: StyleBoxFlat
 var default_border_color : Color = Color.WHITE_SMOKE
 

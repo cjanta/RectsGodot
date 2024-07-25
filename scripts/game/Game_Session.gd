@@ -9,7 +9,6 @@ extends Node2D
 
 var is_runtime_ini = true;
 
-
 @onready var logging_color = Color.MOCCASIN
 
 var logging_color_html
@@ -67,7 +66,6 @@ func get_rich_faction_turn_log(selected_faction : Faction):
 
 func get_session_round_display_log():
 	return get_rich_round_log() + "\n\t" + get_rich_faction_turn_log(faction_has_turn)
-
 
 func iterate_session_round():
 	session_round_counter += 1

@@ -57,8 +57,6 @@ func set_type(regiment_type : Regiment_Type):
 	setup_pos = type.setup_position
 	set_regiment_unit_size(type.regiment_unit_size)
 	
-	pass
-	
 func runntime_ini():
 	update_relatives()
 	update_visuals.emit(current_bounds_extends)

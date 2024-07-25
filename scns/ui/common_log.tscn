@@ -65,3 +65,5 @@ bbcode_enabled = true
 text = "Solve some stuff V0.5
 Willkommen zur heutigen Schlacht!"
 scroll_following = true
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

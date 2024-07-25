@@ -6,7 +6,6 @@ var default_border_color : Color = Color.WHITE_SMOKE
 func _ready():
 	styleBox = get_theme_stylebox("panel").duplicate()
 
-
 func _on_faction_display_update_display(faction):
 	change_border_Color(faction)
 
