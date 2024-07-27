@@ -8,6 +8,9 @@ var has_selected_movement = false:
 		selection_changed.emit(has_selected_movement)
 		
 var selected_Mouse_Position
+
+var position_before_drag : Vector2
+
 var regiment : Faction_Regiment
 @onready var coll_shape : CollisionShape2D = $regiment_bounds
 
@@ -26,6 +29,7 @@ func _input(event):
 func check_endof_drag():
 	if has_selected_movement:
 		has_selected_movement = false
+		regiment.session_update_selection_display()
 
 func _physics_process(delta):
 	if has_selected_movement:
@@ -53,7 +57,7 @@ func move():
 			return abs(dot)
 		elif has_selected_movement and dot < 0:
 			var rotatedBack = Vector2.DOWN.rotated(regiment.rotation)
-			regiment.global_position -= rotatedBack * dot
+			regiment.global_position -= rotatedBack * dot / backwars_modifier
 			selected_Mouse_Position = get_global_mouse_position()
 			return abs(dot) * backwars_modifier
 		return 0
@@ -62,6 +66,7 @@ func _on_input_event(viewport, event, shape_idx):
 	if regiment.is_Selectable && Input.is_action_just_pressed("left_click"):
 		if regiment.type.action_points > -1:
 			has_selected_movement = true
+			position_before_drag = regiment.global_position
 			selected_Mouse_Position = get_global_mouse_position()
 
 func _on_faction_regiment_scene_update_visuals(current_bounds_extends):

@@ -74,7 +74,8 @@ func _draw():
 		temp_arc = get_any_tabletop_arc(bot_left,Vector2.LEFT,top_left,Vector2.UP, range_halfed )
 		draw_polygon(temp_arc, PackedColorArray([draw_color]))
 		
-		#draw_polygon(packed_right_arc, PackedColorArray([draw_color]))
+		#draw_polygon(get_arc_point(-90), PackedColorArray([Color.AQUA]))
+		
 		#draw_polygon(packed_left_arc, PackedColorArray([draw_color]))
 		#draw_polygon(packed_back_arc, PackedColorArray([draw_color]))
 		draw_line(top_left,top_left + Vector2.UP.rotated(deg_to_rad(-45)) * range ,Color.GRAY,3,true)
@@ -125,7 +126,7 @@ func get_arc_point(angle_degrees):
 	var center = Vector2.ZERO - Vector2(0,size.y)
 	#var fow =get_fov_of_degrees(angle_degrees)
 	var fow = 180
-	var radius = size.x
+	var radius = 128
 	var angle_from = angle - fow/2
 	var angle_to = angle + fow/2
 	var nb_points = 16
