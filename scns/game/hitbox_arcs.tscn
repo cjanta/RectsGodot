@@ -5,6 +5,7 @@
 [node name="hitbox_arcs" type="Area2D"]
 light_mask = 4
 z_index = -1
+collision_layer = 4
 script = ExtResource("1_ll1u7")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

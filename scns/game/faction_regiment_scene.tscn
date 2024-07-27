@@ -22,7 +22,6 @@ texture = ExtResource("4_06a2m")
 script = ExtResource("2_nebew")
 
 [node name="hitbox_arcs" parent="." instance=ExtResource("6_eui2j")]
-collision_layer = 4
 
 [connection signal="update_visuals" from="." to="hitbox_regiment_bounds" method="_on_faction_regiment_scene_update_visuals"]
 [connection signal="update_visuals" from="." to="hitbox_rotation" method="_on_faction_regiment_scene_update_visuals"]

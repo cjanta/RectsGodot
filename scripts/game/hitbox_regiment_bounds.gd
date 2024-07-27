@@ -45,6 +45,7 @@ func move():
 		var dragVector = get_global_mouse_position() - selected_Mouse_Position
 		var rotadetForward = Vector2.UP.rotated(regiment.rotation)		
 		var dot = rotadetForward.dot(dragVector)
+		var backwars_modifier = 2.0
 			
 		if has_selected_movement and dot > 0:
 			regiment.global_position += rotadetForward * dot
@@ -54,7 +55,7 @@ func move():
 			var rotatedBack = Vector2.DOWN.rotated(regiment.rotation)
 			regiment.global_position -= rotatedBack * dot
 			selected_Mouse_Position = get_global_mouse_position()
-			return abs(dot)
+			return abs(dot) * backwars_modifier
 		return 0
 	
 func _on_input_event(viewport, event, shape_idx):
