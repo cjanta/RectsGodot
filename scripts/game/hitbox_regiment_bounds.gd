@@ -39,25 +39,25 @@ func _physics_process(delta):
 			regiment.session_update_selection_display()	
 
 func handleDragnDropMovement(delta):
-	regiment.type.action_points -= move()
+	regiment.type.action_points -= move(delta)
 	regiment.session_update_selection_display()
 
 func update_extends(current_bounds_extends :Vector2):
 	coll_shape.shape.extents = current_bounds_extends
 
-func move():
+func move(delta):
 		var dragVector = get_global_mouse_position() - selected_Mouse_Position
-		var rotadetForward = Vector2.UP.rotated(regiment.rotation)		
+		var rotadetForward = Vector2.UP.rotated(regiment.rotation).normalized()		
 		var dot = rotadetForward.dot(dragVector)
 		var backwars_modifier = 2.0
 			
 		if has_selected_movement and dot > 0:
-			regiment.global_position += rotadetForward * dot
+			regiment.global_position += rotadetForward * dot 
 			selected_Mouse_Position = get_global_mouse_position()
 			return abs(dot)
 		elif has_selected_movement and dot < 0:
 			var rotatedBack = Vector2.DOWN.rotated(regiment.rotation)
-			regiment.global_position -= rotatedBack * dot / backwars_modifier
+			regiment.global_position -= rotatedBack  * dot / backwars_modifier
 			selected_Mouse_Position = get_global_mouse_position()
 			return abs(dot) * backwars_modifier
 		return 0

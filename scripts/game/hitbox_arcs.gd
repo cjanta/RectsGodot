@@ -67,15 +67,16 @@ func _draw():
 		var range_halfed = range / 2.0
 		var temp_arc = get_any_tabletop_arc(top_left,Vector2.UP,top_right,Vector2.RIGHT, range )
 		draw_polygon(temp_arc, PackedColorArray([draw_color]))
-		temp_arc = get_any_tabletop_arc(top_right,Vector2.RIGHT,bot_right,Vector2.DOWN, range_halfed )
-		draw_polygon(temp_arc, PackedColorArray([draw_color]))
 		temp_arc = get_any_tabletop_arc(bot_right,Vector2.DOWN,bot_left,Vector2.LEFT, range_halfed )
 		draw_polygon(temp_arc, PackedColorArray([draw_color]))	
-		temp_arc = get_any_tabletop_arc(bot_left,Vector2.LEFT,top_left,Vector2.UP, range_halfed )
-		draw_polygon(temp_arc, PackedColorArray([draw_color]))
+		
+		#temp_arc = get_any_tabletop_arc(top_right,Vector2.RIGHT,bot_right,Vector2.DOWN, range_halfed )
+		#draw_polygon(temp_arc, PackedColorArray([draw_color]))
+		#temp_arc = get_any_tabletop_arc(bot_left,Vector2.LEFT,top_left,Vector2.UP, range_halfed )
+		#draw_polygon(temp_arc, PackedColorArray([draw_color]))
 		
 		#draw_polygon(get_arc_point(-90), PackedColorArray([Color.AQUA]))
-		
+		#regiment.session.factions.all_factions
 		#draw_polygon(packed_left_arc, PackedColorArray([draw_color]))
 		#draw_polygon(packed_back_arc, PackedColorArray([draw_color]))
 		draw_line(top_left,top_left + Vector2.UP.rotated(deg_to_rad(-45)) * range ,Color.GRAY,3,true)
