@@ -47,19 +47,12 @@ func update_extends(current_bounds_extends :Vector2):
 
 func move(delta):
 		var dragVector = get_global_mouse_position() - selected_Mouse_Position
-		var rotadetForward = Vector2.UP.rotated(regiment.rotation).normalized()		
+		var rotadetForward = Vector2.UP.rotated(regiment.rotation).normalized()	
 		var dot = rotadetForward.dot(dragVector)
-		var backwars_modifier = 2.0
-			
-		if has_selected_movement and dot > 0:
-			regiment.global_position += rotadetForward * dot 
+		if has_selected_movement and dot >= 0:
+			regiment.global_position += rotadetForward * dot
 			selected_Mouse_Position = get_global_mouse_position()
-			return abs(dot)
-		elif has_selected_movement and dot < 0:
-			var rotatedBack = Vector2.DOWN.rotated(regiment.rotation)
-			regiment.global_position -= rotatedBack  * dot / backwars_modifier
-			selected_Mouse_Position = get_global_mouse_position()
-			return abs(dot) * backwars_modifier
+			return dot
 		return 0
 	
 func _on_input_event(viewport, event, shape_idx):
