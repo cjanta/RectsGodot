@@ -64,18 +64,18 @@ func _draw():
 					#var off = Vector2(8,0)
 					#draw_line(position +off,to_local(chargeable_regiment.global_position)+off , Color.INDIAN_RED, 8.0 , true)
 	if not is_runtime_ini && is_draw_arc:
-		var range = regiment.type.action_points
-		range = range * 1.4
-		var range_halfed = range / 2.0
-		var temp_arc = get_any_tabletop_arc(top_left, Vector2.UP,top_right,Vector2.RIGHT, range )
-		draw_polygon(temp_arc, PackedColorArray([draw_color]))
-		temp_arc = get_any_tabletop_arc(bot_right,Vector2.DOWN,bot_left,Vector2.RIGHT, range_halfed )
-		draw_polygon(temp_arc, PackedColorArray([draw_color]))
-		draw_line(position - Vector2(0,size_extends.y),Vector2.UP * regiment.type.action_points + Vector2(0,-size_extends.y) ,Color.GRAY,3,true)
-		# charge	
-		temp_arc = get_any_tabletop_arc(top_left,Vector2.UP,top_right,Vector2.RIGHT, regiment.type.action_points_max * 2.0 * 1.4)
-		draw_polygon(temp_arc, PackedColorArray([draw_color]))
-		draw_line(position - Vector2(0,size_extends.y),Vector2(0,-size_extends.y) + Vector2.UP * regiment.type.action_points_max * 2.0  ,Color.GRAY,3,true)
+		#var range = regiment.type.action_points
+		#range = range * 1.4
+		#var range_halfed = range / 2.0
+		#var temp_arc = get_any_tabletop_arc(top_left, Vector2.UP,top_right,Vector2.RIGHT, range )
+		#draw_polygon(temp_arc, PackedColorArray([draw_color]))
+		#temp_arc = get_any_tabletop_arc(bot_right,Vector2.DOWN,bot_left,Vector2.RIGHT, range_halfed )
+		#draw_polygon(temp_arc, PackedColorArray([draw_color]))
+		#draw_line(position - Vector2(0,size_extends.y),Vector2.UP * regiment.type.action_points + Vector2(0,-size_extends.y) ,Color.GRAY,3,true)
+		## charge	
+		#temp_arc = get_any_tabletop_arc(top_left,Vector2.UP,top_right,Vector2.RIGHT, regiment.type.action_points_max * 2.0 * 1.4)
+		#draw_polygon(temp_arc, PackedColorArray([draw_color]))
+		#draw_line(position - Vector2(0,size_extends.y),Vector2(0,-size_extends.y) + Vector2.UP * regiment.type.action_points_max * 2.0  ,Color.GRAY,3,true)
 		#temp_arc = get_any_tabletop_arc(top_right,Vector2.RIGHT,bot_right,Vector2.DOWN, range_halfed )
 		#draw_polygon(temp_arc, PackedColorArray([draw_color]))
 		#temp_arc = get_any_tabletop_arc(bot_left,Vector2.LEFT,top_left,Vector2.UP, range_halfed )
@@ -85,11 +85,11 @@ func _draw():
 		#regiment.session.factions.all_factions
 		#draw_polygon(packed_left_arc, PackedColorArray([draw_color]))
 		#draw_polygon(packed_back_arc, PackedColorArray([draw_color]))
-		
-		draw_line(top_left,top_left + Vector2.UP.rotated(deg_to_rad(-45)) * range  ,Color.GRAY,3,true)
-		draw_line(bot_left,bot_left + Vector2.LEFT.rotated(deg_to_rad(-45)) * range_halfed ,Color.GRAY,3,true)
-		draw_line(top_right,top_right + Vector2.RIGHT.rotated(deg_to_rad(-45)) * range ,Color.GRAY,3,true)
-		draw_line(bot_right,bot_right + Vector2.DOWN.rotated(deg_to_rad(-45)) * range_halfed ,Color.GRAY,3,true)
+		if regiment.is_session_selected_regiment():
+			draw_line(top_left,top_left + Vector2.UP.rotated(deg_to_rad(-45)) * 800  ,Color.GRAY,3,true)
+			draw_line(bot_left,bot_left + Vector2.LEFT.rotated(deg_to_rad(-45)) * 800 ,Color.GRAY,3,true)
+			draw_line(top_right,top_right + Vector2.RIGHT.rotated(deg_to_rad(-45)) * 800 ,Color.GRAY,3,true)
+			draw_line(bot_right,bot_right + Vector2.DOWN.rotated(deg_to_rad(-45)) * 800 ,Color.GRAY,3,true)
 
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	var other_regiment = area.get_parent() as Faction_Regiment
