@@ -10,7 +10,7 @@ func log(text):
 
 func _ready():
 	original_size = size
-	max_size = Vector2(original_size.x,get_viewport_size().y - original_size.y )
+	max_size = Vector2(original_size.x,get_viewport_size().y - original_size.y - position.y)
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton and event.double_click:
