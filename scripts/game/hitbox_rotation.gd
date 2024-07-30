@@ -31,7 +31,7 @@ func check_endof_drag():
 		has_selected_rotation = false
 		icon_sprite.texture = icon_tex_north
 		var result = Vector2.UP.rotated(regiment.global_rotation).angle_to(original_drag_vector_up)
-		var ap_mod = abs(rad_to_deg(result))
+		var ap_mod = abs(rad_to_deg(result)) / 2
 		regiment.type.action_points -= ap_mod
 		regiment.session_update_selection_display()	
 

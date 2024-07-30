@@ -1,4 +1,4 @@
-class_name Info_Label
+class_name InfoLabel
 extends Label
 
 

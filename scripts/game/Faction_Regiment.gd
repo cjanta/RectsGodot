@@ -31,8 +31,17 @@ func _ready():
 	session = find_parent("Game_Session")
 	faction = get_parent()
 
-func get_local_top_rotated():
+func get_top_rotated():
 	return position - Vector2(0,current_bounds_extends.y).rotated(rotation)
+
+func get_bot_rotated():
+	return position - Vector2(0,-current_bounds_extends.y).rotated(rotation)
+
+func get_left_rotated():
+	return position - Vector2(current_bounds_extends.x,0).rotated(rotation)
+
+func get_right_rotated():
+	return position - Vector2(-current_bounds_extends.x,0).rotated(rotation)
 
 func get_current_bounds_extends():
 	return current_bounds_extends

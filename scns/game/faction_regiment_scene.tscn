@@ -16,6 +16,7 @@ script = ExtResource("1_nqapm")
 [node name="hitbox_rotation" parent="." instance=ExtResource("3_3dvq2")]
 
 [node name="bounds_sprite" type="Sprite2D" parent="."]
+visible = false
 material = ExtResource("4_bcwqg")
 texture = ExtResource("4_06a2m")
 script = ExtResource("2_nebew")

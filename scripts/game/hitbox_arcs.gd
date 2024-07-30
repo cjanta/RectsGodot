@@ -28,7 +28,7 @@ var size_extends : Vector2
 var is_draw_arc = true
 
 var front_fov_enemies : Array[Faction_Regiment]
-var infoLabels : Array[Info_Label]
+var infoLabels : Array[InfoLabel]
 
 func _ready():
 	regiment = get_parent()
@@ -72,36 +72,10 @@ func _draw():
 		if regiment.is_session_selected_regiment():
 			draw_diagonal_lines()
 			draw_distance_lines()
-	#for chargeable_regiment : Faction_Regiment in chargeable_regiments:
-		#if regiment.is_session_selected_regiment():		
-			#draw_line(position ,to_local(chargeable_regiment.global_position) , Color.REBECCA_PURPLE, 8.0 , true)
-			#var other_chargeables : Array[Faction_Regiment] = chargeable_regiment.hitbox_arcs_node.chargeable_regiments
-			#for reg in other_chargeables:
-				#if reg == regiment:
-					#var off = Vector2(8,0)
-					#draw_line(position +off,to_local(chargeable_regiment.global_position)+off , Color.INDIAN_RED, 8.0 , true)
-		
-		#var range = regiment.type.action_points
-		#range = range * 1.4
-		#var range_halfed = range / 2.0
-		#var temp_arc = get_any_tabletop_arc(top_left, Vector2.UP,top_right,Vector2.RIGHT, range )
-		#draw_polygon(temp_arc, PackedColorArray([draw_color]))
-		#temp_arc = get_any_tabletop_arc(bot_right,Vector2.DOWN,bot_left,Vector2.RIGHT, range_halfed )
-		#draw_polygon(temp_arc, PackedColorArray([draw_color]))
-		#draw_line(position - Vector2(0,size_extends.y),Vector2.UP * regiment.type.action_points + Vector2(0,-size_extends.y) ,Color.GRAY,3,true)
-		## charge	
-		#temp_arc = get_any_tabletop_arc(top_left,Vector2.UP,top_right,Vector2.RIGHT, regiment.type.action_points_max * 2.0 * 1.4)
-		#draw_polygon(temp_arc, PackedC olorArray([draw_color]))
-		#draw_line(position - Vector2(0,size_extends.y),Vector2(0,-size_extends.y) + Vector2.UP * regiment.type.action_points_max * 2.0  ,Color.GRAY,3,true)
-		#temp_arc = get_any_tabletop_arc(top_right,Vector2.RIGHT,bot_right,Vector2.DOWN, range_halfed )
-		#draw_polygon(temp_arc, PackedColorArray([draw_color]))
-		#temp_arc = get_any_tabletop_arc(bot_left,Vector2.LEFT,top_left,Vector2.UP, range_halfed )
-		#draw_polygon(temp_arc, PackedColorArray([draw_color]))
-		
-		#draw_polygon(get_arc_point(-90), PackedColorArray([Color.AQUA]))
-		#regiment.session.factions.all_factions
-		#draw_polygon(packed_left_arc, PackedColorArray([draw_color]))
-		#draw_polygon(packed_back_arc, PackedColorArray([draw_color]))
+		else:
+			if not infoLabels.is_empty():
+				for label in infoLabels:
+					label.visible = false;
 		
 func draw_distance_lines():
 	var other_faction : Faction = regiment.faction.session.get_other_faction(regiment)
@@ -109,29 +83,63 @@ func draw_distance_lines():
 		label.visible = false
 		
 	for reg : Faction_Regiment in front_fov_enemies:
-		var target =  to_local(reg.get_local_top_rotated())
+		#var target =  to_local(reg.get_top_rotated())
+		var target = find_closest_target(reg)
 		var dir = target - top
-		var dir_length = dir.length()
-		#todo object pool
+		var dir_length = dir.length()	
 		var new_label = get_free_info_label()
 		new_label.position = top + dir.normalized()  * dir_length / 2.0
+		new_label.rotation = Vector2.UP.angle_to(dir)
 		new_label.visible = true
 		new_label.text = str(floor(dir_length))	
-		add_child(new_label)
+		
 		draw_line(top, target ,Color.RED, 3.0, true)
+
+func find_closest_target(reg : Faction_Regiment):
+	var points_lenghts = []	
+	var target =  to_local(reg.get_top_rotated())
+	var dir = target - top
+	points_lenghts.append(dir.length())
+	target =  to_local(reg.get_bot_rotated())
+	dir = target - top
+	points_lenghts.append(dir.length())
+	target =  to_local(reg.get_left_rotated())
+	dir = target - top
+	points_lenghts.append(dir.length())
+	target =  to_local(reg.get_right_rotated())
+	dir = target - top
+	points_lenghts.append(dir.length())
+	var closest = dir.length()
+	var p_closest = 3
+	for i in 4:
+		if points_lenghts[i] < closest:
+			closest = points_lenghts[i]
+			p_closest = i
+	if(p_closest == 0):
+		return to_local(reg.get_top_rotated())
+	elif (p_closest == 1):
+		return to_local(reg.get_bot_rotated())
+	elif (p_closest == 2):
+		return to_local(reg.get_left_rotated())
+	elif (p_closest == 3):
+		return to_local(reg.get_right_rotated())
+	else :
+		return Vector2.ZERO
 
 func get_free_info_label():
 	if infoLabels.is_empty():
-		var new_label = info_label_preload.instantiate()
-		infoLabels.append(new_label)
-		return new_label
+		return get_new_info_label()
 	else:
 		for label in infoLabels:
 			if label.visible == false:
 				return label
-		var new_label = info_label_preload.instantiate()
-		infoLabels.append(new_label)
-		return new_label
+		return get_new_info_label()
+
+func get_new_info_label():
+	var new_label = info_label_preload.instantiate()
+	infoLabels.append(new_label)
+	add_child(new_label)
+	return new_label
 
 func draw_diagonal_lines():
 	draw_line(top_left,top_left + Vector2.UP.rotated(deg_to_rad(-45)) * 800  ,Color.GRAY,3,true)
@@ -192,7 +200,6 @@ func get_arc_point(angle_degrees):
 	var nb_points = 16
 	var points_arc = PackedVector2Array()
 	points_arc.push_back(center)
-
 	for i in range(nb_points+1):
 		var angle_point = angle_from + i*(angle_to-angle_from)/nb_points
 		points_arc.push_back(center + Vector2( cos( deg_to_rad(angle_point) ), sin( deg_to_rad(angle_point) ) ) * radius)
