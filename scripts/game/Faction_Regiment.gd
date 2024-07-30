@@ -4,7 +4,6 @@ extends Node2D
 @export var faction_units : Array[Faction_Unit] = []
 @export var setup_facing_dir : Vector2 = Vector2.ZERO
 @export var setup_pos : Vector2 = Vector2.ZERO
-@onready var hitbox_arcs_node = $hitbox_arcs
 
 var session : Game_Session
 var faction : Faction
@@ -31,6 +30,9 @@ func _ready():
 	faction_unit_preload = load("res://scns/game/faction_unit.tscn")
 	session = find_parent("Game_Session")
 	faction = get_parent()
+
+func get_local_top_rotated():
+	return position - Vector2(0,current_bounds_extends.y).rotated(rotation)
 
 func get_current_bounds_extends():
 	return current_bounds_extends

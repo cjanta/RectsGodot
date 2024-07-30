@@ -2,6 +2,8 @@ class_name Hitbox_Arcs
 
 extends Area2D
 @onready var coll_shape :CollisionPolygon2D = $CollisionPolygon2D
+@onready var info_label_preload  = load("res://scns/game/info_label.tscn")
+
 var is_runtime_ini = true
 var regiment : Faction_Regiment
 const RED = Color(1.0, 0, 0, 0.05)
@@ -13,13 +15,20 @@ var packed_right_arc :PackedVector2Array
 var packed_back_arc : PackedVector2Array
 var packed_left_arc :PackedVector2Array
 
+var top : Vector2
 var top_left : Vector2
-var bot_left : Vector2
 var top_right : Vector2
+var bot : Vector2
+var bot_left : Vector2
 var bot_right : Vector2
+var left : Vector2
+var right : Vector2
 var size_extends : Vector2
 
 var is_draw_arc = true
+
+var front_fov_enemies : Array[Faction_Regiment]
+var infoLabels : Array[Info_Label]
 
 func _ready():
 	regiment = get_parent()
@@ -49,12 +58,20 @@ func _on_faction_regiment_scene_update_visuals(current_bounds_extends):
 
 func update_metrics():
 	size_extends = regiment.get_current_bounds_extends() as Vector2
+	top = position + Vector2(0 ,-size_extends.y)
+	bot = position + Vector2(0 ,size_extends.y)
+	left = position + Vector2(-size_extends.x,0)
+	right = position + Vector2(size_extends.x,0)
 	top_left =  position + Vector2(-size_extends.x ,-size_extends.y)
 	bot_left =  position + Vector2(-size_extends.x ,size_extends.y)
 	top_right = position + Vector2(size_extends.x ,-size_extends.y)
 	bot_right = position + Vector2(size_extends.x ,size_extends.y)
 
 func _draw():
+	if not is_runtime_ini && is_draw_arc:
+		if regiment.is_session_selected_regiment():
+			draw_diagonal_lines()
+			draw_distance_lines()
 	#for chargeable_regiment : Faction_Regiment in chargeable_regiments:
 		#if regiment.is_session_selected_regiment():		
 			#draw_line(position ,to_local(chargeable_regiment.global_position) , Color.REBECCA_PURPLE, 8.0 , true)
@@ -63,7 +80,7 @@ func _draw():
 				#if reg == regiment:
 					#var off = Vector2(8,0)
 					#draw_line(position +off,to_local(chargeable_regiment.global_position)+off , Color.INDIAN_RED, 8.0 , true)
-	if not is_runtime_ini && is_draw_arc:
+		
 		#var range = regiment.type.action_points
 		#range = range * 1.4
 		#var range_halfed = range / 2.0
@@ -74,7 +91,7 @@ func _draw():
 		#draw_line(position - Vector2(0,size_extends.y),Vector2.UP * regiment.type.action_points + Vector2(0,-size_extends.y) ,Color.GRAY,3,true)
 		## charge	
 		#temp_arc = get_any_tabletop_arc(top_left,Vector2.UP,top_right,Vector2.RIGHT, regiment.type.action_points_max * 2.0 * 1.4)
-		#draw_polygon(temp_arc, PackedColorArray([draw_color]))
+		#draw_polygon(temp_arc, PackedC olorArray([draw_color]))
 		#draw_line(position - Vector2(0,size_extends.y),Vector2(0,-size_extends.y) + Vector2.UP * regiment.type.action_points_max * 2.0  ,Color.GRAY,3,true)
 		#temp_arc = get_any_tabletop_arc(top_right,Vector2.RIGHT,bot_right,Vector2.DOWN, range_halfed )
 		#draw_polygon(temp_arc, PackedColorArray([draw_color]))
@@ -85,25 +102,58 @@ func _draw():
 		#regiment.session.factions.all_factions
 		#draw_polygon(packed_left_arc, PackedColorArray([draw_color]))
 		#draw_polygon(packed_back_arc, PackedColorArray([draw_color]))
-		if regiment.is_session_selected_regiment():
-			draw_line(top_left,top_left + Vector2.UP.rotated(deg_to_rad(-45)) * 800  ,Color.GRAY,3,true)
-			draw_line(bot_left,bot_left + Vector2.LEFT.rotated(deg_to_rad(-45)) * 800 ,Color.GRAY,3,true)
-			draw_line(top_right,top_right + Vector2.RIGHT.rotated(deg_to_rad(-45)) * 800 ,Color.GRAY,3,true)
-			draw_line(bot_right,bot_right + Vector2.DOWN.rotated(deg_to_rad(-45)) * 800 ,Color.GRAY,3,true)
+		
+func draw_distance_lines():
+	var other_faction : Faction = regiment.faction.session.get_other_faction(regiment)
+	for label in infoLabels:
+		label.visible = false
+		
+	for reg : Faction_Regiment in front_fov_enemies:
+		var target =  to_local(reg.get_local_top_rotated())
+		var dir = target - top
+		var dir_length = dir.length()
+		#todo object pool
+		var new_label = get_free_info_label()
+		new_label.position = top + dir.normalized()  * dir_length / 2.0
+		new_label.visible = true
+		new_label.text = str(floor(dir_length))	
+		add_child(new_label)
+		draw_line(top, target ,Color.RED, 3.0, true)
+
+func get_free_info_label():
+	if infoLabels.is_empty():
+		var new_label = info_label_preload.instantiate()
+		infoLabels.append(new_label)
+		return new_label
+	else:
+		for label in infoLabels:
+			if label.visible == false:
+				return label
+		var new_label = info_label_preload.instantiate()
+		infoLabels.append(new_label)
+		return new_label
+
+func draw_diagonal_lines():
+	draw_line(top_left,top_left + Vector2.UP.rotated(deg_to_rad(-45)) * 800  ,Color.GRAY,3,true)
+	draw_line(bot_left,bot_left + Vector2.LEFT.rotated(deg_to_rad(-45)) * 800 ,Color.GRAY,3,true)
+	draw_line(top_right,top_right + Vector2.RIGHT.rotated(deg_to_rad(-45)) * 800 ,Color.GRAY,3,true)
+	draw_line(bot_right,bot_right + Vector2.DOWN.rotated(deg_to_rad(-45)) * 800 ,Color.GRAY,3,true)
 
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	var other_regiment = area.get_parent() as Faction_Regiment
-	if  other_regiment != null and other_regiment != regiment:
+	if  other_regiment != null and other_regiment != regiment and other_regiment.faction != regiment.faction:
 		draw_color = RED
+		front_fov_enemies.append(other_regiment)
 
 func _on_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
 	var other_regiment = area.get_parent() as Faction_Regiment
 	if  other_regiment != null and other_regiment != regiment:
 		draw_color = GREEN
+		front_fov_enemies.erase(other_regiment)
 
 func get_tabletop_front_arc():
 	var points_arc = PackedVector2Array()
-	var range = 128
+	var range = 800
 	points_arc.push_back(top_left)
 	points_arc.push_back(top_left + Vector2.UP.rotated(deg_to_rad(-45)) * range )
 	points_arc.push_back(top_right + Vector2.UP.rotated(deg_to_rad(45)) * range )

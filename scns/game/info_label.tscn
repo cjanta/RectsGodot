@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnet7t6kw40jj"]
+
+[ext_resource type="Script" path="res://scns/game/info_label.gd" id="1_81h3b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_iw40h"]
+
+[node name="info_label" type="Label"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -12.5
+offset_right = 25.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Ipsum"
+label_settings = SubResource("LabelSettings_iw40h")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_81h3b")

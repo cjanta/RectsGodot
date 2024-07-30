@@ -88,6 +88,11 @@ func select_faction():
 	update_selectable_regiments(factions.all_factions[faction_turn_index], true)
 	selected_regiment = null
 	selection_display.clear()
+
+func get_other_faction(regiment : Faction_Regiment):
+	for fac in factions.all_factions:
+		if fac != regiment.faction:
+			return fac
 	
 func update_selectable_regiments(faction : Faction, isSelectable : bool):
 	for regiment in faction.faction_regiments:
