@@ -9,4 +9,4 @@ regiment_name = "Knights"
 regiment_texture = ExtResource("1_q28eq")
 regiment_unit_size = Vector3(13, 5, 0)
 regiment_color = Color(1, 1, 1, 1)
-regiment_unit_coords = Vector2(3, 7)
+regiment_unit_coords = Vector2(1, 22)
