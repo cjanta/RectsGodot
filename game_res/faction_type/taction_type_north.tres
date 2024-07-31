@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="faction_type" load_steps=3 format=3 uid="uid://ck43168nase3u"]
 
 [ext_resource type="Script" path="res://game_res/faction_type/faction_type.gd" id="1_fjiu0"]
-[ext_resource type="Texture2D" uid="uid://4qeegurau2oi" path="res://grfx/flags/AuraRays.png" id="1_yt6xj"]
+[ext_resource type="Texture2D" uid="uid://cvd8labkds3nu" path="res://grfx/flags/au.svg" id="1_lygg3"]
 
 [resource]
 script = ExtResource("1_fjiu0")
 faction_name = "Die Nordfraktion"
-faction_texture = ExtResource("1_yt6xj")
+faction_texture = ExtResource("1_lygg3")
 start_facing = Vector2(0, 1)
-faction_color = Color(0, 0.619608, 0.619608, 1)
+faction_color = Color(0.215686, 0.439216, 0.984314, 1)

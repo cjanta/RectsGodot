@@ -94,10 +94,13 @@ func check_if_runtime_ini():
 		runntime_ini()
 
 func get_rich_display_prefix():
+	var deadImgRichText = "[img]" + "res://grfx/icon_Skull32.png" + "[/img]"
 	var faction_prefix = faction.get_rich_logPrefix()
-	var message = faction_prefix + "\n"
-	message += "\t" + type.regiment_name + "\n"
-	message += "\t" + "Lebende " + str(faction_units.size()) + "\n"
+	var info_size = str(faction_units.size())
+	var info_died = str(regiment_unit_size.x - faction_units.size())
+	var message = ""
+	message += "\t" + info_size + " " + type.regiment_name + "\n"
+	message += "\t" + deadImgRichText + " " + info_died + " " + type.regiment_name + "\n"
 	message += "\t" + "AP " + str(type.action_points)
 	return get_colored_string(message, Color.WHEAT)
 

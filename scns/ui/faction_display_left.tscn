@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://deqc5r53rtb20"]
+[gd_scene load_steps=12 format=3 uid="uid://deqc5r53rtb20"]
 
 [ext_resource type="Script" path="res://scripts/ui/Faction_Display.gd" id="1_jancj"]
 [ext_resource type="Texture2D" uid="uid://es4hya57y7to" path="res://grfx/icon.svg" id="2_17crv"]
 [ext_resource type="Script" path="res://scripts/ui/faction_colored_panel.gd" id="2_aa7ff"]
+[ext_resource type="Shader" path="res://shader/flag_shader.gdshader" id="3_dgpgk"]
 [ext_resource type="Script" path="res://scripts/ui/label_faction_name.gd" id="4_382mh"]
 
 [sub_resource type="SystemFont" id="SystemFont_wk3wk"]
@@ -24,6 +25,9 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cf6g1"]
+shader = ExtResource("3_dgpgk")
+
 [sub_resource type="GDScript" id="GDScript_tauem"]
 script/source = "extends TextureButton
 
@@ -41,7 +45,7 @@ func _on_faction_display_update_display(faction : Faction):
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqm84"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0, 0, 0, 0.701961)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -73,16 +77,11 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_1yi8p")
 script = ExtResource("2_aa7ff")
 
 [node name="texture_button_faction" type="TextureButton" parent="faction_colored_panel"]
+material = SubResource("ShaderMaterial_cf6g1")
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -78.5
-offset_top = -36.0
-offset_right = 76.5
-offset_bottom = 32.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("2_17crv")
@@ -101,10 +100,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -147.0
-offset_top = -49.0
-offset_right = 145.0
-offset_bottom = -6.0
+offset_left = -143.5
+offset_right = 148.5
+offset_bottom = 43.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.701961, 0.501961, 0.0823529, 1)
@@ -112,7 +110,7 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_uqm84")
 text = "Die Drachenhüter von Ulm"
 horizontal_alignment = 1
-vertical_alignment = 1
+vertical_alignment = 2
 script = ExtResource("4_382mh")
 
 [connection signal="update_display" from="." to="faction_colored_panel" method="_on_faction_display_update_display"]

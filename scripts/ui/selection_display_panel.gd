@@ -10,6 +10,6 @@ func change_border_Color(color : Color):
 	styleBox.set("border_color", color)
 	add_theme_stylebox_override("panel", styleBox)
 
-func change_color(color : Color):
-	styleBox.set("bg_color", color)
-	add_theme_stylebox_override("panel", styleBox)
+#func change_color(color : Color):
+	#styleBox.set("bg_color", color)
+	#add_theme_stylebox_override("panel", styleBox)
