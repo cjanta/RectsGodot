@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="Regiment_Type" load_steps=3 format=3 uid="uid://dhshjxjo5brft"]
+[gd_resource type="Resource" script_class="Regiment_Type" load_steps=2 format=3 uid="uid://dhshjxjo5brft"]
 
-[ext_resource type="Texture2D" uid="uid://b46ftcdt1274c" path="res://grfx/flags/bt.svg" id="1_q28eq"]
 [ext_resource type="Script" path="res://game_res/faction_regiment/regiment_type.gd" id="2_vq15k"]
 
 [resource]
 script = ExtResource("2_vq15k")
-regiment_name = "Knights"
-regiment_texture = ExtResource("1_q28eq")
+regiment_name = "Ritter zu Fuß"
 regiment_unit_size = Vector3(13, 5, 0)
 regiment_color = Color(1, 1, 1, 1)
-regiment_unit_coords = Vector2(1, 22)
+regiment_unit_coords = Vector2(3, 1)

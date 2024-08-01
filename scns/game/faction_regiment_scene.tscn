@@ -10,8 +10,6 @@
 
 [node name="Faction_Regiment_Scene" type="Node2D"]
 script = ExtResource("1_nqapm")
-setup_facing_dir = null
-setup_pos = null
 
 [node name="hitbox_regiment_bounds" parent="." instance=ExtResource("2_daj36")]
 

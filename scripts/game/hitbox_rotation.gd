@@ -49,7 +49,7 @@ func handleDragnDropRotation(delta):
 func rotate_dragged_object(delta):
 	var direction = get_global_mouse_position() - regiment.global_position
 	var alpha = Vector2.UP.rotated(regiment.global_rotation).angle_to(direction)
-	regiment.global_rotation += alpha
+	regiment.add_regiment_rotation(alpha)
 
 func _process(delta):
 	pass

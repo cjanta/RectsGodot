@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_sqo0m")
-regiment_name = "Rangers"
+regiment_name = "Bogenschützen"
 regiment_texture = ExtResource("1_ycddq")
 regiment_unit_size = Vector3(11, 5, 0)
 regiment_color = Color(1, 1, 1, 1)
-regiment_unit_coords = Vector2(0, 22)
+regiment_unit_coords = Vector2(2, 0)

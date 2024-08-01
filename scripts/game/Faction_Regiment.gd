@@ -62,9 +62,11 @@ func _process(delta):
 
 func set_type(regiment_type : Regiment_Type):
 	type = regiment_type
+	type.regiment_texture = faction.faction_texture
 	setup_facing_dir = type.setup_facing_dir
-	if setup_facing_dir == Vector2.DOWN:
-		rotation_degrees += 180
+	rotation_degrees = rad_to_deg(setup_facing_dir.angle_to(Vector2.UP))
+	#if setup_facing_dir == Vector2.DOWN:
+		#rotation_degrees += 180
 	setup_pos = type.setup_position
 	set_regiment_unit_size(type.regiment_unit_size)
 	
@@ -81,7 +83,19 @@ func runntime_ini():
 		#unit.visible = false
 		add_child(unit)
 		faction_units.append(unit)
+		var angle = setup_facing_dir.angle_to(Vector2.UP)
+		unit.rotation = angle
 	guilog(get_rich_common_prefix() + " mit " + str(faction_units.size()) + " Einheiten bereit.")
+
+func add_regiment_rotation(angle):
+	global_rotation += angle
+	var abs_rot = abs(global_rotation_degrees)
+	print(abs_rot)
+	for u in faction_units:
+		if not u.sprite_flipped_vert and abs_rot > 90:
+			u.flip_sprite_vertical()
+		elif u.sprite_flipped_vert and abs_rot <=90:
+			u.flip_sprite_vertical()
 
 func update_relatives():
 	shape_extends_total = Vector2(current_bounds_extends.x * 2, current_bounds_extends.y *2)
@@ -100,7 +114,7 @@ func get_rich_display_prefix():
 	var info_died = str(regiment_unit_size.x - faction_units.size())
 	var message = ""
 	message += "\t" + info_size + " " + type.regiment_name + "\n"
-	message += "\t" + deadImgRichText + " " + info_died + " " + type.regiment_name + "\n"
+	message += "\t" + "" + info_died + " " + type.regiment_name + "\n" + deadImgRichText
 	message += "\t" + "AP " + str(type.action_points)
 	return get_colored_string(message, Color.WHEAT)
 

@@ -6,8 +6,11 @@ var regiment : FactionRegiment
 
 @export var unit_name = ""
 @export var icon_vector : Vector2 = Vector2.ZERO
-@onready var sprite = $icon_sprite
+@export var icon_sprite : Sprite2D
+
 @onready var rastersize : float = 32.0
+
+var sprite_flipped_vert = false
 
 func _ready():
 	session = find_parent("Game_Session")
@@ -15,9 +18,11 @@ func _ready():
 	setup()
 
 func setup():
+	
 	unit_name = get_random_name()
 	icon_vector = regiment.type.regiment_unit_coords
-	sprite.region_rect = Rect2(icon_vector.x * rastersize, icon_vector.y * rastersize, rastersize, rastersize)
+	icon_sprite.region_rect = Rect2(icon_vector.x * rastersize, icon_vector.y * rastersize, rastersize, rastersize)
+	guilog(regiment.get_rich_common_prefix() + " " + unit_name + " bereit!")
 
 func guilog(text : String):
 	session.gui.log(text)
@@ -26,3 +31,7 @@ var names : Array[String] = ["Aaran", "Aaren", "Aarez", "Aarman", "Aaron", "Aaro
 
 func get_random_name():
 	return names[randi_range(0,names.size()-1)]
+
+func flip_sprite_vertical():
+	rotation_degrees += 180
+	sprite_flipped_vert = !sprite_flipped_vert;
