@@ -1,4 +1,4 @@
-class_name Regiment_Bounds
+class_name HitboxRegimentBounds
 extends Area2D
 
 signal selection_changed(has_selected_movement :bool)
@@ -11,7 +11,7 @@ var selected_Mouse_Position
 
 var position_before_drag : Vector2
 
-var regiment : Faction_Regiment
+var regiment : FactionRegiment
 @onready var coll_shape : CollisionShape2D = $regiment_bounds
 
 func _ready():

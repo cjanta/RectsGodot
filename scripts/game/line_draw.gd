@@ -1,6 +1,6 @@
 extends Node2D
 
-var regiment : Faction_Regiment
+var regiment : FactionRegiment
 
 func _ready():
 	regiment = get_parent()

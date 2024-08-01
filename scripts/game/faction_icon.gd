@@ -1,13 +1,13 @@
 extends Sprite2D
 
 var initial_size
-var regiment : Faction_Regiment
+var regiment : FactionRegiment
 var hitbox_regiment_bounds
 var new_scale : Vector2
 
 func _ready():
 	initial_size = texture.get_size()
-	regiment = get_parent() as Faction_Regiment
+	regiment = get_parent() as FactionRegiment
 
 func update_scale(current_Bounds_extend : Vector2):
 	var x_ratio = (current_Bounds_extend.x * 2.0)  / initial_size.x 

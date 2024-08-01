@@ -1,0 +1,215 @@
+[gd_scene load_steps=17 format=3 uid="uid://beauaqxcm41yt"]
+
+[ext_resource type="Script" path="res://scripts/game/Game_Session.gd" id="2_nx4wc"]
+[ext_resource type="Script" path="res://scripts/game/data.gd" id="2_vo6wv"]
+[ext_resource type="PackedScene" uid="uid://bt142o4g34u0y" path="res://scns/ui/common_log.tscn" id="3_48iyu"]
+[ext_resource type="Resource" uid="uid://dhshjxjo5brft" path="res://game_res/faction_regiment/knights.tres" id="3_aq20d"]
+[ext_resource type="Resource" uid="uid://ck43168nase3u" path="res://game_res/faction_type/taction_type_north.tres" id="3_btu6t"]
+[ext_resource type="Script" path="res://scripts/game/Factions.gd" id="3_l3rp5"]
+[ext_resource type="PackedScene" uid="uid://deqc5r53rtb20" path="res://scns/ui/faction_display_left.tscn" id="4_6lmdl"]
+[ext_resource type="Resource" uid="uid://cfl18t63y2oxu" path="res://game_res/faction_type/taction_type_sued.tres" id="4_44ndl"]
+[ext_resource type="Resource" uid="uid://ge42sv2l88mk" path="res://game_res/faction_regiment/ranger.tres" id="4_xrbtp"]
+[ext_resource type="PackedScene" uid="uid://dkyarb68ybori" path="res://scns/ui/selection_display.tscn" id="5_eta7b"]
+[ext_resource type="PackedScene" uid="uid://c2be5ggfs43tl" path="res://scns/ui/session_round_display.tscn" id="6_bsjtm"]
+
+[sub_resource type="SystemFont" id="SystemFont_hlcwx"]
+
+[sub_resource type="Theme" id="Theme_lfqe7"]
+default_font = SubResource("SystemFont_hlcwx")
+default_font_size = 22
+
+[sub_resource type="SystemFont" id="SystemFont_18rl2"]
+
+[sub_resource type="Theme" id="Theme_v6ffy"]
+default_font = SubResource("SystemFont_18rl2")
+default_font_size = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jr7dn"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.501961, 0.501961, 0.501961, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="root" type="Node2D"]
+
+[node name="Game_Session" type="Node2D" parent="." node_paths=PackedStringArray("gui", "selection_display", "session_round_display", "factions", "data")]
+script = ExtResource("2_nx4wc")
+gui = NodePath("GUI/main/Common_Log")
+selection_display = NodePath("GUI/main/selection_display")
+session_round_display = NodePath("GUI/main/session_round_display")
+factions = NodePath("Factions")
+data = NodePath("data")
+
+[node name="data" type="Node" parent="Game_Session"]
+script = ExtResource("2_vo6wv")
+regiment_types = Array[Resource("res://game_res/faction_regiment/regiment_type.gd")]([ExtResource("3_aq20d"), ExtResource("4_xrbtp")])
+
+[node name="Factions" type="Node2D" parent="Game_Session"]
+script = ExtResource("3_l3rp5")
+faction_types = Array[Resource("res://game_res/faction_type/faction_type.gd")]([ExtResource("3_btu6t"), ExtResource("4_44ndl")])
+
+[node name="Gameboard" type="Node2D" parent="Game_Session"]
+
+[node name="GUI" type="CanvasLayer" parent="Game_Session"]
+
+[node name="main" type="Control" parent="Game_Session/GUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -7.0
+offset_right = -8.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_lfqe7")
+
+[node name="Common_Log" parent="Game_Session/GUI/main" instance=ExtResource("3_48iyu")]
+layout_mode = 1
+offset_left = -367.5
+offset_top = 90.0
+offset_right = 367.5
+offset_bottom = 160.0
+size_flags_vertical = 4
+
+[node name="Faction_Display_North" parent="Game_Session/GUI/main" instance=ExtResource("4_6lmdl")]
+layout_mode = 1
+offset_left = 219.0
+offset_top = 15.0
+offset_right = 530.0
+offset_bottom = 95.0
+theme = SubResource("Theme_v6ffy")
+
+[node name="Faction_Display_South" parent="Game_Session/GUI/main" instance=ExtResource("4_6lmdl")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -529.0
+offset_top = 15.0
+offset_right = -219.0
+offset_bottom = 95.0
+grow_horizontal = 0
+theme = SubResource("Theme_v6ffy")
+
+[node name="selection_display" parent="Game_Session/GUI/main" instance=ExtResource("5_eta7b")]
+layout_mode = 1
+offset_left = -329.0
+offset_top = 15.0
+offset_right = -13.0
+offset_bottom = 155.0
+
+[node name="session_round_display" parent="Game_Session/GUI/main" instance=ExtResource("6_bsjtm")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -367.5
+offset_top = 15.0
+offset_right = 367.5
+offset_bottom = 87.0
+grow_horizontal = 2
+
+[node name="action_bar" type="Control" parent="Game_Session/GUI/main"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -345.5
+offset_top = -75.0
+offset_right = 345.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="Game_Session/GUI/main/action_bar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jr7dn")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Game_Session/GUI/main/action_bar/Panel"]
+custom_minimum_size = Vector2(800, 75)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -32.5
+offset_right = 807.0
+offset_bottom = 42.5
+grow_vertical = 2
+
+[node name="element" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element2" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element3" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element4" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element5" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element6" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element7" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element8" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element9" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element10" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[connection signal="clicked_session_round_display" from="Game_Session/GUI/main/session_round_display" to="Game_Session" method="_on_session_round_display_clicked_session_round_display"]

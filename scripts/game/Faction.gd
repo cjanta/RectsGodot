@@ -5,11 +5,11 @@ extends Node2D
 @export var faction_texture : Texture2D
 @export var owner_ident : String = "LOCAL_PLAYER"
 @export var start_direction : Vector2 = Vector2.ZERO
-@export var faction_regiments : Array[Faction_Regiment] = []
+@export var faction_regiments : Array[FactionRegiment] = []
 @onready var regiments_preload
-var session : Game_Session
+var session : GameSession
 var sum_regiments = 0
-var faction_type : faction_type
+var faction_type : FactionType
 var faction_color : Color
 var faction_color_html = Color.WHITE.to_html()
 
@@ -40,7 +40,7 @@ func _process(delta):
 	pass
 	
 func create_test_regiments(start_position : Vector2):
-	var regiment : Faction_Regiment = regiments_preload.instantiate()
+	var regiment : FactionRegiment = regiments_preload.instantiate()
 	add_child(regiment)
 	randomize()
 	var number_units = randi_range(10,101)

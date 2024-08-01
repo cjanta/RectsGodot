@@ -4,10 +4,10 @@ extends Node2D
 @export var all_factions : Array[Faction] = []
 @onready var faction_preload
 @onready var gui : GUI_Log = $"../GUI/main/Common_Log" as GUI_Log
-@onready var gui_faction_display_north =$"../GUI/main/Faction_Display_North" as Faction_Display
-@onready var gui_faction_display_south = $"../GUI/main/Faction_Display_South" as Faction_Display
+@onready var gui_faction_display_north =$"../GUI/main/Faction_Display_North" as FactionDisplay
+@onready var gui_faction_display_south = $"../GUI/main/Faction_Display_South" as FactionDisplay
 
-@export var faction_types : Array[faction_type]
+@export var faction_types : Array[FactionType]
 
 func _ready():
 	faction_preload = load("res://scns/game/faction_scene.tscn")	

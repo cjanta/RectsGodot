@@ -1,5 +1,5 @@
+class_name FactionType
 extends Resource
-class_name faction_type
 
 @export var faction_name : String = "default name"
 @export var faction_texture : Texture2D = null

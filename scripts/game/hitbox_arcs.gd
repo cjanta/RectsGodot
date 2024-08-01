@@ -1,11 +1,11 @@
-class_name Hitbox_Arcs
+class_name HitboxArcs
 
 extends Area2D
 @onready var coll_shape :CollisionPolygon2D = $CollisionPolygon2D
 @onready var info_label_preload  = load("res://scns/game/info_label.tscn")
 
 var is_runtime_ini = true
-var regiment : Faction_Regiment
+var regiment : FactionRegiment
 const RED = Color(1.0, 0, 0, 0.05)
 const GREEN = Color(0, 1.0, 0, 0.05)
 var draw_color = GREEN
@@ -27,7 +27,7 @@ var size_extends : Vector2
 
 var is_draw_arc = true
 
-var front_fov_enemies : Array[Faction_Regiment]
+var front_fov_enemies : Array[FactionRegiment]
 var infoLabels : Array[InfoLabel]
 
 func _ready():
@@ -82,7 +82,7 @@ func draw_distance_lines():
 	for label in infoLabels:
 		label.visible = false
 		
-	for reg : Faction_Regiment in front_fov_enemies:
+	for reg : FactionRegiment in front_fov_enemies:
 		#var target =  to_local(reg.get_top_rotated())
 		var target = find_closest_target(reg)
 		var dir = target - top
@@ -95,7 +95,7 @@ func draw_distance_lines():
 		
 		draw_line(top, target ,Color.RED, 3.0, true)
 
-func find_closest_target(reg : Faction_Regiment):
+func find_closest_target(reg : FactionRegiment):
 	var points_lenghts = []	
 	var target =  to_local(reg.get_top_rotated())
 	var dir = target - top
@@ -148,13 +148,13 @@ func draw_diagonal_lines():
 	draw_line(bot_right,bot_right + Vector2.DOWN.rotated(deg_to_rad(-45)) * 800 ,Color.GRAY,3,true)
 
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	var other_regiment = area.get_parent() as Faction_Regiment
+	var other_regiment = area.get_parent() as FactionRegiment
 	if  other_regiment != null and other_regiment != regiment and other_regiment.faction != regiment.faction:
 		draw_color = RED
 		front_fov_enemies.append(other_regiment)
 
 func _on_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
-	var other_regiment = area.get_parent() as Faction_Regiment
+	var other_regiment = area.get_parent() as FactionRegiment
 	if  other_regiment != null and other_regiment != regiment:
 		draw_color = GREEN
 		front_fov_enemies.erase(other_regiment)

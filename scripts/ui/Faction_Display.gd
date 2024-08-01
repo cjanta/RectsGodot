@@ -1,4 +1,4 @@
-class_name Faction_Display
+class_name FactionDisplay
 extends Control
 
 signal update_display(faction : Faction)

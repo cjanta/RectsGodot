@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/ui/Faction_Display.gd" id="1_jancj"]
 [ext_resource type="Texture2D" uid="uid://es4hya57y7to" path="res://grfx/icon.svg" id="2_17crv"]
 [ext_resource type="Script" path="res://scripts/ui/faction_colored_panel.gd" id="2_aa7ff"]
-[ext_resource type="Shader" path="res://shader/flag_shader.gdshader" id="3_dgpgk"]
+[ext_resource type="Shader" path="res://shader/regiment_shader/flag_shader.gdshader" id="3_dgpgk"]
 [ext_resource type="Script" path="res://scripts/ui/label_faction_name.gd" id="4_382mh"]
 
 [sub_resource type="SystemFont" id="SystemFont_wk3wk"]

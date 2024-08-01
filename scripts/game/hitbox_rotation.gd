@@ -1,4 +1,4 @@
-class_name Regiment_rotation
+class_name HitboxRegimentRotation
 extends Area2D
 
 signal selection_changed(has_selected_rotation :bool)
@@ -8,7 +8,7 @@ var has_selected_rotation = false:
 		selection_changed.emit(has_selected_rotation)
 
 var original_drag_vector_up
-var regiment : Faction_Regiment
+var regiment : FactionRegiment
 var icon_sprite : Sprite2D
 var icon_tex_north
 var icon_tex_rotate

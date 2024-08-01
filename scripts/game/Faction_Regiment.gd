@@ -1,11 +1,11 @@
-class_name Faction_Regiment
+class_name FactionRegiment
 extends Node2D
 
-@export var faction_units : Array[Faction_Unit] = []
+@export var faction_units : Array[FactionUnit] = []
 @export var setup_facing_dir : Vector2 = Vector2.ZERO
 @export var setup_pos : Vector2 = Vector2.ZERO
 
-var session : Game_Session
+var session : GameSession
 var faction : Faction
 var faction_unit_preload
 var is_runntime_ini = true
@@ -126,16 +126,16 @@ func _on_hitbox_rotation_selection_changed(has_selected_rotation):
 		session_set_selected_regiment()
 		
 func session_update_selection_display():
-	session.update_selection_display(self as Faction_Regiment)
+	session.update_selection_display(self as FactionRegiment)
 	
 func session_set_selected_regiment():
-	session.set_selected_regiment(self as Faction_Regiment)
+	session.set_selected_regiment(self as FactionRegiment)
 	
 func session_clear_selected_regiment():
-	session.remove_selected_regiment(self as Faction_Regiment)
+	session.remove_selected_regiment(self as FactionRegiment)
 	
 func is_session_selected_regiment():
-	return session.is_selected_regiment(self as Faction_Regiment)
+	return session.is_selected_regiment(self as FactionRegiment)
 	
 	
 	

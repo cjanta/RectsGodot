@@ -1,9 +1,9 @@
-class_name Game_Session
+class_name GameSession
 extends Node2D
 
 @export var gui : CommonLog
 @export var selection_display : SelectionDisplay
-@export var session_round_display : Session_Round_Display
+@export var session_round_display : SessionRoundDisplay
 @export var factions : Factions
 @export var data : Data
 
@@ -16,7 +16,7 @@ var session_round_counter = 0
 var faction_turn_index = 0
 
 var faction_has_turn : Faction
-var selected_regiment : Faction_Regiment
+var selected_regiment : FactionRegiment
 
 func _ready():
 	logging_color_html = logging_color.to_html()
@@ -29,20 +29,20 @@ func check_runtime_ini():
 		is_runtime_ini = false
 		runtime_ini()
 
-func set_selected_regiment(faction_Regiment : Faction_Regiment):
+func set_selected_regiment(faction_Regiment : FactionRegiment):
 	if not is_selected_regiment(faction_Regiment):
 		selected_regiment = faction_Regiment
 		selection_display.update(faction_Regiment)
 
-func update_selection_display(faction_Regiment : Faction_Regiment):
+func update_selection_display(faction_Regiment : FactionRegiment):
 	selection_display.update(faction_Regiment)
 
-func remove_selected_regiment(faction_Regiment : Faction_Regiment):
+func remove_selected_regiment(faction_Regiment : FactionRegiment):
 	if is_selected_regiment(faction_Regiment):
 		selected_regiment = null
 		selection_display.clear()
 
-func is_selected_regiment(faction_Regiment : Faction_Regiment):
+func is_selected_regiment(faction_Regiment : FactionRegiment):
 	return selected_regiment == faction_Regiment
 
 func runtime_ini():
@@ -89,7 +89,7 @@ func select_faction():
 	selected_regiment = null
 	selection_display.clear()
 
-func get_other_faction(regiment : Faction_Regiment):
+func get_other_faction(regiment : FactionRegiment):
 	for fac in factions.all_factions:
 		if fac != regiment.faction:
 			return fac

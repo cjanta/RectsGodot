@@ -1,8 +1,8 @@
-class_name Faction_Unit
+class_name FactionUnit
 extends Node2D
 
-var session : Game_Session
-var regiment : Faction_Regiment
+var session : GameSession
+var regiment : FactionRegiment
 
 @export var unit_name = ""
 @export var icon_vector : Vector2 = Vector2.ZERO
