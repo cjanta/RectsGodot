@@ -8,15 +8,15 @@
 [ext_resource type="Material" uid="uid://d4nnj0la4o3if" path="res://shader/regiment_shader/regiment_sprite_shader.tres" id="4_bcwqg"]
 [ext_resource type="PackedScene" uid="uid://cgrwbimmaa7cd" path="res://scns/game/hitbox_arcs.tscn" id="6_eui2j"]
 
-[node name="Faction_Regiment_Scene" type="Node2D"]
+[node name="Faction_Regiment_Scene" type="Node2D" node_paths=PackedStringArray("bounds_sprite")]
 script = ExtResource("1_nqapm")
+bounds_sprite = NodePath("bounds_sprite")
 
 [node name="hitbox_regiment_bounds" parent="." instance=ExtResource("2_daj36")]
 
 [node name="hitbox_rotation" parent="." instance=ExtResource("3_3dvq2")]
 
 [node name="bounds_sprite" type="Sprite2D" parent="."]
-visible = false
 material = ExtResource("4_bcwqg")
 texture = ExtResource("4_06a2m")
 script = ExtResource("2_nebew")

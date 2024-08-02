@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" path="res://scripts/game/hitbox_arcs.gd" id="1_ll1u7"]
 
-[node name="hitbox_arcs" type="Area2D"]
+[node name="hitbox_arcs" type="Area2D" node_paths=PackedStringArray("coll_shape")]
 light_mask = 4
 z_index = -1
 collision_layer = 4
 script = ExtResource("1_ll1u7")
+coll_shape = NodePath("CollisionPolygon2D")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 light_mask = 4

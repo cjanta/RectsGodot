@@ -1,7 +1,8 @@
 class_name HitboxArcs
-
 extends Area2D
-@onready var coll_shape :CollisionPolygon2D = $CollisionPolygon2D
+
+@export var coll_shape :CollisionPolygon2D
+
 @onready var info_label_preload  = load("res://scns/game/info_label.tscn")
 
 var is_runtime_ini = true

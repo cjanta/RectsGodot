@@ -25,7 +25,7 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[node name="Common_Log" type="Control"]
+[node name="Common_Log" type="Control" node_paths=PackedStringArray("textbox")]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 5
@@ -37,6 +37,7 @@ offset_bottom = 83.0
 grow_horizontal = 2
 theme = SubResource("Theme_wlalc")
 script = ExtResource("1_xxtbb")
+textbox = NodePath("inner_panel/RichTextLabel")
 
 [node name="inner_panel" type="Panel" parent="."]
 clip_contents = true
@@ -67,3 +68,4 @@ Willkommen zur heutigen Schlacht!"
 scroll_following = true
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="meta_clicked" from="inner_panel/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]

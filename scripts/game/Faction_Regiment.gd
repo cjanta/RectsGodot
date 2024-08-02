@@ -1,10 +1,13 @@
 class_name FactionRegiment
 extends Node2D
 
-@export var faction_units : Array[FactionUnit] = []
-@export var setup_facing_dir : Vector2 = Vector2.ZERO
-@export var setup_pos : Vector2 = Vector2.ZERO
+signal update_visuals(current_bounds_extends)
 
+@export var bounds_sprite : Sprite2D
+@export var units_visible = true
+@export var bounds_sprite_visible = false
+
+var faction_units : Array[FactionUnit] = []
 var session : GameSession
 var faction : Faction
 var faction_unit_preload
@@ -14,10 +17,8 @@ var is_Selectable = false:
 		is_Selectable = value
 	get:
 		return is_Selectable
-
 var type : Regiment_Type
 
-signal update_visuals(current_bounds_extends)
 
 var shape_extends_total = Vector2.ZERO # full width and height
 var current_bounds_extends = Vector2.ZERO #ready to shape, halfed
@@ -30,6 +31,7 @@ func _ready():
 	faction_unit_preload = load("res://scns/game/faction_unit.tscn")
 	session = find_parent("Game_Session")
 	faction = get_parent()
+	bounds_sprite.visible = bounds_sprite_visible
 
 func get_top_rotated():
 	return position - Vector2(0,current_bounds_extends.y).rotated(rotation)
@@ -63,38 +65,43 @@ func _process(delta):
 func set_type(regiment_type : Regiment_Type):
 	type = regiment_type
 	type.regiment_texture = faction.faction_texture
-	setup_facing_dir = type.setup_facing_dir
+	var setup_facing_dir = type.setup_facing_dir
 	rotation_degrees = rad_to_deg(setup_facing_dir.angle_to(Vector2.UP))
-	#if setup_facing_dir == Vector2.DOWN:
-		#rotation_degrees += 180
-	setup_pos = type.setup_position
 	set_regiment_unit_size(type.regiment_unit_size)
 	
 func runntime_ini():
 	update_relatives()
 	update_visuals.emit(current_bounds_extends)
-	position += setup_pos
+	position += type.setup_position
 	var offset = Vector2(unit_pixel_size/2, unit_pixel_size/2)
 	for n in regiment_unit_size.x:		
 		var unit = faction_unit_preload.instantiate()
 		var collum =  floor(n / regiment_unit_size.y)
 		unit.position = relative_position  + Vector2(n * unit_pixel_size - collum * regiment_unit_size.y * unit_pixel_size , collum * unit_pixel_size ) + offset
-		unit.visible = true
-		#unit.visible = false
+		unit.visible = units_visible
 		add_child(unit)
 		faction_units.append(unit)
+		var setup_facing_dir = type.setup_facing_dir
 		var angle = setup_facing_dir.angle_to(Vector2.UP)
 		unit.rotation = angle
-	guilog(get_rich_common_prefix() + " mit " + str(faction_units.size()) + " Einheiten bereit.")
+	var message = get_rich_common_prefix() + " mit " + str(faction_units.size()) + " Einheiten bereit."
+	log_with_bg_color(message)
+
+func log_with_bg_color(text):	
+	var col_html = Color(0.5, 0.5, 0.5, 0.5).to_html()
+	guilog("[bgcolor=" + col_html + "]" + text + "[/bgcolor]")
+
+func log_links():
+	#Temp. Beispiel, Verzweigung impl in 
+	guilog("[url=print]Google[/url] or [url=quit]Quit to Desktop[/url].")
 
 func add_regiment_rotation(angle):
 	global_rotation += angle
 	var abs_rot = abs(global_rotation_degrees)
-	print(abs_rot)
 	for u in faction_units:
 		if not u.sprite_flipped_vert and abs_rot > 90:
 			u.flip_sprite_vertical()
-		elif u.sprite_flipped_vert and abs_rot <=90:
+		elif u.sprite_flipped_vert and abs_rot <= 90:
 			u.flip_sprite_vertical()
 
 func update_relatives():
@@ -108,13 +115,13 @@ func check_if_runtime_ini():
 		runntime_ini()
 
 func get_rich_display_prefix():
-	var deadImgRichText = "[img]" + "res://grfx/icon_Skull32.png" + "[/img]"
+	var dead_icon = "[img]" + "res://grfx/icon_Skull32.png" + "[/img]"
 	var faction_prefix = faction.get_rich_logPrefix()
 	var info_size = str(faction_units.size())
 	var info_died = str(regiment_unit_size.x - faction_units.size())
 	var message = ""
 	message += "\t" + info_size + " " + type.regiment_name + "\n"
-	message += "\t" + "" + info_died + " " + type.regiment_name + "\n" + deadImgRichText
+	message += "\t"+ dead_icon + "" + info_died + " " + type.regiment_name + "\n"
 	message += "\t" + "AP " + str(type.action_points)
 	return get_colored_string(message, Color.WHEAT)
 

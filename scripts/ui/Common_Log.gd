@@ -1,12 +1,13 @@
 class_name CommonLog
 extends Control
 
-@onready var rightRichLabelTextbox = $inner_panel/RichTextLabel
+@export var textbox : RichTextLabel
+
 var original_size : Vector2
 var max_size : Vector2
 
 func log(text):
-	rightRichLabelTextbox.append_text("\n" + str(text))
+	textbox.append_text("\n" + str(text))
 
 func _ready():
 	original_size = size
@@ -24,3 +25,11 @@ func toggle_size():
 
 func get_viewport_size() -> Vector2:
 	return get_viewport_rect().size
+
+func _on_rich_text_label_meta_clicked(meta):
+	handle(meta)
+
+func handle(argument):
+	match argument:
+		"print": OS.shell_open("https://www.google.de/")
+		"quit": get_tree().quit()
