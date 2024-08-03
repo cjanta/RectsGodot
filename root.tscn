@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://beauaqxcm41yt"]
+[gd_scene load_steps=18 format=3 uid="uid://beauaqxcm41yt"]
 
 [ext_resource type="Script" path="res://scripts/game/Game_Session.gd" id="2_nx4wc"]
 [ext_resource type="Script" path="res://scripts/game/data.gd" id="2_vo6wv"]
@@ -22,10 +22,22 @@ default_font_size = 22
 
 [sub_resource type="Theme" id="Theme_v6ffy"]
 default_font = SubResource("SystemFont_18rl2")
-default_font_size = 22
+default_font_size = 11
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cvje8"]
+bg_color = Color(0, 0, 0, 0.5)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0.8, 0.8, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jr7dn"]
-bg_color = Color(1, 1, 1, 0)
+bg_color = Color(1, 1, 1, 0.396078)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -63,10 +75,6 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = -7.0
-offset_right = -8.0
-offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -74,17 +82,24 @@ theme = SubResource("Theme_lfqe7")
 
 [node name="Common_Log" parent="Game_Session/GUI/main" instance=ExtResource("3_48iyu")]
 layout_mode = 1
-offset_left = -367.5
-offset_top = 90.0
-offset_right = 367.5
-offset_bottom = 160.0
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = -217.0
+offset_right = 735.0
+offset_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 0
 size_flags_vertical = 4
 
 [node name="Faction_Display_North" parent="Game_Session/GUI/main" instance=ExtResource("4_6lmdl")]
 layout_mode = 1
-offset_left = 219.0
+offset_left = 376.0
 offset_top = 15.0
-offset_right = 530.0
+offset_right = 526.0
 offset_bottom = 95.0
 theme = SubResource("Theme_v6ffy")
 
@@ -93,9 +108,9 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -529.0
+offset_left = -520.0
 offset_top = 15.0
-offset_right = -219.0
+offset_right = -370.0
 offset_bottom = 95.0
 grow_horizontal = 0
 theme = SubResource("Theme_v6ffy")
@@ -109,104 +124,192 @@ offset_bottom = 155.0
 
 [node name="session_round_display" parent="Game_Session/GUI/main" instance=ExtResource("6_bsjtm")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
 offset_left = -367.5
 offset_top = 15.0
 offset_right = 367.5
-offset_bottom = 87.0
-grow_horizontal = 2
+offset_bottom = 95.0
 
 [node name="action_bar" type="Control" parent="Game_Session/GUI/main"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -345.5
-offset_top = -75.0
-offset_right = 345.5
-grow_horizontal = 2
+offset_left = -700.0
+offset_top = -210.0
+grow_horizontal = 0
 grow_vertical = 0
 
-[node name="Panel" type="Panel" parent="Game_Session/GUI/main/action_bar"]
+[node name="VFlowContainer" type="VFlowContainer" parent="Game_Session/GUI/main/action_bar"]
+custom_minimum_size = Vector2(700, 75)
+layout_mode = 1
+offset_right = 700.0
+offset_bottom = 210.0
+
+[node name="TabBar" type="TabBar" parent="Game_Session/GUI/main/action_bar/VFlowContainer"]
+custom_minimum_size = Vector2(700, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_cvje8")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_cvje8")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_cvje8")
+tab_count = 2
+max_tab_width = 120
+tab_0/title = " Global "
+tab_1/title = " Tactical "
+
+[node name="Panel" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer"]
+custom_minimum_size = Vector2(700, 75)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jr7dn")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 10.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="element" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element2" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element3" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element4" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element5" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element6" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element7" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element8" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element9" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="element10" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel/HFlowContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Panel2" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer"]
+custom_minimum_size = Vector2(700, 75)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jr7dn")
 
-[node name="HFlowContainer" type="HFlowContainer" parent="Game_Session/GUI/main/action_bar/Panel"]
-custom_minimum_size = Vector2(800, 75)
+[node name="HFlowContainer" type="HFlowContainer" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 7.0
-offset_top = -32.5
-offset_right = 807.0
-offset_bottom = 42.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 10.0
+offset_bottom = 5.0
+grow_horizontal = 2
 grow_vertical = 2
 
-[node name="element" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+[node name="element" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="element2" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+[node name="element2" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="element3" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+[node name="element3" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="element4" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+[node name="element4" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="element5" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+[node name="element5" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="element6" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+[node name="element6" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="element7" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+[node name="element7" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="element8" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+[node name="element8" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="element9" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+[node name="element9" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="element10" type="Panel" parent="Game_Session/GUI/main/action_bar/Panel/HFlowContainer"]
+[node name="element10" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4

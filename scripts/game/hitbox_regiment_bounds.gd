@@ -77,7 +77,7 @@ func draw_bounds():
 	draw_edge_line(Vector2(1,-1),Vector2(1,1), width)
 
 func draw_edge_line(from_dir : Vector2, to_dir : Vector2, width):
-	var color = Color.WHITE
+	var color = regiment.GREY
 	var offset = Vector2(width / 2.0, width / 2.0)
 	var from = regiment.get_current_bounds_extends()
 	from = Vector2(from.x * from_dir.x, from.y * from_dir.y)

@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="faction_type" load_steps=3 format=3 uid="uid://ck43168nase3u"]
+[gd_resource type="Resource" script_class="FactionType" load_steps=3 format=3 uid="uid://ck43168nase3u"]
 
+[ext_resource type="Texture2D" uid="uid://du81srjj3qr6f" path="res://grfx/planet00.png" id="1_320pj"]
 [ext_resource type="Script" path="res://game_res/faction_type/faction_type.gd" id="1_fjiu0"]
-[ext_resource type="Texture2D" uid="uid://cvd8labkds3nu" path="res://grfx/flags/au.svg" id="1_lygg3"]
 
 [resource]
 script = ExtResource("1_fjiu0")
 faction_name = "Die Nordfraktion"
-faction_texture = ExtResource("1_lygg3")
+faction_texture = ExtResource("1_320pj")
 start_facing = Vector2(0, 1)
-faction_color = Color(0.215686, 0.439216, 0.984314, 1)
+faction_color = Color(0, 0.509804, 0.509804, 1)

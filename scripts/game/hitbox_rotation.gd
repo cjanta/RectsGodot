@@ -9,14 +9,11 @@ var has_selected_rotation = false:
 
 var original_drag_vector_up
 var regiment : FactionRegiment
-var icon_sprite : Sprite2D
-var icon_tex_north
-var icon_tex_rotate
+@export var icon_sprite : Sprite2D
+@export var icon_tex_north : Texture2D
+@export var icon_tex_rotate : Texture2D
 
 func _ready():
-	icon_sprite = $rotation_circle/icon
-	icon_tex_north = load("res://grfx/icon_PointNorth32.png")
-	icon_tex_rotate = load("res://grfx/icon_Rotate32.png")
 	icon_sprite.texture = icon_tex_north
 	regiment = get_parent()
 	original_drag_vector_up = Vector2.UP.rotated(regiment.global_rotation)

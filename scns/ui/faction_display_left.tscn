@@ -11,7 +11,7 @@ subpixel_positioning = 0
 
 [sub_resource type="Theme" id="Theme_m0chg"]
 default_font = SubResource("SystemFont_wk3wk")
-default_font_size = 22
+default_font_size = 11
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yi8p"]
 bg_color = Color(0, 0, 0, 1)
@@ -45,12 +45,12 @@ func _on_faction_display_update_display(faction : Faction):
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqm84"]
-bg_color = Color(0, 0, 0, 0.701961)
+bg_color = Color(0, 0, 0, 0.75)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(0.670588, 0.670588, 0.670588, 1)
+border_color = Color(1, 1, 1, 0)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -61,8 +61,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 313.0
-offset_bottom = 102.0
+offset_right = 160.0
+offset_bottom = 90.0
 theme = SubResource("Theme_m0chg")
 script = ExtResource("1_jancj")
 
@@ -95,14 +95,11 @@ script = SubResource("GDScript_tauem")
 
 [node name="label_faction_name" type="Label" parent="faction_colored_panel"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -143.5
-offset_right = 148.5
-offset_bottom = 43.0
+offset_top = -24.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.701961, 0.501961, 0.0823529, 1)

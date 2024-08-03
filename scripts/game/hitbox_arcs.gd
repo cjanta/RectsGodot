@@ -7,9 +7,10 @@ extends Area2D
 
 var is_runtime_ini = true
 var regiment : FactionRegiment
-const RED = Color(1.0, 0, 0, 0.05)
-const GREEN = Color(0, 1.0, 0, 0.05)
+const RED = Color(1.0, 0, 0, 0.1)
+const GREEN = Color(0, 1.0, 0, 0.1)
 var draw_color = GREEN
+const GREY = Color(1.0, 1.0, 1.0, 0.1)
 
 var packed_front_arc :PackedVector2Array
 var packed_right_arc :PackedVector2Array
@@ -93,8 +94,7 @@ func draw_distance_lines():
 		new_label.rotation = Vector2.UP.angle_to(dir)
 		new_label.visible = true
 		new_label.text = str(floor(dir_length))	
-		
-		draw_line(top, target ,Color.RED, 3.0, true)
+		draw_line(top, target , RED, 3.0, true)
 
 func find_closest_target(reg : FactionRegiment):
 	var points_lenghts = []	
@@ -143,10 +143,11 @@ func get_new_info_label():
 	return new_label
 
 func draw_diagonal_lines():
-	draw_line(top_left,top_left + Vector2.UP.rotated(deg_to_rad(-45)) * 800  ,Color.GRAY,3,true)
-	draw_line(bot_left,bot_left + Vector2.LEFT.rotated(deg_to_rad(-45)) * 800 ,Color.GRAY,3,true)
-	draw_line(top_right,top_right + Vector2.RIGHT.rotated(deg_to_rad(-45)) * 800 ,Color.GRAY,3,true)
-	draw_line(bot_right,bot_right + Vector2.DOWN.rotated(deg_to_rad(-45)) * 800 ,Color.GRAY,3,true)
+	draw_line(top_left,top_left + Vector2.UP.rotated(deg_to_rad(-45)) * 800  ,GREY,3,true)
+	draw_line(top_right,top_right + Vector2.RIGHT.rotated(deg_to_rad(-45)) * 800 ,GREY,3,true)
+	#
+	#draw_line(bot_left,bot_left + Vector2.LEFT.rotated(deg_to_rad(-45)) * 800 ,GREY,3,true)
+	#draw_line(bot_right,bot_right + Vector2.DOWN.rotated(deg_to_rad(-45)) * 800 ,Color.GRAY,3,true)
 
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	var other_regiment = area.get_parent() as FactionRegiment

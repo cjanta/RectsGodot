@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="faction_type" load_steps=3 format=3 uid="uid://cfl18t63y2oxu"]
+[gd_resource type="Resource" script_class="FactionType" load_steps=3 format=3 uid="uid://cfl18t63y2oxu"]
 
-[ext_resource type="Texture2D" uid="uid://b46ftcdt1274c" path="res://grfx/flags/bt.svg" id="1_kddyb"]
+[ext_resource type="Texture2D" uid="uid://5sbu30cgpynq" path="res://grfx/planet02.png" id="1_8trl7"]
 [ext_resource type="Script" path="res://game_res/faction_type/faction_type.gd" id="1_v6qn5"]
 
 [resource]
 script = ExtResource("1_v6qn5")
 faction_name = "Die Süd Fraktion"
-faction_texture = ExtResource("1_kddyb")
+faction_texture = ExtResource("1_8trl7")
 start_facing = Vector2(0, -1)
-faction_color = Color(1, 0.305882, 0.0705882, 1)
+faction_color = Color(0.603922, 0.25098, 0.0470588, 1)

@@ -3,6 +3,8 @@ extends Node2D
 
 signal update_visuals(current_bounds_extends)
 
+const GREY = Color(1.0, 1.0, 1.0, 0.1)
+
 @export var bounds_sprite : Sprite2D
 @export var units_visible = true
 @export var bounds_sprite_visible = false
@@ -88,7 +90,7 @@ func runntime_ini():
 	log_with_bg_color(message)
 
 func log_with_bg_color(text):	
-	var col_html = Color(0.5, 0.5, 0.5, 0.5).to_html()
+	var col_html = Color(0.5, 0.5, 0.5, 0.25).to_html()
 	guilog("[bgcolor=" + col_html + "]" + text + "[/bgcolor]")
 
 func log_links():
