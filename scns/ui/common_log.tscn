@@ -63,7 +63,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 bbcode_enabled = true
-text = "Solve some stuff V0.5
+text = "Solve some stuff v0.0.1
+
 Willkommen zur heutigen Schlacht!"
 scroll_following = true
 

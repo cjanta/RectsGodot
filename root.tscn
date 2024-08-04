@@ -75,6 +75,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = -10.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -88,9 +92,9 @@ anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
 offset_left = 0.0
-offset_top = -217.0
+offset_top = -109.0
 offset_right = 735.0
-offset_bottom = 0.0
+offset_bottom = 1.0
 grow_horizontal = 1
 grow_vertical = 0
 size_flags_vertical = 4
@@ -137,7 +141,8 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -700.0
-offset_top = -210.0
+offset_top = -121.0
+offset_bottom = 4.0
 grow_horizontal = 0
 grow_vertical = 0
 
@@ -233,83 +238,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="element10" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel/HFlowContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Panel2" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer"]
-custom_minimum_size = Vector2(700, 75)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_jr7dn")
-
-[node name="HFlowContainer" type="HFlowContainer" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 5.0
-offset_right = 10.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="element" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="element2" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="element3" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="element4" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="element5" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="element6" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="element7" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="element8" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="element9" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="element10" type="Panel" parent="Game_Session/GUI/main/action_bar/VFlowContainer/Panel2/HFlowContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4

@@ -10,8 +10,9 @@ var regiment_texture : Texture2D = null #getsFactionTexture
 var setup_position : Vector2 = Vector2.ZERO
 var setup_facing_dir : Vector2 = Vector2.DOWN
 
-const action_points_max : int = 128
-var action_points : int = 128:
+const action_points_max : float = 128
+const charge_range : float = action_points_max * 2
+var action_points : float = 128:
 	set(value):
 		action_points = value
 		if action_points < 0:

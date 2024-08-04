@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="Regiment_Type" load_steps=3 format=3 uid="uid://ge42sv2l88mk"]
+[gd_resource type="Resource" script_class="Regiment_Type" load_steps=2 format=3 uid="uid://ge42sv2l88mk"]
 
 [ext_resource type="Script" path="res://game_res/faction_regiment/regiment_type.gd" id="1_sqo0m"]
-[ext_resource type="Texture2D" uid="uid://cvd8labkds3nu" path="res://grfx/flags/au.svg" id="1_ycddq"]
 
 [resource]
 script = ExtResource("1_sqo0m")
 regiment_name = "Bogenschützen"
-regiment_texture = ExtResource("1_ycddq")
 regiment_unit_size = Vector3(11, 5, 0)
 regiment_color = Color(1, 1, 1, 1)
-regiment_unit_coords = Vector2(2, 0)
+regiment_unit_coords = Vector2(4, 4)

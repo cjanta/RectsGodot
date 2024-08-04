@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://3mie7hp7sxd"]
+[gd_scene load_steps=7 format=3 uid="uid://3mie7hp7sxd"]
 
 [ext_resource type="Script" path="res://scripts/game/hitbox_rotation.gd" id="1_xxdfa"]
 [ext_resource type="Texture2D" uid="uid://dia8i6qamr8kw" path="res://grfx/icon_Skull32.png" id="2_is6yo"]
 [ext_resource type="Texture2D" uid="uid://bjj4hh6ud74e8" path="res://grfx/icon_north_arrow.png" id="2_s81sm"]
 [ext_resource type="Texture2D" uid="uid://bvm1xc8oouurf" path="res://grfx/arrow_rotate_64.png" id="3_33meo"]
+[ext_resource type="PackedScene" uid="uid://cnet7t6kw40jj" path="res://scns/game/info_label.tscn" id="4_uqm1i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3p1nj"]
 radius = 16.0
@@ -15,6 +16,7 @@ script = ExtResource("1_xxdfa")
 icon_sprite = NodePath("rotation_circle/icon")
 icon_tex_north = ExtResource("2_s81sm")
 icon_tex_rotate = ExtResource("3_33meo")
+info_label_scene = ExtResource("4_uqm1i")
 
 [node name="rotation_circle" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3p1nj")

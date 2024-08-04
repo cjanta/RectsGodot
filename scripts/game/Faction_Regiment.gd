@@ -86,6 +86,8 @@ func runntime_ini():
 		var setup_facing_dir = type.setup_facing_dir
 		var angle = setup_facing_dir.angle_to(Vector2.UP)
 		unit.rotation = angle
+		if abs(rad_to_deg(angle)) > 90:
+			unit.sprite_flipped_vert = true
 	var message = get_rich_common_prefix() + " mit " + str(faction_units.size()) + " Einheiten bereit."
 	log_with_bg_color(message)
 
@@ -124,7 +126,7 @@ func get_rich_display_prefix():
 	var message = ""
 	message += "\t" + info_size + " " + type.regiment_name + "\n"
 	message += "\t"+ dead_icon + "" + info_died + " " + type.regiment_name + "\n"
-	message += "\t" + "AP " + str(type.action_points)
+	message += "\t" + "AP " + str(snapped(type.action_points, 0.01))
 	return get_colored_string(message, Color.WHEAT)
 
 func get_rich_common_prefix():

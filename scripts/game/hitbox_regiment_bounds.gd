@@ -13,11 +13,21 @@ var position_before_drag : Vector2
 
 var regiment : FactionRegiment
 @onready var coll_shape : CollisionShape2D = $regiment_bounds
+@export var info_label_scene : PackedScene
+var info_label_move : InfoLabel
+var info_label_charge : InfoLabel
 
 func _ready():
 	regiment = get_parent()
 	selected_Mouse_Position = get_global_mouse_position()
 	coll_shape.shape = coll_shape.shape.duplicate()
+	info_label_move = info_label_scene.instantiate()
+	add_child(info_label_move)
+	info_label_move.visible = false
+	info_label_charge = info_label_scene.instantiate()
+	info_label_charge.visible = false
+	add_child(info_label_charge)
+
 func _process(delta):
 	queue_redraw()
 
@@ -68,6 +78,17 @@ func _on_faction_regiment_scene_update_visuals(current_bounds_extends):
 func _draw():
 	if regiment.is_session_selected_regiment():
 		draw_bounds()
+		if regiment.type.action_points > 0:
+			draw_move_range()
+		else:
+			info_label_move.visible = false
+		if regiment.type.action_points == regiment.type.action_points_max:
+			draw_charge_range()
+		else:
+			info_label_charge.visible = false
+	else:
+		info_label_move.visible = false
+		info_label_charge.visible = false
 
 func draw_bounds():
 	var width = 3.0	
@@ -75,6 +96,39 @@ func draw_bounds():
 	draw_edge_line(Vector2(-1,1),Vector2(-1,-1), width)
 	draw_edge_line(Vector2(-1,-1),Vector2(1,-1), width)
 	draw_edge_line(Vector2(1,-1),Vector2(1,1), width)
+
+func draw_move_range():
+	var color = regiment.GREY
+	var width = 4.0	
+	var bounds = regiment.get_current_bounds_extends()
+	var move_range = Vector2.UP * regiment.type.action_points
+	var from = position + Vector2(-bounds.x,-bounds.y)
+	var to = position + Vector2(bounds.x,-bounds.y)
+	draw_dashed_line(from + move_range, to + move_range, regiment.GREY, width, 8.0, true)
+	var dir = (to + move_range) -  (from + move_range)
+	var length_halfed = dir.length() / 2.0
+	dir = dir.normalized()
+	info_label_move.text = "AP: " + str(snapped(regiment.type.action_points, 0.01))
+	info_label_move.visible = true
+	info_label_move.position = from + move_range + dir * length_halfed
+	info_label_move.position -= info_label_move.get_center()
+
+func draw_charge_range():
+	var color = regiment.GREY
+	var width = 4.0
+	var bounds = regiment.get_current_bounds_extends()
+	var from = position + Vector2(-bounds.x,-bounds.y)
+	var to = position + Vector2(bounds.x,-bounds.y)
+	var charge_range = Vector2.UP * float(regiment.type.charge_range)
+	draw_dashed_line(from + charge_range, to + charge_range, regiment.GREY, width, 8.0, true)
+	var dir = (to + charge_range) -  (from + charge_range)
+	var length_halfed = dir.length() / 2.0
+	dir = dir.normalized()
+	info_label_charge.text = "Charge: " + str(snapped(regiment.type.charge_range, 0.01))
+	info_label_charge.visible = true
+	info_label_charge.position = from + charge_range + dir * length_halfed
+	info_label_charge.position -= info_label_charge.get_center()
+	pass
 
 func draw_edge_line(from_dir : Vector2, to_dir : Vector2, width):
 	var color = regiment.GREY

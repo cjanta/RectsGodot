@@ -90,8 +90,8 @@ func draw_distance_lines():
 		var dir = target - top
 		var dir_length = dir.length()	
 		var new_label = get_free_info_label()
+		new_label.rotation = top.angle_to(dir)
 		new_label.position = top + dir.normalized()  * dir_length / 2.0 - new_label.get_center()
-		new_label.rotation = Vector2.UP.angle_to(dir)
 		new_label.visible = true
 		new_label.text = str(floor(dir_length))	
 		draw_line(top, target , RED, 3.0, true)

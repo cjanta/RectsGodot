@@ -7,4 +7,4 @@ script = ExtResource("2_vq15k")
 regiment_name = "Ritter zu Fuß"
 regiment_unit_size = Vector3(13, 5, 0)
 regiment_color = Color(1, 1, 1, 1)
-regiment_unit_coords = Vector2(3, 1)
+regiment_unit_coords = Vector2(0, 4)
