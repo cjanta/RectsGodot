@@ -85,7 +85,7 @@ func rotate_dragged_object(delta):
 
 func result_actions_points():
 	var rotation_delta = get_rotation_delta(original_rotation_degrees, regiment.rotation_degrees)
-	rotation_delta = abs(rotation_delta)
+	#rotation_delta = abs(rotation_delta)
 	rotation_delta = snapped(rotation_delta, 0.01)
 	#RULE : TODO: innerhalb des drags noch fehler wenn richtung gewechselt wird -+ +-
 	var step_ap = regiment.type.action_points_max / 4.0
@@ -94,11 +94,21 @@ func result_actions_points():
 	#regiment.type.action_points -= ap_cost
 	var prefix = regiment.get_rich_common_prefix()
 	var message =  " rotiert " + str(rotation_delta) + "° AP: " + str(ap_cost) 
-	regiment.guilog(prefix + message)
+	#regiment.guilog(prefix + message)
 	pass
 
 func get_rotation_delta(original_rotation_deg, regiment_rotation_deg):
-	return to_360(original_rotation_deg) - to_360(regiment_rotation_deg)
+	#TODO: soll eigentlich nur die summe der rotation anzeigen
+	var original = original_rotation_deg
+	var current = regiment_rotation_deg
+	if original >= 0 and current >= 0 || original <= 0 and current <= 0:
+		return original - current
+	if original <= 0 and current >= 0:
+		current + (180 - abs(original))
+	if original >= 0 and current <= 0:
+		return original + (180 - abs(current))
+		
+	return original - current
 
 func to_360(rotation_degrees):
 	if rotation_degrees < 0:
