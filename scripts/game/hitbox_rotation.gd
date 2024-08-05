@@ -16,7 +16,6 @@ var regiment : FactionRegiment
 @export var info_label_scene : PackedScene
 var info_label : InfoLabel
 
-
 func _ready():
 	icon_sprite.texture = icon_tex_north
 	regiment = get_parent()
@@ -30,30 +29,31 @@ func _process(delta):
 
 func _draw():
 	if has_selected_rotation and regiment.is_session_selected_regiment():
-		var color = regiment.GREY
-		var pos = to_local(regiment.global_position)
-		var from : Vector2 = pos
-		var to : Vector2 = pos + Vector2.UP * 400
-		draw_line(from, to, color, 4.0, true)
-		
-		from = pos
-		var target_to = pos + original_drag_vector_up.rotated(-regiment.global_rotation) * 400
-		draw_line(from, target_to, color, 4.0, true)
-		
-		draw_dashed_line(to, target_to,color, 4.0, 8.0, true)
-		var dir =  to - target_to
-		var l_halfed = dir.length() / 2.0
-		dir = dir.normalized()
-		info_label.position = target_to + dir * l_halfed
-		info_label.position -= info_label.get_center()
-		info_label.rotation = Vector2.UP.angle_to(target_to + dir)
-		var rotation_delta = get_rotation_delta(original_rotation_degrees,regiment.rotation_degrees )
-		rotation_delta = abs(rotation_delta)
-		rotation_delta = snapped(rotation_delta, 0.01)
-		info_label.text = str(rotation_delta)
-		info_label.visible = true
+		draw_rotation_lines()
 	else:
-		info_label.visible = false	
+		info_label.visible = false
+
+func draw_rotation_lines():
+	var color = regiment.GREY
+	var pos = to_local(regiment.global_position)
+	var from : Vector2 = pos
+	var to : Vector2 = pos + Vector2.UP * 400
+	draw_line(from, to, color, 4.0, true)
+	from = pos
+	var target_to = pos + original_drag_vector_up.rotated(-regiment.global_rotation) * 400
+	draw_line(from, target_to, color, 4.0, true)
+	draw_dashed_line(to, target_to,color, 4.0, 8.0, true)
+	var dir =  to - target_to
+	var l_halfed = dir.length() / 2.0
+	dir = dir.normalized()
+	info_label.position = target_to + dir * l_halfed
+	info_label.position -= info_label.get_center()
+	info_label.rotation = Vector2.UP.angle_to(target_to + dir)
+	var rotation_delta = get_rotation_delta(original_rotation_degrees,regiment.rotation_degrees )
+	rotation_delta = abs(rotation_delta)
+	rotation_delta = snapped(rotation_delta, 0.01)
+	info_label.text = str(rotation_delta)
+	info_label.visible = true
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -85,35 +85,22 @@ func rotate_dragged_object(delta):
 
 func result_actions_points():
 	var rotation_delta = get_rotation_delta(original_rotation_degrees, regiment.rotation_degrees)
-	#rotation_delta = abs(rotation_delta)
-	rotation_delta = snapped(rotation_delta, 0.01)
-	#RULE : TODO: innerhalb des drags noch fehler wenn richtung gewechselt wird -+ +-
+	rotation_delta = abs(rotation_delta)
 	var step_ap = regiment.type.action_points_max / 4.0
 	var ap_cost = (rotation_delta / 90.0) * step_ap
-	#ap_cost = snapped(ap_cost, 0.01)
-	#regiment.type.action_points -= ap_cost
+	regiment.type.action_points -= ap_cost
 	var prefix = regiment.get_rich_common_prefix()
+	ap_cost = snapped(ap_cost, 0.01)
+	rotation_delta = snapped(rotation_delta, 0.01)
 	var message =  " rotiert " + str(rotation_delta) + "° AP: " + str(ap_cost) 
-	#regiment.guilog(prefix + message)
+	regiment.guilog(prefix + message)
 	pass
 
 func get_rotation_delta(original_rotation_deg, regiment_rotation_deg):
-	#TODO: soll eigentlich nur die summe der rotation anzeigen
-	var original = original_rotation_deg
-	var current = regiment_rotation_deg
-	if original >= 0 and current >= 0 || original <= 0 and current <= 0:
-		return original - current
-	if original <= 0 and current >= 0:
-		current + (180 - abs(original))
-	if original >= 0 and current <= 0:
-		return original + (180 - abs(current))
-		
-	return original - current
-
-func to_360(rotation_degrees):
-	if rotation_degrees < 0:
-		return 360 + rotation_degrees 
-	return rotation_degrees
+	var original_up = Vector2.UP.rotated(deg_to_rad(original_rotation_deg))
+	var current_up = Vector2.UP.rotated(deg_to_rad(regiment_rotation_deg))
+	var delta_angle = original_up.angle_to(current_up)
+	return rad_to_deg(delta_angle)
 
 func update_position(current_Bounds_extend : Vector2):
 	var y_offset = current_Bounds_extend.y + regiment.unit_pixel_size / 2.0
