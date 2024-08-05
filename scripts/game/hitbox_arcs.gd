@@ -86,6 +86,7 @@ func draw_distance_lines():
 		
 	for reg : FactionRegiment in front_fov_enemies:
 		#var target =  to_local(reg.get_top_rotated())
+		var color = RED
 		var target = find_closest_target(reg)
 		var dir = target - top
 		var dir_length = dir.length()	
@@ -94,7 +95,10 @@ func draw_distance_lines():
 		new_label.position = top + dir.normalized()  * dir_length / 2.0 - new_label.get_center()
 		new_label.visible = true
 		new_label.text = str(floor(dir_length))	
-		draw_line(top, target , RED, 3.0, true)
+		var charge_range = reg.type.charge_range
+		if dir_length <= charge_range:
+			color = GREEN
+		draw_line(top, target , color, 3.0, true)
 
 func find_closest_target(reg : FactionRegiment):
 	var points_lenghts = []	

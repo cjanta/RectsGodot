@@ -76,8 +76,8 @@ func _on_faction_regiment_scene_update_visuals(current_bounds_extends):
 	update_extends(current_bounds_extends)
 
 func _draw():
+	draw_bounds()
 	if regiment.is_session_selected_regiment():
-		draw_bounds()
 		if regiment.type.action_points > 0:
 			draw_move_range()
 		else:
@@ -131,7 +131,7 @@ func draw_charge_range():
 	pass
 
 func draw_edge_line(from_dir : Vector2, to_dir : Vector2, width):
-	var color = regiment.GREY
+	var color = get_color_by_state()
 	var offset = Vector2(width / 2.0, width / 2.0)
 	var from = regiment.get_current_bounds_extends()
 	from = Vector2(from.x * from_dir.x, from.y * from_dir.y)
@@ -142,7 +142,10 @@ func draw_edge_line(from_dir : Vector2, to_dir : Vector2, width):
 	to += Vector2(offset.y * to_dir.x, offset.y * to_dir.y)
 	draw_line(from, to, color, width, true)
 
-
+func get_color_by_state():
+	if regiment.is_session_selected_regiment():
+		return regiment.GREY
+	return regiment.faction.faction_type.faction_color
 
 
 

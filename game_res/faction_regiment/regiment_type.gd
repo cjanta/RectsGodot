@@ -1,14 +1,35 @@
+class_name RegimentType
 extends Resource
-class_name Regiment_Type
+enum REGIMENT_CLASS{ empty = 0, Regiment = 1, Single = 2, Skirmish = 3 , Loose = 4}
 
-@export var regiment_name : String = "default name"
-@export var regiment_unit_size : Vector3 = Vector3.ZERO
+#visuals
+@export var has_spritesheet = false
+@export var unit_texture : Texture2D
+@export var unit_region_data : Vector3 = Vector3.ZERO
 @export var regiment_color : Color = Color.WHITE
-@export var regiment_unit_coords : Vector2 = Vector2.ZERO
-
 var regiment_texture : Texture2D = null #getsFactionTexture
+
+#DEV: battle setup
 var setup_position : Vector2 = Vector2.ZERO
 var setup_facing_dir : Vector2 = Vector2.DOWN
+
+#stats
+@export var regiment_name : String = "Hungrige Wölfe"
+@export var regiment_template_name : String = "Schwertkämpfer"
+@export var regiment_class : REGIMENT_CLASS = REGIMENT_CLASS.Regiment
+@export var regiment_unit_size : Vector3 = Vector3.ZERO
+
+@export var stat_move : int = 0
+@export var stat_battle : int = 0
+@export var stat_rangedl : int = 0
+@export var stat_strength : int = 0
+@export var stat_toughness : int = 0
+@export var stat_life : int = 0
+@export var stat_initiative : int = 0
+@export var stat_attacks : int = 0
+@export var stat_moral : int = 0
+@export var special_rules : Array = []
+@export var gear : Array = []
 
 const action_points_max : float = 128
 const charge_range : float = action_points_max * 2

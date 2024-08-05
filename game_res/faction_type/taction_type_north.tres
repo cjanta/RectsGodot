@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="FactionType" load_steps=3 format=3 uid="uid://ck43168nase3u"]
+[gd_resource type="Resource" script_class="FactionType" load_steps=4 format=3 uid="uid://ck43168nase3u"]
 
 [ext_resource type="Texture2D" uid="uid://du81srjj3qr6f" path="res://grfx/planet00.png" id="1_320pj"]
 [ext_resource type="Script" path="res://game_res/faction_type/faction_type.gd" id="1_fjiu0"]
+[ext_resource type="Resource" uid="uid://bo1p0ss824llt" path="res://game_res/faction_army_book/Empire.tres" id="1_p6t3n"]
 
 [resource]
 script = ExtResource("1_fjiu0")
-faction_name = "Die Nordfraktion"
+army_book = ExtResource("1_p6t3n")
+faction_name = "Nordmark"
 faction_texture = ExtResource("1_320pj")
 start_facing = Vector2(0, 1)
 faction_color = Color(0, 0.509804, 0.509804, 1)

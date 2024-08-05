@@ -4,14 +4,18 @@ extends Control
 @export var textbox : RichTextLabel
 
 var original_size : Vector2
+var original_position : Vector2
 var max_size : Vector2
+var max_pos : Vector2
 
 func log(text):
 	textbox.append_text("\n" + str(text))
 
 func _ready():
 	original_size = size
-	max_size = Vector2(original_size.x,get_viewport_size().y - original_size.y - position.y)
+	original_position = position
+	max_size = Vector2(original_size.x,get_viewport_size().y)
+	max_pos = Vector2.ZERO
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton and event.double_click:
@@ -20,8 +24,10 @@ func _on_gui_input(event):
 func toggle_size():
 	if size == original_size:
 		size = max_size
+		position = max_pos
 	else:
 		size = original_size
+		position = original_position
 
 func get_viewport_size() -> Vector2:
 	return get_viewport_rect().size

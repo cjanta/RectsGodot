@@ -10,11 +10,13 @@ extends Node2D
 var session : GameSession
 var sum_regiments = 0
 var faction_type : FactionType
+var army_book : ArmyBook
 var faction_color : Color
 var faction_color_html = Color.WHITE.to_html()
 
 func setup(type):
 	faction_type = type
+	army_book = type.army_book
 	faction_name = type.faction_name
 	start_direction = type.start_facing
 	faction_texture = type.faction_texture
@@ -44,11 +46,10 @@ func create_test_regiments(start_position : Vector2):
 	add_child(regiment)
 	randomize()
 	var number_units = randi_range(10,101)
-	var new_type : Regiment_Type = session.data.get_random_regiment_type()
+	var new_type : RegimentType = army_book.get_random_regiment_type(ArmyBook.ARMY_BOOKS.EMPIRE)
 	new_type.setup_facing_dir = start_direction
 	new_type.setup_position = start_position
 	regiment.set_type(new_type)
-	#regiment.setup("Regiment " + str(sum_regiments),start_direction, start_position, Vector3(number_units, 10.0, 1.0 ))
 	faction_regiments.append(regiment)
 
 func get_rich_logPrefix():

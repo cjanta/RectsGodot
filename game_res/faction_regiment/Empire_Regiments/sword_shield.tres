@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="RegimentType" load_steps=3 format=3 uid="uid://ge42sv2l88mk"]
+
+[ext_resource type="Script" path="res://game_res/faction_regiment/regiment_type.gd" id="1_7srbh"]
+[ext_resource type="Texture2D" uid="uid://2ve0jajk2gbb" path="res://grfx/32rogues/rogues.png" id="2_jv5ig"]
+
+[resource]
+script = ExtResource("1_7srbh")
+has_spritesheet = true
+unit_texture = ExtResource("2_jv5ig")
+unit_region_data = Vector3(0, 0, 32)
+regiment_color = Color(1, 1, 1, 1)
+regiment_name = "Schwertkämpfer"
+regiment_template_name = "Schwertkämpfer"
+regiment_class = 1
+regiment_unit_size = Vector3(11, 5, 0)
+stat_move = 0
+stat_battle = 0
+stat_rangedl = 0
+stat_strength = 0
+stat_toughness = 0
+stat_life = 0
+stat_initiative = 0
+stat_attacks = 0
+stat_moral = 0
+special_rules = []
+gear = []

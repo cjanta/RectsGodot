@@ -19,7 +19,7 @@ var is_Selectable = false:
 		is_Selectable = value
 	get:
 		return is_Selectable
-var type : Regiment_Type
+var type : RegimentType
 
 
 var shape_extends_total = Vector2.ZERO # full width and height
@@ -64,7 +64,7 @@ func update_current_bounds_extends():
 func _process(delta):
 	check_if_runtime_ini()
 
-func set_type(regiment_type : Regiment_Type):
+func set_type(regiment_type : RegimentType):
 	type = regiment_type
 	type.regiment_texture = faction.faction_texture
 	var setup_facing_dir = type.setup_facing_dir

@@ -1,14 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://beauaqxcm41yt"]
+[gd_scene load_steps=16 format=3 uid="uid://beauaqxcm41yt"]
 
 [ext_resource type="Script" path="res://scripts/game/Game_Session.gd" id="2_nx4wc"]
 [ext_resource type="Script" path="res://scripts/game/data.gd" id="2_vo6wv"]
 [ext_resource type="PackedScene" uid="uid://bt142o4g34u0y" path="res://scns/ui/common_log.tscn" id="3_48iyu"]
-[ext_resource type="Resource" uid="uid://dhshjxjo5brft" path="res://game_res/faction_regiment/knights.tres" id="3_aq20d"]
 [ext_resource type="Resource" uid="uid://ck43168nase3u" path="res://game_res/faction_type/taction_type_north.tres" id="3_btu6t"]
 [ext_resource type="Script" path="res://scripts/game/Factions.gd" id="3_l3rp5"]
 [ext_resource type="PackedScene" uid="uid://deqc5r53rtb20" path="res://scns/ui/faction_display_left.tscn" id="4_6lmdl"]
 [ext_resource type="Resource" uid="uid://cfl18t63y2oxu" path="res://game_res/faction_type/taction_type_sued.tres" id="4_44ndl"]
-[ext_resource type="Resource" uid="uid://ge42sv2l88mk" path="res://game_res/faction_regiment/ranger.tres" id="4_xrbtp"]
 [ext_resource type="PackedScene" uid="uid://dkyarb68ybori" path="res://scns/ui/selection_display.tscn" id="5_eta7b"]
 [ext_resource type="PackedScene" uid="uid://c2be5ggfs43tl" path="res://scns/ui/session_round_display.tscn" id="6_bsjtm"]
 
@@ -60,7 +58,6 @@ data = NodePath("data")
 
 [node name="data" type="Node" parent="Game_Session"]
 script = ExtResource("2_vo6wv")
-regiment_types = Array[Resource("res://game_res/faction_regiment/regiment_type.gd")]([ExtResource("3_aq20d"), ExtResource("4_xrbtp")])
 
 [node name="Factions" type="Node2D" parent="Game_Session"]
 script = ExtResource("3_l3rp5")
@@ -84,27 +81,12 @@ grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_lfqe7")
 
-[node name="Common_Log" parent="Game_Session/GUI/main" instance=ExtResource("3_48iyu")]
-layout_mode = 1
-anchors_preset = 2
-anchor_left = 0.0
-anchor_top = 1.0
-anchor_right = 0.0
-anchor_bottom = 1.0
-offset_left = 0.0
-offset_top = -109.0
-offset_right = 735.0
-offset_bottom = 1.0
-grow_horizontal = 1
-grow_vertical = 0
-size_flags_vertical = 4
-
 [node name="Faction_Display_North" parent="Game_Session/GUI/main" instance=ExtResource("4_6lmdl")]
 layout_mode = 1
-offset_left = 376.0
-offset_top = 15.0
-offset_right = 526.0
-offset_bottom = 95.0
+offset_left = 361.0
+offset_top = 0.0
+offset_right = 511.0
+offset_bottom = 80.0
 theme = SubResource("Theme_v6ffy")
 
 [node name="Faction_Display_South" parent="Game_Session/GUI/main" instance=ExtResource("4_6lmdl")]
@@ -112,10 +94,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -520.0
-offset_top = 15.0
-offset_right = -370.0
-offset_bottom = 95.0
+offset_left = -511.0
+offset_top = 0.0
+offset_right = -361.0
+offset_bottom = 80.0
 grow_horizontal = 0
 theme = SubResource("Theme_v6ffy")
 
@@ -241,6 +223,21 @@ size_flags_vertical = 4
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Common_Log" parent="Game_Session/GUI/main" instance=ExtResource("3_48iyu")]
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = -109.0
+offset_right = 735.0
+offset_bottom = 1.0
+grow_horizontal = 1
+grow_vertical = 0
 size_flags_vertical = 4
 
 [connection signal="clicked_session_round_display" from="Game_Session/GUI/main/session_round_display" to="Game_Session" method="_on_session_round_display_clicked_session_round_display"]

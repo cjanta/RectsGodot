@@ -1,6 +1,6 @@
 class_name FactionType
 extends Resource
-
+@export var army_book : ArmyBook
 @export var faction_name : String = "default name"
 @export var faction_texture : Texture2D = null
 @export var start_facing : Vector2 = Vector2.DOWN

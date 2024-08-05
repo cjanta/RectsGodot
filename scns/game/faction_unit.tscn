@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/game/Faction_Unit.gd" id="1_vwj34"]
 [ext_resource type="Shader" path="res://shader/glow_rect2d.gdshader" id="2_cevfk"]
 [ext_resource type="Texture2D" uid="uid://cr5oi7r654p88" path="res://grfx/iconRoundGrey32.png" id="2_rm1af"]
-[ext_resource type="Texture2D" uid="uid://dljqmx1y65gbh" path="res://grfx/32rogues/monsters.png" id="4_iwqdm"]
+[ext_resource type="Texture2D" uid="uid://dia8i6qamr8kw" path="res://grfx/icon_Skull32.png" id="4_jvn37"]
 [ext_resource type="Texture2D" uid="uid://caam420tbkwk1" path="res://grfx/idle_1.png" id="5_ul0no"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rikpj"]
@@ -23,10 +23,9 @@ texture = ExtResource("2_rm1af")
 region_rect = Rect2(64, 0, 32, 32)
 
 [node name="icon_sprite" type="Sprite2D" parent="."]
-position = Vector2(9.53674e-07, 1.43051e-06)
-texture = ExtResource("4_iwqdm")
-region_enabled = true
-region_rect = Rect2(64, 0, 32, 32)
+position = Vector2(9.53674e-07, 1)
+texture = ExtResource("4_jvn37")
+region_rect = Rect2(0, 0, 32, 32)
 
 [node name="unit_sprite" type="Sprite2D" parent="."]
 visible = false

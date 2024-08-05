@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="FactionType" load_steps=3 format=3 uid="uid://cfl18t63y2oxu"]
+[gd_resource type="Resource" script_class="FactionType" load_steps=4 format=3 uid="uid://cfl18t63y2oxu"]
 
 [ext_resource type="Texture2D" uid="uid://5sbu30cgpynq" path="res://grfx/planet02.png" id="1_8trl7"]
+[ext_resource type="Resource" uid="uid://dowwd8u04fahg" path="res://game_res/faction_army_book/Undead.tres" id="1_i4fwy"]
 [ext_resource type="Script" path="res://game_res/faction_type/faction_type.gd" id="1_v6qn5"]
 
 [resource]
 script = ExtResource("1_v6qn5")
-faction_name = "Die Süd Fraktion"
+army_book = ExtResource("1_i4fwy")
+faction_name = "Südliche Untode"
 faction_texture = ExtResource("1_8trl7")
 start_facing = Vector2(0, -1)
-faction_color = Color(0.603922, 0.25098, 0.0470588, 1)
+faction_color = Color(0.831373, 0.72549, 0.803922, 1)

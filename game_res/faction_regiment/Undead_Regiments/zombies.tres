@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="RegimentType" load_steps=3 format=3 uid="uid://cjkn83loolwaf"]
+
+[ext_resource type="Script" path="res://game_res/faction_regiment/regiment_type.gd" id="1_cbc1i"]
+[ext_resource type="Texture2D" uid="uid://dia8i6qamr8kw" path="res://grfx/icon_Skull32.png" id="2_nt78l"]
+
+[resource]
+script = ExtResource("1_cbc1i")
+has_spritesheet = false
+unit_texture = ExtResource("2_nt78l")
+unit_region_data = Vector3(4, 4, 32)
+regiment_color = Color(1, 1, 1, 1)
+regiment_name = "Zombies"
+regiment_template_name = "Zombie"
+regiment_class = 1
+regiment_unit_size = Vector3(20, 5, 0)
+stat_move = 0
+stat_battle = 0
+stat_rangedl = 0
+stat_strength = 0
+stat_toughness = 0
+stat_life = 0
+stat_initiative = 0
+stat_attacks = 0
+stat_moral = 0
+special_rules = []
+gear = []

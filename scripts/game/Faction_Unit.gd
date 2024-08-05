@@ -3,25 +3,28 @@ extends Node2D
 
 var session : GameSession
 var regiment : FactionRegiment
+var regiment_type : RegimentType
 
 @export var unit_name = ""
 @export var icon_vector : Vector2 = Vector2.ZERO
 @export var icon_sprite : Sprite2D
-
-@onready var rastersize : float = 32.0
 
 var sprite_flipped_vert = false
 
 func _ready():
 	session = find_parent("Game_Session")
 	regiment = get_parent()
+	regiment_type = regiment.type
 	setup()
 
 func setup():
-	
 	unit_name = get_random_name()
-	icon_vector = regiment.type.regiment_unit_coords
-	icon_sprite.region_rect = Rect2(icon_vector.x * rastersize, icon_vector.y * rastersize, rastersize, rastersize)
+	icon_sprite.texture = regiment.type.unit_texture
+	if regiment.type.has_spritesheet:
+		icon_sprite.region_enabled = true
+		var rastersize = regiment.type.unit_region_data.z
+		icon_vector = Vector2(regiment.type.unit_region_data.x,regiment.type.unit_region_data.y)
+		icon_sprite.region_rect = Rect2(icon_vector.x * rastersize, icon_vector.y * rastersize, rastersize, rastersize)
 	guilog(regiment.get_rich_common_prefix() + " " + unit_name + " bereit!")
 
 func guilog(text : String):
