@@ -3,6 +3,7 @@ extends Resource
 enum REGIMENT_CLASS{ empty = 0, Regiment = 1, Single = 2, Skirmish = 3 , Loose = 4}
 
 #visuals
+@export var sprite_scene : PackedScene
 @export var has_spritesheet = false
 @export var unit_texture : Texture2D
 @export var unit_region_data : Vector3 = Vector3.ZERO
@@ -29,11 +30,11 @@ var setup_facing_dir : Vector2 = Vector2.DOWN
 @export var stat_attacks : int = 0
 @export var stat_moral : int = 0
 @export var special_rules : Array = []
-@export var gear : Array = []
+@export var regiment_gear : Array = []
 
-const action_points_max : float = 128
-const charge_range : float = action_points_max * 2
-var action_points : float = 128:
+var action_points_max : float = 0
+var charge_range : float = 0
+var action_points : float = 0:
 	set(value):
 		action_points = value
 		if action_points < 0:
@@ -41,3 +42,10 @@ var action_points : float = 128:
 
 func reset_action_points():
 	action_points = action_points_max
+
+func setup(_setup_position : Vector2, _setup_facing_dir : Vector2):
+	setup_position = _setup_position
+	setup_facing_dir = _setup_facing_dir
+	action_points_max = float(stat_move * 64)
+	charge_range = action_points_max * 2.0
+	action_points = float(stat_move * 64)

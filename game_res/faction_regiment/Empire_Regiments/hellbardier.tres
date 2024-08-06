@@ -1,26 +1,28 @@
-[gd_resource type="Resource" script_class="RegimentType" load_steps=3 format=3 uid="uid://dhshjxjo5brft"]
+[gd_resource type="Resource" script_class="RegimentType" load_steps=4 format=3 uid="uid://dhshjxjo5brft"]
 
 [ext_resource type="Script" path="res://game_res/faction_regiment/regiment_type.gd" id="1_e6k27"]
+[ext_resource type="PackedScene" uid="uid://d4lddihd6sky" path="res://game_res/sprite_scenes/sprite_hellbardier_scene.tscn" id="2_mw8lj"]
 [ext_resource type="Texture2D" uid="uid://dia8i6qamr8kw" path="res://grfx/icon_Skull32.png" id="2_qqhwq"]
 
 [resource]
 script = ExtResource("1_e6k27")
+sprite_scene = ExtResource("2_mw8lj")
 has_spritesheet = false
 unit_texture = ExtResource("2_qqhwq")
-unit_region_data = Vector3(1, 0, 32)
+unit_region_data = Vector3(0, 0, 64)
 regiment_color = Color(1, 1, 1, 1)
-regiment_name = "Stadtwache"
+regiment_name = "Hellebardenkämpfer"
 regiment_template_name = "Hellebardenkämpfer"
 regiment_class = 1
-regiment_unit_size = Vector3(13, 5, 0)
-stat_move = 0
-stat_battle = 0
-stat_rangedl = 0
-stat_strength = 0
-stat_toughness = 0
-stat_life = 0
-stat_initiative = 0
-stat_attacks = 0
-stat_moral = 0
+regiment_unit_size = Vector3(10, 5, 0)
+stat_move = 4
+stat_battle = 3
+stat_rangedl = 3
+stat_strength = 3
+stat_toughness = 3
+stat_life = 1
+stat_initiative = 3
+stat_attacks = 1
+stat_moral = 7
 special_rules = []
-gear = []
+regiment_gear = []

@@ -9,8 +9,10 @@
 [ext_resource type="Material" uid="uid://d4nnj0la4o3if" path="res://shader/regiment_shader/regiment_sprite_shader.tres" id="4_bcwqg"]
 [ext_resource type="PackedScene" uid="uid://cgrwbimmaa7cd" path="res://scns/game/hitbox_arcs.tscn" id="6_eui2j"]
 
-[node name="Faction_Regiment_Scene" type="Node2D" node_paths=PackedStringArray("bounds_sprite")]
+[node name="Faction_Regiment_Scene" type="Node2D" node_paths=PackedStringArray("hitbox_arcs", "hitbox_regiment_bounds", "bounds_sprite")]
 script = ExtResource("1_nqapm")
+hitbox_arcs = NodePath("hitbox_arcs")
+hitbox_regiment_bounds = NodePath("hitbox_regiment_bounds")
 bounds_sprite = NodePath("bounds_sprite")
 
 [node name="hitbox_regiment_bounds" parent="." instance=ExtResource("2_daj36")]

@@ -44,11 +44,8 @@ func _process(delta):
 func create_test_regiments(start_position : Vector2):
 	var regiment : FactionRegiment = regiments_preload.instantiate()
 	add_child(regiment)
-	randomize()
-	var number_units = randi_range(10,101)
-	var new_type : RegimentType = army_book.get_random_regiment_type(ArmyBook.ARMY_BOOKS.EMPIRE)
-	new_type.setup_facing_dir = start_direction
-	new_type.setup_position = start_position
+	var new_type : RegimentType = army_book.get_random_regiment_type()
+	new_type.setup(start_position,start_direction)
 	regiment.set_type(new_type)
 	faction_regiments.append(regiment)
 

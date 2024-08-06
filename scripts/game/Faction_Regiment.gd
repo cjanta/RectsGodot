@@ -5,6 +5,8 @@ signal update_visuals(current_bounds_extends)
 
 const GREY = Color(1.0, 1.0, 1.0, 0.1)
 
+@export var hitbox_arcs : HitboxArcs
+@export var hitbox_regiment_bounds : HitboxRegimentBounds
 @export var bounds_sprite : Sprite2D
 @export var units_visible = true
 @export var bounds_sprite_visible = false
@@ -12,14 +14,28 @@ const GREY = Color(1.0, 1.0, 1.0, 0.1)
 var faction_units : Array[FactionUnit] = []
 var session : GameSession
 var faction : Faction
+var regiment_battles : Array[RegimentBattle]
 var faction_unit_preload
 var is_runntime_ini = true
 var is_Selectable = false:
 	set(value):
 		is_Selectable = value
+		if value == false:
+			target_regiment = null
+			if is_session_selected_regiment():
+				session_clear_selected_regiment()
+		else:
+			if not regiment_battles.is_empty():
+				is_Selectable = false
+
 	get:
 		return is_Selectable
 var type : RegimentType
+var target_regiment : FactionRegiment:
+	set(value ):
+		target_regiment = value
+		session.target_selection_display.update(value)
+		check_if_attackable(value)
 
 
 var shape_extends_total = Vector2.ZERO # full width and height
@@ -50,14 +66,12 @@ func get_right_rotated():
 func get_current_bounds_extends():
 	return current_bounds_extends
 
-func get_unit_Pixel_size():
-	return unit_pixel_size
-
 func set_regiment_unit_size(new_size : Vector3):
 	regiment_unit_size = new_size
 	update_current_bounds_extends()
 
 func update_current_bounds_extends():
+	
 	regiment_unit_size.z = ceil(regiment_unit_size.x / regiment_unit_size.y)
 	current_bounds_extends = Vector2(regiment_unit_size.y * unit_pixel_size /2  ,regiment_unit_size.z * unit_pixel_size /2  )
 
@@ -66,6 +80,7 @@ func _process(delta):
 
 func set_type(regiment_type : RegimentType):
 	type = regiment_type
+	unit_pixel_size = type.unit_region_data.z
 	type.regiment_texture = faction.faction_texture
 	var setup_facing_dir = type.setup_facing_dir
 	rotation_degrees = rad_to_deg(setup_facing_dir.angle_to(Vector2.UP))
@@ -118,6 +133,10 @@ func check_if_runtime_ini():
 		is_runntime_ini = false
 		runntime_ini()
 
+
+
+
+
 func get_rich_display_prefix():
 	var dead_icon = "[img]" + "res://grfx/icon_Skull32.png" + "[/img]"
 	var faction_prefix = faction.get_rich_logPrefix()
@@ -162,9 +181,74 @@ func session_clear_selected_regiment():
 func is_session_selected_regiment():
 	return session.is_selected_regiment(self as FactionRegiment)
 	
+func is_regiment_in_front_arc(enemie_regiment : FactionRegiment):
+	return hitbox_arcs.is_regiment_in_front_arc(enemie_regiment)
 	
 	
+func check_if_attackable(target : FactionRegiment):
+	if target == null:
+		return
+
+	var result = hitbox_arcs.get_attackable(target) as Array
+	if not result.is_empty():
+		attack_target_regiment(result, target)
+		
+
+func add_battle(new_battle: RegimentBattle):
+	add_child(new_battle)
+	regiment_battles.append(new_battle)
+
+func attack_target_regiment(result : Array, target : FactionRegiment):
+	print("attack: " + target.type.regiment_name)
+	var point = result[0] as Vector2
+	var target_rotated_forward = Vector2.UP.rotated(target.global_rotation)
+	var rotated_forward = Vector2.UP.rotated(global_rotation)
+	position = to_global(point)
+	var angle_deg = rad_to_deg(target_rotated_forward.angle_to(rotated_forward))
+	print(floor(angle_deg))
+	angle_deg = abs(angle_deg)
+	var angle_of_attack = 0
+	if angle_deg <= 45:
+		angle_of_attack = 2
+	elif angle_deg <= 135:
+		angle_of_attack = 1
+	else :
+		angle_of_attack = 0
+	var dir = target.global_position - global_position
+	rotation += rotated_forward.angle_to(dir)
+	position += Vector2.DOWN.rotated(global_rotation) * current_bounds_extends.y
+	var new_battle = RegimentBattle.new()
+	new_battle.setup(self, target, global_position, angle_of_attack)
+	add_battle(new_battle)
+	target.add_battle(new_battle)
+	var prefix = get_rich_common_prefix()
+	var target_prefix = target.get_rich_common_prefix()
+	var message = " attackiert "
+	is_Selectable = false
 	
+	guilog(prefix + message + target_prefix)
 	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

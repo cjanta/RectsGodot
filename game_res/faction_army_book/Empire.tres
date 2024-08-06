@@ -6,5 +6,5 @@
 
 [resource]
 script = ExtResource("1_c0yom")
-army_book_class = 1
+army_book_class = 0
 regiment_types = Array[Resource("res://game_res/faction_regiment/regiment_type.gd")]([ExtResource("1_ua37b"), ExtResource("2_ta6qp")])

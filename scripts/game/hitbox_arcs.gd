@@ -69,6 +69,9 @@ func update_metrics():
 	top_right = position + Vector2(size_extends.x ,-size_extends.y)
 	bot_right = position + Vector2(size_extends.x ,size_extends.y)
 
+func is_regiment_in_front_arc(enemy_regiment : FactionRegiment):
+	return front_fov_enemies.find(enemy_regiment,0) != -1
+
 func _draw():
 	if not is_runtime_ini && is_draw_arc:
 		if regiment.is_session_selected_regiment():
@@ -76,44 +79,61 @@ func _draw():
 			draw_distance_lines()
 		else:
 			if not infoLabels.is_empty():
-				for label in infoLabels:
-					label.visible = false;
+				hide_info_labels()
 		
 func draw_distance_lines():
 	var other_faction : Faction = regiment.faction.session.get_other_faction(regiment)
-	for label in infoLabels:
-		label.visible = false
-		
+	hide_info_labels()		
 	for reg : FactionRegiment in front_fov_enemies:
-		#var target =  to_local(reg.get_top_rotated())
-		var color = RED
-		var target = find_closest_target(reg)
+		draw_labeld_line_to_target(reg)
+
+func draw_labeld_line_to_target(target_regiment : FactionRegiment):
+	#var target =  to_local(reg.get_top_rotated())
+	var color = RED
+	var target = find_closest_target(target_regiment)
+	var dir = target - top
+	var dir_length = dir.length()	
+	var new_label = get_free_info_label()
+	new_label.rotation = top.angle_to(dir)
+	new_label.position = top + dir.normalized()  * dir_length / 2.0 - new_label.get_center()
+	new_label.visible = true
+	new_label.text = str(floor(dir_length))	
+	var charge_range = target_regiment.type.charge_range
+	if dir_length <= charge_range:
+		color = GREEN
+	draw_line(top, target , color, 3.0, true)
+
+func get_attackable(target_regiment : FactionRegiment):
+	var result = []
+	var isIn = is_regiment_in_front_arc(target_regiment)
+	if isIn:
+		var target = find_closest_target(target_regiment)
 		var dir = target - top
-		var dir_length = dir.length()	
-		var new_label = get_free_info_label()
-		new_label.rotation = top.angle_to(dir)
-		new_label.position = top + dir.normalized()  * dir_length / 2.0 - new_label.get_center()
-		new_label.visible = true
-		new_label.text = str(floor(dir_length))	
-		var charge_range = reg.type.charge_range
-		if dir_length <= charge_range:
-			color = GREEN
-		draw_line(top, target , color, 3.0, true)
+		var dir_length = dir.length()
+		if dir_length <= target_regiment.type.charge_range:
+			return [target]
+			
+	return result
 
 func find_closest_target(reg : FactionRegiment):
 	var points_lenghts = []	
+	
 	var target =  to_local(reg.get_top_rotated())
 	var dir = target - top
 	points_lenghts.append(dir.length())
+	
 	target =  to_local(reg.get_bot_rotated())
 	dir = target - top
 	points_lenghts.append(dir.length())
+	
 	target =  to_local(reg.get_left_rotated())
 	dir = target - top
 	points_lenghts.append(dir.length())
+	
 	target =  to_local(reg.get_right_rotated())
 	dir = target - top
 	points_lenghts.append(dir.length())
+	
 	var closest = dir.length()
 	var p_closest = 3
 	for i in 4:
@@ -130,6 +150,10 @@ func find_closest_target(reg : FactionRegiment):
 		return to_local(reg.get_right_rotated())
 	else :
 		return Vector2.ZERO
+
+func hide_info_labels():
+	for label in infoLabels:
+		label.visible = false
 
 func get_free_info_label():
 	if infoLabels.is_empty():

@@ -12,5 +12,5 @@ enum UNIT_CATS { empty = 0, COMAND = 1, HERO = 2, CORE_UNIT = 3, ELITE = 4, RARE
 func get_regiment_type(index : int):
 	return regiment_types[index].duplicate()
 
-func get_random_regiment_type(book_index : ARMY_BOOKS):
-	return get_regiment_type(randi_range(book_index,regiment_types.size()-1))
+func get_random_regiment_type():
+	return get_regiment_type(randi_range(0,regiment_types.size()-1))

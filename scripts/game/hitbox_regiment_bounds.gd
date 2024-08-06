@@ -16,6 +16,7 @@ var regiment : FactionRegiment
 @export var info_label_scene : PackedScene
 var info_label_move : InfoLabel
 var info_label_charge : InfoLabel
+var ap_before_drag : float
 
 func _ready():
 	regiment = get_parent()
@@ -39,7 +40,13 @@ func _input(event):
 func check_endof_drag():
 	if has_selected_movement:
 		has_selected_movement = false
-		regiment.session_update_selection_display()
+		var prefix = regiment.get_rich_common_prefix()
+		var ap_delta = ap_before_drag - regiment.type.action_points
+		if ap_delta > 0:
+			ap_delta = snapped(ap_delta, 0.01)
+			var message =  " bewegt sich um " + str(ap_delta) + " AP" 
+			regiment.guilog(prefix + message)
+			regiment.session_update_selection_display()
 
 func _physics_process(delta):
 	if has_selected_movement:
@@ -66,11 +73,20 @@ func move(delta):
 		return 0
 	
 func _on_input_event(viewport, event, shape_idx):
-	if regiment.is_Selectable && Input.is_action_just_pressed("left_click"):
-		if regiment.type.action_points > -1:
-			has_selected_movement = true
-			position_before_drag = regiment.global_position
-			selected_Mouse_Position = get_global_mouse_position()
+	if Input.is_action_just_pressed("left_click"):
+		if regiment.is_Selectable:
+			if regiment.type.action_points > -1:
+				has_selected_movement = true
+				ap_before_drag = regiment.type.action_points
+				position_before_drag = regiment.global_position
+				selected_Mouse_Position = get_global_mouse_position()
+		else:
+			check_if_valid_target()
+
+func check_if_valid_target():
+	var selected = regiment.session.selected_regiment as FactionRegiment
+	if selected != null and selected.is_regiment_in_front_arc(regiment):
+		selected.target_regiment = regiment
 
 func _on_faction_regiment_scene_update_visuals(current_bounds_extends):
 	update_extends(current_bounds_extends)
@@ -146,12 +162,4 @@ func get_color_by_state():
 	if regiment.is_session_selected_regiment():
 		return regiment.GREY
 	return regiment.faction.faction_type.faction_color
-
-
-
-
-
-
-
-
 

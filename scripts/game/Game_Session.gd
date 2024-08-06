@@ -3,6 +3,7 @@ extends Node2D
 
 @export var gui : CommonLog
 @export var selection_display : SelectionDisplay
+@export var target_selection_display : SelectionDisplay
 @export var session_round_display : SessionRoundDisplay
 @export var factions : Factions
 @export var data : Data

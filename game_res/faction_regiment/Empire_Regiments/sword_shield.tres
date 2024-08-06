@@ -1,26 +1,26 @@
 [gd_resource type="Resource" script_class="RegimentType" load_steps=3 format=3 uid="uid://ge42sv2l88mk"]
 
 [ext_resource type="Script" path="res://game_res/faction_regiment/regiment_type.gd" id="1_7srbh"]
-[ext_resource type="Texture2D" uid="uid://2ve0jajk2gbb" path="res://grfx/32rogues/rogues.png" id="2_jv5ig"]
+[ext_resource type="PackedScene" uid="uid://cqo6t81jkesr2" path="res://game_res/sprite_scenes/sprite_swordmen_scene.tscn" id="2_63m6i"]
 
 [resource]
 script = ExtResource("1_7srbh")
-has_spritesheet = true
-unit_texture = ExtResource("2_jv5ig")
-unit_region_data = Vector3(0, 0, 32)
+sprite_scene = ExtResource("2_63m6i")
+has_spritesheet = false
+unit_region_data = Vector3(0, 0, 64)
 regiment_color = Color(1, 1, 1, 1)
 regiment_name = "Schwertkämpfer"
 regiment_template_name = "Schwertkämpfer"
 regiment_class = 1
-regiment_unit_size = Vector3(11, 5, 0)
-stat_move = 0
-stat_battle = 0
-stat_rangedl = 0
-stat_strength = 0
-stat_toughness = 0
-stat_life = 0
-stat_initiative = 0
-stat_attacks = 0
-stat_moral = 0
+regiment_unit_size = Vector3(10, 5, 0)
+stat_move = 4
+stat_battle = 4
+stat_rangedl = 3
+stat_strength = 3
+stat_toughness = 3
+stat_life = 1
+stat_initiative = 4
+stat_attacks = 1
+stat_moral = 7
 special_rules = []
-gear = []
+regiment_gear = []

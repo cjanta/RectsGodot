@@ -7,8 +7,11 @@ func _ready():
 	visible = false
 
 func update(faction_regiment : FactionRegiment):
-	update_selection_display.emit(faction_regiment)
-	visible = true
+	if faction_regiment != null:
+		update_selection_display.emit(faction_regiment)
+		visible = true
+	else:
+		visible = false
 
 func clear():
 	visible = false
