@@ -30,18 +30,20 @@ func iterate_session_round():
 	else:
 		current_state = 0
 	reset_action_points()
+	reset_phase_finished()
 	select_next_faction()
 	common_log.log(get_rich_prefix_line())
 	round_display.update_display(self)
 
 func resolved_phase():
-	select_next_faction()
+	#TODO schaltet noch nicht richtig
 	if has_all_factions_endet_phase():
-		print("all factions endet phase")
-	pass
+		iterate_session_round()
+	else:
+		select_next_faction()
 	common_log.log(get_rich_suffix_line())
 	round_display.update_display(self)
-
+	
 func reset_action_points():
 	for faction in factions.all_factions:
 		for regiment in faction.faction_regiments:
@@ -50,30 +52,27 @@ func reset_action_points():
 func select_next_faction():
 	var faction = factions.all_factions[faction_at_turn_index]
 	faction.clear_after_phase(current_state)
-	#update_selectable_regiments(factions.all_factions[faction_at_turn_index], false)
 	toogle_faction_at_turn_index()
 	faction_has_turn = factions.all_factions[faction_at_turn_index]
 	faction_has_turn.handle_phase(current_state)
-	#update_selectable_regiments(factions.all_factions[faction_at_turn_index], true)
 	session.selected_regiment = null
 	session.selection_display.clear()
-	
 
 func has_all_factions_endet_phase():
 	for faction in factions.all_factions:
 		if not faction.has_phase_finished:
 			return false
 	return true
-	
+
+func reset_phase_finished():
+	for faction in factions.all_factions:
+		faction.has_phase_finished = false;
 
 func toogle_faction_at_turn_index():
 	if faction_at_turn_index == 0:
 		faction_at_turn_index = 1
 	else:
 		faction_at_turn_index = 0
-
-#func update_selectable_regiments(faction : Faction, isSelectable : bool):
-	#faction.update_phase(isSelectable, current_state)
 
 func get_game_round_log():
 	return "Runde [color=" + logging_color_html + "]" + str(game_round_counter) + "[/color]" 
@@ -121,7 +120,7 @@ func get_game_round_display_log():
 		var second_line = get_rich_suffix_line()
 		return first_line + "\n\t" + second_line
 	else:
-		return "\t" + "\t" +"\t" +"\t" + "press spacebar to start"
+		return "\t" + "\t" +"\t" +"\t" + "click to start"
 
 func get_rich_suffix_line():
 	return get_selected_faction_log(faction_has_turn) + "\t" + get_state_faction_info_log()
