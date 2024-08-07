@@ -1,22 +1,20 @@
 class_name GameSession
 extends Node2D
-
+#setup
 @export var gui : CommonLog
 @export var selection_display : SelectionDisplay
 @export var target_selection_display : SelectionDisplay
-@export var session_round_display : SessionRoundDisplay
+@export var game_round_display : GameRoundDisplay
 @export var factions : Factions
 @export var data : Data
+@export var game_round : GameRoundHelper
 
 var is_runtime_ini = true;
-
+#logging
 @onready var logging_color = Color.MOCCASIN
-
 var logging_color_html
-var session_round_counter = 0
-var faction_turn_index = 0
 
-var faction_has_turn : Faction
+#selection
 var selected_regiment : FactionRegiment
 
 func _ready():
@@ -51,53 +49,15 @@ func runtime_ini():
 	factions.display_faction_left(faction)
 	faction = factions.all_factions[1]
 	factions.display_faction_right(faction)
-	iterate_session_round()
 	
 func _input(event):
 	if Input.is_action_just_pressed("spacebar"):
-		iterate_session_round()
-
-func get_rich_round_log():
-	return "Runde [color=" + logging_color_html + "]" + str(session_round_counter) + "[/color]" 
-
-func get_rich_faction_turn_log(selected_faction : Faction):
-	if selected_faction != null:
-		return "[color=" + selected_faction.faction_color_html + "]" + selected_faction.faction_name + "[/color]" 
-	return "error"	
-
-func get_session_round_display_log():
-	return get_rich_round_log() + "\n\t" + get_rich_faction_turn_log(faction_has_turn)
-
-func iterate_session_round():
-	session_round_counter += 1
-	gui.log(get_rich_round_log())
-	for faction in factions.all_factions:
-		for regiment in faction.faction_regiments:
-			regiment.type.reset_action_points()
-	
-	select_faction()
-	gui.log(get_rich_faction_turn_log(faction_has_turn))
-	session_round_display.update(self)
-
-func select_faction():
-	update_selectable_regiments(factions.all_factions[faction_turn_index], false)
-	if faction_turn_index == 0:
-		faction_turn_index = 1
-	else:
-		faction_turn_index = 0
-	faction_has_turn = factions.all_factions[faction_turn_index]
-	update_selectable_regiments(factions.all_factions[faction_turn_index], true)
-	selected_regiment = null
-	selection_display.clear()
+		game_round.resolved_phase()
 
 func get_other_faction(regiment : FactionRegiment):
 	for fac in factions.all_factions:
 		if fac != regiment.faction:
 			return fac
-	
-func update_selectable_regiments(faction : Faction, isSelectable : bool):
-	for regiment in faction.faction_regiments:
-		regiment.is_Selectable = isSelectable	
 
 func _on_session_round_display_clicked_session_round_display():
-	iterate_session_round()
+	game_round.iterate_session_round()

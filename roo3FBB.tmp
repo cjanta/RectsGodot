@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://deqc5r53rtb20" path="res://scns/ui/faction_display_left.tscn" id="4_6lmdl"]
 [ext_resource type="Resource" uid="uid://cfl18t63y2oxu" path="res://game_res/faction_type/taction_type_sued.tres" id="4_44ndl"]
 [ext_resource type="PackedScene" uid="uid://dkyarb68ybori" path="res://scns/ui/selection_display.tscn" id="5_eta7b"]
-[ext_resource type="PackedScene" uid="uid://c2be5ggfs43tl" path="res://scns/ui/game_round_display.tscn" id="6_bsjtm"]
+[ext_resource type="PackedScene" uid="uid://c2be5ggfs43tl" path="res://scns/ui/session_round_display.tscn" id="6_bsjtm"]
 [ext_resource type="Script" path="res://GameRoundHelper.gd" id="6_dnjo4"]
 
 [sub_resource type="SystemFont" id="SystemFont_hlcwx"]
@@ -49,12 +49,11 @@ corner_radius_bottom_left = 8
 
 [node name="root" type="Node2D"]
 
-[node name="Game_Session" type="Node2D" parent="." node_paths=PackedStringArray("gui", "selection_display", "target_selection_display", "game_round_display", "factions", "data", "game_round")]
+[node name="Game_Session" type="Node2D" parent="." node_paths=PackedStringArray("gui", "selection_display", "target_selection_display", "factions", "data", "game_round")]
 script = ExtResource("2_nx4wc")
 gui = NodePath("GUI/main/Common_Log")
 selection_display = NodePath("GUI/main/selection_display")
 target_selection_display = NodePath("GUI/main/target_selection_display")
-game_round_display = NodePath("GUI/main/game_round_display")
 factions = NodePath("Factions")
 data = NodePath("data")
 game_round = NodePath("GameRoundHelper")
@@ -68,10 +67,10 @@ faction_types = Array[Resource("res://game_res/faction_type/faction_type.gd")]([
 
 [node name="Gameboard" type="Node2D" parent="Game_Session"]
 
-[node name="GameRoundHelper" type="Node2D" parent="Game_Session" node_paths=PackedStringArray("session", "round_display", "factions", "common_log")]
+[node name="GameRoundHelper" type="Node2D" parent="Game_Session" node_paths=PackedStringArray("session", "session_round_display", "factions", "common_log")]
 script = ExtResource("6_dnjo4")
 session = NodePath("..")
-round_display = NodePath("../GUI/main/game_round_display")
+session_round_display = NodePath("../GUI/main/game_round_display")
 factions = NodePath("../Factions")
 common_log = NodePath("../GUI/main/Common_Log")
 

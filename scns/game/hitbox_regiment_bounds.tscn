@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://sf58apyyihsn"]
+[gd_scene load_steps=4 format=3 uid="uid://sf58apyyihsn"]
 
 [ext_resource type="Script" path="res://scripts/game/hitbox_regiment_bounds.gd" id="1_esg0t"]
+[ext_resource type="PackedScene" uid="uid://cnet7t6kw40jj" path="res://scns/game/info_label.tscn" id="2_jsr5w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jkixb"]
 
-[node name="hitbox_regiment_bounds" type="Area2D"]
+[node name="hitbox_regiment_bounds" type="Area2D" node_paths=PackedStringArray("coll_shape")]
 script = ExtResource("1_esg0t")
+coll_shape = NodePath("regiment_bounds")
+info_label_scene = ExtResource("2_jsr5w")
 
 [node name="regiment_bounds" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jkixb")

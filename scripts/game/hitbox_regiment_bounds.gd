@@ -1,22 +1,23 @@
 class_name HitboxRegimentBounds
 extends Area2D
 
+@export var coll_shape : CollisionShape2D
+@export var info_label_scene : PackedScene
+
 signal selection_changed(has_selected_movement :bool)
+
 var has_selected_movement = false:
 	set(value):
 		has_selected_movement = value
 		selection_changed.emit(has_selected_movement)
 		
 var selected_Mouse_Position
-
+var ap_before_drag : float
 var position_before_drag : Vector2
 
 var regiment : FactionRegiment
-@onready var coll_shape : CollisionShape2D = $regiment_bounds
-@export var info_label_scene : PackedScene
 var info_label_move : InfoLabel
 var info_label_charge : InfoLabel
-var ap_before_drag : float
 
 func _ready():
 	regiment = get_parent()
@@ -105,13 +106,26 @@ func _draw():
 	else:
 		info_label_move.visible = false
 		info_label_charge.visible = false
+	
+	if regiment.is_Selectable:
+		draw_selectable_bounds()
 
 func draw_bounds():
-	var width = 3.0	
-	draw_edge_line(Vector2(1,1),Vector2(-1,1), width)
-	draw_edge_line(Vector2(-1,1),Vector2(-1,-1), width)
-	draw_edge_line(Vector2(-1,-1),Vector2(1,-1), width)
-	draw_edge_line(Vector2(1,-1),Vector2(1,1), width)
+	var width = 4.0	
+	var halfed = width / 2.0
+	var color = regiment.faction.faction_type.faction_color
+	draw_edge_line(Vector2(1,1),Vector2(-1,1), halfed, width, color)
+	draw_edge_line(Vector2(-1,1),Vector2(-1,-1), halfed, width, color)
+	draw_edge_line(Vector2(-1,-1),Vector2(1,-1), halfed, width, color)
+	draw_edge_line(Vector2(1,-1),Vector2(1,1), halfed, width, color)
+
+func draw_selectable_bounds():
+	var width = 4.0	
+	var halfed = width / 2.0
+	draw_edge_line(Vector2(1,1),Vector2(-1,1), width+halfed, width,get_color_by_state())
+	draw_edge_line(Vector2(-1,1),Vector2(-1,-1), width+halfed, width,get_color_by_state())
+	draw_edge_line(Vector2(-1,-1),Vector2(1,-1), width+halfed, width,get_color_by_state())
+	draw_edge_line(Vector2(1,-1),Vector2(1,1), width+halfed, width,get_color_by_state())
 
 func draw_move_range():
 	var color = regiment.GREY
@@ -146,9 +160,8 @@ func draw_charge_range():
 	info_label_charge.position -= info_label_charge.get_center()
 	pass
 
-func draw_edge_line(from_dir : Vector2, to_dir : Vector2, width):
-	var color = get_color_by_state()
-	var offset = Vector2(width / 2.0, width / 2.0)
+func draw_edge_line(from_dir : Vector2, to_dir : Vector2, off :float, line_width : float, color : Color):
+	var offset = Vector2(off, off)
 	var from = regiment.get_current_bounds_extends()
 	from = Vector2(from.x * from_dir.x, from.y * from_dir.y)
 	from += Vector2(offset.y * from_dir.x, offset.y * from_dir.y)
@@ -156,10 +169,10 @@ func draw_edge_line(from_dir : Vector2, to_dir : Vector2, width):
 	var to = regiment.get_current_bounds_extends()
 	to = Vector2(to.x * to_dir.x, to.y * to_dir.y)
 	to += Vector2(offset.y * to_dir.x, offset.y * to_dir.y)
-	draw_line(from, to, color, width, true)
+	draw_line(from, to, color, line_width, true)
 
 func get_color_by_state():
 	if regiment.is_session_selected_regiment():
-		return regiment.GREY
-	return regiment.faction.faction_type.faction_color
+		return Color.AQUA
+	return Color.DIM_GRAY
 

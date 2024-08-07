@@ -11,7 +11,7 @@ subpixel_positioning = 0
 
 [sub_resource type="Theme" id="Theme_m0chg"]
 default_font = SubResource("SystemFont_wk3wk")
-default_font_size = 11
+default_font_size = 14
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yi8p"]
 bg_color = Color(0, 0, 0, 1)

@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwv3s62w20ivm"]
+[gd_scene load_steps=8 format=3 uid="uid://bwv3s62w20ivm"]
 
 [ext_resource type="Script" path="res://scripts/game/Faction_Regiment.gd" id="1_nqapm"]
 [ext_resource type="PackedScene" uid="uid://sf58apyyihsn" path="res://scns/game/hitbox_regiment_bounds.tscn" id="2_daj36"]
 [ext_resource type="Script" path="res://scripts/game/faction_icon.gd" id="2_nebew"]
-[ext_resource type="PackedScene" uid="uid://cnet7t6kw40jj" path="res://scns/game/info_label.tscn" id="3_1awe1"]
 [ext_resource type="PackedScene" uid="uid://3mie7hp7sxd" path="res://scns/game/hitbox_rotation.tscn" id="3_3dvq2"]
 [ext_resource type="Texture2D" uid="uid://ciub6jojdfds2" path="res://grfx/flags/bd.svg" id="4_06a2m"]
 [ext_resource type="Material" uid="uid://d4nnj0la4o3if" path="res://shader/regiment_shader/regiment_sprite_shader.tres" id="4_bcwqg"]
@@ -16,7 +15,6 @@ hitbox_regiment_bounds = NodePath("hitbox_regiment_bounds")
 bounds_sprite = NodePath("bounds_sprite")
 
 [node name="hitbox_regiment_bounds" parent="." instance=ExtResource("2_daj36")]
-info_label_scene = ExtResource("3_1awe1")
 
 [node name="hitbox_rotation" parent="." instance=ExtResource("3_3dvq2")]
 

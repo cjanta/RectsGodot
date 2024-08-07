@@ -15,6 +15,11 @@ var faction_units : Array[FactionUnit] = []
 var session : GameSession
 var faction : Faction
 var regiment_battles : Array[RegimentBattle]
+var has_battle : bool:
+	get:
+		return not regiment_battles.is_empty() || is_defender_in_battle
+var is_defender_in_battle = false
+
 var faction_unit_preload
 var is_runntime_ini = true
 var is_Selectable = false:
@@ -25,7 +30,7 @@ var is_Selectable = false:
 			if is_session_selected_regiment():
 				session_clear_selected_regiment()
 		else:
-			if not regiment_battles.is_empty():
+			if has_battle:
 				is_Selectable = false
 
 	get:
@@ -65,6 +70,9 @@ func get_right_rotated():
 
 func get_current_bounds_extends():
 	return current_bounds_extends
+
+func has_peek_attacks():
+	return false
 
 func set_regiment_unit_size(new_size : Vector3):
 	regiment_unit_size = new_size
@@ -133,10 +141,6 @@ func check_if_runtime_ini():
 		is_runntime_ini = false
 		runntime_ini()
 
-
-
-
-
 func get_rich_display_prefix():
 	var dead_icon = "[img]" + "res://grfx/icon_Skull32.png" + "[/img]"
 	var faction_prefix = faction.get_rich_logPrefix()
@@ -192,11 +196,7 @@ func check_if_attackable(target : FactionRegiment):
 	var result = hitbox_arcs.get_attackable(target) as Array
 	if not result.is_empty():
 		attack_target_regiment(result, target)
-		
-
-func add_battle(new_battle: RegimentBattle):
-	add_child(new_battle)
-	regiment_battles.append(new_battle)
+			
 
 func attack_target_regiment(result : Array, target : FactionRegiment):
 	print("attack: " + target.type.regiment_name)
@@ -219,8 +219,8 @@ func attack_target_regiment(result : Array, target : FactionRegiment):
 	position += Vector2.DOWN.rotated(global_rotation) * current_bounds_extends.y
 	var new_battle = RegimentBattle.new()
 	new_battle.setup(self, target, global_position, angle_of_attack)
-	add_battle(new_battle)
-	target.add_battle(new_battle)
+	regiment_battles.append(new_battle)
+	target.is_defender_in_battle = true
 	var prefix = get_rich_common_prefix()
 	var target_prefix = target.get_rich_common_prefix()
 	var message = " attackiert "

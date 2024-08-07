@@ -13,6 +13,7 @@ var faction_type : FactionType
 var army_book : ArmyBook
 var faction_color : Color
 var faction_color_html = Color.WHITE.to_html()
+var has_phase_finished = false;
 
 func setup(type):
 	faction_type = type
@@ -48,6 +49,31 @@ func create_test_regiments(start_position : Vector2):
 	new_type.setup(start_position,start_direction)
 	regiment.set_type(new_type)
 	faction_regiments.append(regiment)
+
+func clear_after_phase(phase_id : int):
+	for regiment in faction_regiments:
+		regiment.is_Selectable = false
+
+func handle_phase(phase_id : int):
+	for regiment in faction_regiments:
+		select_by_phase(regiment, phase_id)
+	has_phase_finished = true
+	for regiment in faction_regiments:
+		if regiment.is_Selectable:
+			has_phase_finished = false
+
+	
+
+func select_by_phase(regiment : FactionRegiment, phase_id : int):
+	print(phase_id)
+	if phase_id == 0:
+		regiment.is_Selectable = false
+	elif phase_id > -1:
+		if regiment.type.action_points > 0:
+			regiment.is_Selectable = true
+		else:
+			regiment.is_Selectable = false
+	pass
 
 func get_rich_logPrefix():
 	var color = faction_type.faction_color

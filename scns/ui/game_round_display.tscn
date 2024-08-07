@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c2be5ggfs43tl"]
 
-[ext_resource type="Script" path="res://scripts/ui/session_round_display.gd" id="1_34h0q"]
+[ext_resource type="Script" path="res://scripts/ui/game_round_display.gd" id="1_xyhgc"]
 [ext_resource type="Script" path="res://scripts/ui/session_round_display_label.gd" id="2_mg1yd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kd5si"]
@@ -22,7 +22,7 @@ subpixel_positioning = 0
 default_font = SubResource("SystemFont_bnbvd")
 default_font_size = 22
 
-[node name="session_round_display" type="Control"]
+[node name="game_round_display" type="Control"]
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
@@ -32,7 +32,7 @@ offset_right = 171.5
 offset_bottom = 69.0
 grow_horizontal = 2
 mouse_force_pass_scroll_events = false
-script = ExtResource("1_34h0q")
+script = ExtResource("1_xyhgc")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
