@@ -14,6 +14,7 @@ const GREY = Color(1.0, 1.0, 1.0, 0.1)
 var faction_units : Array[FactionUnit] = []
 var session : GameSession
 var faction : Faction
+var has_phase_finished = false
 var regiment_battles : Array[RegimentBattle]
 var has_battle : bool:
 	get:
@@ -30,7 +31,7 @@ var is_Selectable = false:
 			if is_session_selected_regiment():
 				session_clear_selected_regiment()
 		else:
-			if has_battle:
+			if has_battle or has_phase_finished:
 				is_Selectable = false
 
 	get:

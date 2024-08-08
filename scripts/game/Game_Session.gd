@@ -52,6 +52,12 @@ func runtime_ini():
 	
 func _input(event):
 	if Input.is_action_just_pressed("spacebar"):
+		if selected_regiment == null:
+			game_round.faction_has_turn.has_phase_finished = true
+			print("faction phase finished")
+		else:
+			selected_regiment.has_phase_finished = true
+			print("regiment phase finished")
 		game_round.resolved_phase()
 
 func get_other_faction(regiment : FactionRegiment):

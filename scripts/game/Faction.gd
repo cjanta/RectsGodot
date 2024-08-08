@@ -54,22 +54,17 @@ func clear_after_phase(phase_id : int):
 	for regiment in faction_regiments:
 		regiment.is_Selectable = false
 
-func handle_phase(phase_id : int):
+func set_selectable_by_phase(phase_id : int):
 	for regiment in faction_regiments:
 		select_by_phase(regiment, phase_id)
-	has_phase_finished = true
-	for regiment in faction_regiments:
-		if regiment.is_Selectable:
-			has_phase_finished = false
-
-	
 
 func select_by_phase(regiment : FactionRegiment, phase_id : int):
-	print(phase_id)
 	if phase_id == 0:
 		regiment.is_Selectable = false
 	elif phase_id > -1:
-		if regiment.type.action_points > 0:
+		if regiment.has_phase_finished:
+			regiment.is_Selectable = false	
+		elif regiment.type.action_points > 0 :
 			regiment.is_Selectable = true
 		else:
 			regiment.is_Selectable = false

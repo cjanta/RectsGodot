@@ -36,7 +36,6 @@ func iterate_session_round():
 	round_display.update_display(self)
 
 func resolved_phase():
-	#TODO schaltet noch nicht richtig
 	if has_all_factions_endet_phase():
 		iterate_session_round()
 	else:
@@ -54,7 +53,7 @@ func select_next_faction():
 	faction.clear_after_phase(current_state)
 	toogle_faction_at_turn_index()
 	faction_has_turn = factions.all_factions[faction_at_turn_index]
-	faction_has_turn.handle_phase(current_state)
+	faction_has_turn.set_selectable_by_phase(current_state)
 	session.selected_regiment = null
 	session.selection_display.clear()
 
@@ -67,6 +66,8 @@ func has_all_factions_endet_phase():
 func reset_phase_finished():
 	for faction in factions.all_factions:
 		faction.has_phase_finished = false;
+		for regiment in faction.faction_regiments:
+			regiment.has_phase_finished = false
 
 func toogle_faction_at_turn_index():
 	if faction_at_turn_index == 0:
