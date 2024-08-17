@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://gb506qvi6uvu"]
+
+[ext_resource type="Shader" path="res://mask_unit.gdshader" id="1_01pyb"]
+[ext_resource type="Texture2D" uid="uid://dcy0jqjr4wh6w" path="res://grfx/ork_pike.png" id="2_l3r8p"]
+[ext_resource type="Script" path="res://single_1024.gd" id="3_d85wl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cdrnk"]
+shader = ExtResource("1_01pyb")
+
+[node name="Single_1024" type="Sprite2D"]
+material = SubResource("ShaderMaterial_cdrnk")
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_l3r8p")
+script = ExtResource("3_d85wl")

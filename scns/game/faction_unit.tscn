@@ -16,6 +16,7 @@ script = ExtResource("1_vwj34")
 icon_sprite = NodePath("icon_sprite")
 
 [node name="base_sprite" type="Sprite2D" parent="."]
+visible = false
 self_modulate = Color(0.117647, 0.117647, 0.117647, 1)
 material = SubResource("ShaderMaterial_rikpj")
 scale = Vector2(2, 2)

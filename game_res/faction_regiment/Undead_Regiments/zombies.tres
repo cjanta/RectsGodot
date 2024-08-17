@@ -1,15 +1,13 @@
-[gd_resource type="Resource" script_class="RegimentType" load_steps=4 format=3 uid="uid://cjkn83loolwaf"]
+[gd_resource type="Resource" script_class="RegimentType" load_steps=3 format=3 uid="uid://cjkn83loolwaf"]
 
 [ext_resource type="Script" path="res://game_res/faction_regiment/regiment_type.gd" id="1_cbc1i"]
-[ext_resource type="PackedScene" uid="uid://5xfc17euyojm" path="res://game_res/sprite_scenes/sprite_zombie_scene.tscn" id="2_f1110"]
-[ext_resource type="Texture2D" uid="uid://dia8i6qamr8kw" path="res://grfx/icon_Skull32.png" id="2_nt78l"]
+[ext_resource type="PackedScene" uid="uid://gb506qvi6uvu" path="res://single_1024.tscn" id="2_g1l1l"]
 
 [resource]
 script = ExtResource("1_cbc1i")
-sprite_scene = ExtResource("2_f1110")
-has_spritesheet = true
-unit_texture = ExtResource("2_nt78l")
-unit_region_data = Vector3(0, 0, 64)
+sprite_scene = ExtResource("2_g1l1l")
+has_spritesheet = false
+unit_region_data = Vector3(0, 0, 128)
 regiment_color = Color(1, 1, 1, 1)
 regiment_name = "Zombies"
 regiment_template_name = "Zombie"
