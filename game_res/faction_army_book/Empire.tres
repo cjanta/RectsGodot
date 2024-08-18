@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ArmyBook" load_steps=4 format=3 uid="uid://bo1p0ss824llt"]
+[gd_resource type="Resource" script_class="ArmyBook" load_steps=5 format=3 uid="uid://bo1p0ss824llt"]
 
+[ext_resource type="Script" path="res://game_res/faction_regiment/regiment_type.gd" id="1_1mehs"]
 [ext_resource type="Script" path="res://game_res/faction_army_book/army_book.gd" id="1_c0yom"]
 [ext_resource type="Resource" uid="uid://ge42sv2l88mk" path="res://game_res/faction_regiment/Empire_Regiments/sword_shield.tres" id="1_ua37b"]
 [ext_resource type="Resource" uid="uid://dhshjxjo5brft" path="res://game_res/faction_regiment/Empire_Regiments/hellbardier.tres" id="2_ta6qp"]
@@ -7,4 +8,4 @@
 [resource]
 script = ExtResource("1_c0yom")
 army_book_class = 0
-regiment_types = Array[Resource("res://game_res/faction_regiment/regiment_type.gd")]([ExtResource("1_ua37b"), ExtResource("2_ta6qp")])
+regiment_types = Array[ExtResource("1_1mehs")]([ExtResource("1_ua37b"), ExtResource("2_ta6qp")])

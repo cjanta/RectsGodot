@@ -175,4 +175,3 @@ func get_color_by_state():
 	if regiment.is_session_selected_regiment():
 		return Color.AQUA
 	return Color.DIM_GRAY
-

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://beauaqxcm41yt"]
+[gd_scene load_steps=18 format=3 uid="uid://beauaqxcm41yt"]
 
 [ext_resource type="Script" path="res://scripts/game/Game_Session.gd" id="2_nx4wc"]
 [ext_resource type="Script" path="res://scripts/game/data.gd" id="2_vo6wv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/game/Factions.gd" id="3_l3rp5"]
 [ext_resource type="PackedScene" uid="uid://deqc5r53rtb20" path="res://scns/ui/faction_display_left.tscn" id="4_6lmdl"]
 [ext_resource type="Resource" uid="uid://cfl18t63y2oxu" path="res://game_res/faction_type/taction_type_sued.tres" id="4_44ndl"]
+[ext_resource type="Script" path="res://game_res/faction_type/faction_type.gd" id="4_osjfb"]
 [ext_resource type="PackedScene" uid="uid://dkyarb68ybori" path="res://scns/ui/selection_display.tscn" id="5_eta7b"]
 [ext_resource type="PackedScene" uid="uid://c2be5ggfs43tl" path="res://scns/ui/game_round_display.tscn" id="6_bsjtm"]
 [ext_resource type="Script" path="res://GameRoundHelper.gd" id="6_dnjo4"]
@@ -64,7 +65,7 @@ script = ExtResource("2_vo6wv")
 
 [node name="Factions" type="Node2D" parent="Game_Session"]
 script = ExtResource("3_l3rp5")
-faction_types = Array[Resource("res://game_res/faction_type/faction_type.gd")]([ExtResource("3_btu6t"), ExtResource("4_44ndl")])
+faction_types = Array[ExtResource("4_osjfb")]([ExtResource("3_btu6t"), ExtResource("4_44ndl")])
 
 [node name="Gameboard" type="Node2D" parent="Game_Session"]
 
@@ -157,11 +158,11 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
-theme_override_styles/tab_selected = SubResource("StyleBoxFlat_cvje8")
-theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_cvje8")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_cvje8")
-tab_count = 2
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_cvje8")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_cvje8")
 max_tab_width = 120
+tab_count = 2
 tab_0/title = " Global "
 tab_1/title = " Tactical "
 

@@ -229,27 +229,3 @@ func attack_target_regiment(result : Array, target : FactionRegiment):
 	
 	guilog(prefix + message + target_prefix)
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="ArmyBook" load_steps=3 format=3 uid="uid://dowwd8u04fahg"]
+[gd_resource type="Resource" script_class="ArmyBook" load_steps=4 format=3 uid="uid://dowwd8u04fahg"]
 
+[ext_resource type="Script" path="res://game_res/faction_regiment/regiment_type.gd" id="1_46ajy"]
 [ext_resource type="Resource" uid="uid://cjkn83loolwaf" path="res://game_res/faction_regiment/Undead_Regiments/zombies.tres" id="1_qibop"]
 [ext_resource type="Script" path="res://game_res/faction_army_book/army_book.gd" id="1_y8ltg"]
 
 [resource]
 script = ExtResource("1_y8ltg")
 army_book_class = 1
-regiment_types = Array[Resource("res://game_res/faction_regiment/regiment_type.gd")]([ExtResource("1_qibop")])
+regiment_types = Array[ExtResource("1_46ajy")]([ExtResource("1_qibop")])
