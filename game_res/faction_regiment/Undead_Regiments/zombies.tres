@@ -7,7 +7,7 @@
 script = ExtResource("1_cbc1i")
 sprite_scene = ExtResource("2_g1l1l")
 has_spritesheet = false
-unit_region_data = Vector3(0, 0, 128)
+unit_region_data = Vector3(0, 0, 64)
 regiment_color = Color(1, 1, 1, 1)
 regiment_name = "Zombies"
 regiment_template_name = "Zombie"
