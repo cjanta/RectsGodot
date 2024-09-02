@@ -36,6 +36,10 @@ func iterate_session_round():
 	round_display.update_display(self)
 
 func resolved_phase():
+	#TODO: A player (faction) dose all phases and then the next faction
+	# does alle the phases. When all players did their phases the session
+	#round needs to iterate
+	#Folowing code does not do this :) TODO
 	if has_all_factions_endet_phase():
 		iterate_session_round()
 	else:
