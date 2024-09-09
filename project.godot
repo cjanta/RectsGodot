@@ -17,10 +17,11 @@ config/icon="res://grfx/icon.svg"
 
 [display]
 
-window/size/viewport_width=1800
-window/size/viewport_height=1000
+window/size/viewport_width=1600
+window/size/viewport_height=900
 window/size/initial_position_type=2
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 
 [input]
 

@@ -2,7 +2,7 @@
 https://godotengine.org
 Godot_confiq:
 	Project -> General -> Textures -> Default Texture Filter: nearest
-
+	Project -> General -> Display -> Window -> Stretch: Mode: viewport , Scale Mode: integer
 # MEILENSTEIN 0
 > grundlegende Struktur des Objekt Modells des Spiels. Bootsequenz
 > grundlegende Steurung der Einheiten. DragnDrop Bewegung und Rotation
