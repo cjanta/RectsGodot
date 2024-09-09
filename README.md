@@ -1,5 +1,7 @@
 # open with editor Godot v4.2.2.stable.official.15073afe3 
 https://godotengine.org
+Godot_confiq:
+	Project -> General -> Textures -> Default Texture Filter: nearest
 
 # MEILENSTEIN 0
 > grundlegende Struktur des Objekt Modells des Spiels. Bootsequenz
@@ -26,4 +28,3 @@ https://godotengine.org
 > RULE: Mögliche Angriffe erkennen und Angriff deklarieren
 > RULE: Bewegung und Rotation gem. Aktionspunkten
 > RULE: Kampfberechnung
-
