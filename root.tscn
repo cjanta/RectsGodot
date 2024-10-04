@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://beauaqxcm41yt"]
+[gd_scene load_steps=19 format=3 uid="uid://beauaqxcm41yt"]
 
 [ext_resource type="Script" path="res://scripts/game/Game_Session.gd" id="2_nx4wc"]
 [ext_resource type="Script" path="res://scripts/game/data.gd" id="2_vo6wv"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dkyarb68ybori" path="res://scns/ui/selection_display.tscn" id="5_eta7b"]
 [ext_resource type="PackedScene" uid="uid://c2be5ggfs43tl" path="res://scns/ui/game_round_display.tscn" id="6_bsjtm"]
 [ext_resource type="Script" path="res://GameRoundHelper.gd" id="6_dnjo4"]
+[ext_resource type="Script" path="res://cam.gd" id="12_xitxp"]
 
 [sub_resource type="SystemFont" id="SystemFont_hlcwx"]
 
@@ -257,5 +258,8 @@ offset_bottom = 1.0
 grow_horizontal = 1
 grow_vertical = 0
 size_flags_vertical = 4
+
+[node name="cam" type="Camera2D" parent="Game_Session"]
+script = ExtResource("12_xitxp")
 
 [connection signal="clicked_session_round_display" from="Game_Session/GUI/main/game_round_display" to="Game_Session" method="_on_session_round_display_clicked_session_round_display"]
