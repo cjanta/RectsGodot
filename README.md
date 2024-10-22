@@ -28,3 +28,15 @@ Godot_confiq:
 > RULE: Mögliche Angriffe erkennen und Angriff deklarieren
 > RULE: Bewegung und Rotation gem. Aktionspunkten
 > RULE: Kampfberechnung
+
+# MEILENSTEIN 2
+Project verbockt, muss ich leider so hinnehmen.
+1. Bootsequenz grottig beim nächsten Versuch es ähnlich wie in Linux angehen gelayert die Objekthierachie hochziehen,
+   konfigurieren, anzeigen/visualisieren -> layer0, layer1, layer2 ...
+2. Typisierungen der Einheiten und Regimenter und Spieler ok aber Filesystem eher Enitätssystem verwenden
+3. **Memo an mich selbst: "Entscheide dich endlich ob 64x zu 1 Zoll oder 32px zu 1 Zoll**
+
+
+Fazit nur nächsten Revision des Ganzen:
+Usecase, Klassen (grob - Assoziationsgeflecht später) und grobes Sequenzdiargramm erstellen.
+plan do check act
